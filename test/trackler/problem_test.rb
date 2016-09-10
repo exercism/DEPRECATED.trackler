@@ -19,7 +19,11 @@ class ProblemTest < Minitest::Test
   end
 
   def test_json_url
-    # when JSON file exists
+    # when JSON file exists in default location
+    problem = Trackler::Problem.new('mango', FIXTURE_PATH)
+    assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.json_url
+
+    # when JSON file exists in deprecated location
     problem = Trackler::Problem.new('apple', FIXTURE_PATH)
     assert_equal "https://github.com/exercism/x-common/blob/master/apple.json", problem.json_url
 
@@ -28,22 +32,31 @@ class ProblemTest < Minitest::Test
     assert_equal nil, problem.json_url
   end
 
+  def test_default_location
+    problem = Trackler::Problem.new('mango', FIXTURE_PATH)
+    assert_equal "## Source\n\nThe mango. [http://example.com](http://example.com)", problem.source_markdown
+  end
+
   def test_source_markdown_no_url
+    # in deprecated location
     problem = Trackler::Problem.new('apple', FIXTURE_PATH)
     assert_equal "## Source\n\nThe internet.", problem.source_markdown
   end
 
   def test_source_markdown_no_source
+    # in deprecated location
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     assert_equal "## Source\n\n[http://example.com](http://example.com)", problem.source_markdown
   end
 
   def test_no_source
+    # in deprecated location
     problem = Trackler::Problem.new('cherry', FIXTURE_PATH)
     assert_equal "", problem.source_markdown
   end
 
   def test_no_such_problem
+    # in deprecated location
     refute Trackler::Problem.new('no-such-problem', FIXTURE_PATH).exists?
   end
 end

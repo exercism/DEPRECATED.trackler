@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      File.exist?(md) && File.exist?(yaml)
+      !!md && !!yaml
     end
 
     def name
@@ -18,7 +18,7 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(md)
+      @description ||= File.read(filepath(md))
     end
 
     def source_markdown
@@ -32,15 +32,15 @@ module Trackler
     end
 
     def md_url
-      repo_url('md')
+      repo_url(md)
     end
 
     def json_url
-      repo_url('json') if File.exist?(path("%s.json" % slug))
+      repo_url(json) if !!json
     end
 
     def yaml_url
-      repo_url('yml')
+      repo_url(yaml)
     end
 
     %w(blurb source source_url).each do |name|
@@ -51,24 +51,37 @@ module Trackler
 
     private
 
-    def repo_url(ext)
-      "https://github.com/exercism/x-common/blob/master/%s.%s" % [slug, ext]
+    def json
+      [
+        "exercises/%s/canonical-data.json" % slug,
+        "%s.json" % slug,
+      ].find { |path| File.exist?(filepath(path)) }
     end
 
     def yaml
-      path('%s.yml' % slug)
+      [
+        "exercises/%s/metadata.yml" % slug,
+        "%s.yml" % slug,
+      ].find { |path| File.exist?(filepath(path)) }
     end
 
     def md
-      path('%s.md' % slug)
+      [
+        "exercises/%s/description.md" % slug,
+        "%s.md" % slug,
+      ].find { |path| File.exist?(filepath(path)) }
     end
 
-    def path(f)
+    def repo_url(path)
+      "https://github.com/exercism/x-common/blob/master/%s" % path
+    end
+
+    def filepath(f)
       File.join(root, "common", f)
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(yaml))
+      @metadata ||= YAML.load(File.read(filepath(yaml)))
     end
   end
 end
