@@ -46,9 +46,11 @@ module Trackler
     end
 
     def icon_path
-      if img("img/icon.png").exists?
-        "/tracks/#{id}/img/icon.png"
-      end
+      icon.path if icon.exists?
+    end
+
+    def icon
+      @icon ||= Image.new(File.join(dir, "img/icon.png"))
     end
 
     %w(language repository).each do |name|

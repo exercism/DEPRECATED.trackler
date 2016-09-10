@@ -9,4 +9,4 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
-FIXTURE_PATH = "./test/fixtures".freeze
+FIXTURE_PATH = File.expand_path("./test/fixtures").freeze

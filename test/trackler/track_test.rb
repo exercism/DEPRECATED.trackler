@@ -41,14 +41,14 @@ class TrackTest < Minitest::Test
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 
     img = track.img('img/icon.png')
-    assert img.exists?, "track icon fake.png cannot be found"
+    assert img.exists?, "track icon fake.png cannot be found in img dir"
     assert_equal :png, img.type
-    assert_equal "./test/fixtures/tracks/fake/img/icon.png", img.path
+    assert_equal FIXTURE_PATH + "/tracks/fake/img/icon.png", img.path
 
     img = track.img('docs/img/test.png')
-    assert img.exists?, "image test.png cannot be found"
+    assert img.exists?, "image test.png cannot be found in docs dir"
     assert_equal :png, img.type
-    assert_equal "./test/fixtures/tracks/fake/docs/img/test.png", img.path
+    assert_equal FIXTURE_PATH + "/tracks/fake/docs/img/test.png", img.path
 
     img = track.img('docs/img/nope.png')
     refute img.exists?, "should not have a nope.png"
@@ -94,7 +94,7 @@ class TrackTest < Minitest::Test
 
   def test_icon_path
     subject = Trackler::Track.new('fake', FIXTURE_PATH)
-    expected = '/tracks/fake/img/icon.png'
+    expected = FIXTURE_PATH + '/tracks/fake/img/icon.png'
     assert_equal expected, subject.icon_path
   end
 
