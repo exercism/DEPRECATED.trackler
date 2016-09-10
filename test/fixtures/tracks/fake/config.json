@@ -1,0 +1,20 @@
+{
+  "slug": "fake",
+  "language": "Fake",
+  "repository": "https://github.com/exercism/xfake",
+  "image": "fake.png",
+  "checklist_issue": 5,
+  "active": true,
+  "problems": [
+    "hello-world",
+    "one",
+    "two",
+    "three"
+  ],
+  "deprecated": [
+    "dog"
+  ],
+  "foregone": [
+    "apple"
+  ]
+}

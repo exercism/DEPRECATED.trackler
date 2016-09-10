@@ -1,0 +1,11 @@
+{
+  "slug": "jewels",
+  "language": "Fancy Stones",
+  "repository": "https://github.com/exercism/xjewels",
+  "active": true,
+  "problems": [
+    "hello-world"
+  ],
+  "deprecated": [],
+  "foregone": []
+}
