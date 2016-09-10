@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+require_relative '../lib/trackler'
+
+omissions = []
+Trackler.tracks.each do |track|
+  track.problems.each do |slug|
+    unless Trackler.problems[slug].exists?
+      omissions << slug
+    end
+  end
+end
+
+omissions = omissions.uniq
+unless omissions.empty?
+  puts "missing:"
+  omissions.each do |omission|
+    puts "  #{omission}"
+  end
+  exit 1
+end
