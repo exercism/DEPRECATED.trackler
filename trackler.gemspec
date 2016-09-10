@@ -14,7 +14,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "http://exercism.io"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f|
+    f.match(%r{^(test)/})
+  } + Dir.glob("common/**/*", File::FNM_DOTMATCH) + Dir.glob("tracks/**/*", File::FNM_DOTMATCH)
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rubyzip", "~> 1.1.0"
