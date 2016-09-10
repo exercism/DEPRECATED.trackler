@@ -65,16 +65,20 @@ module Trackler
 
     def assemble_readme
       <<-README
-# #{problem.name}
+# #{readme_title}
 
 #{problem.blurb}
 
 #{readme_body}
 
-#{problem.source_markdown}
+#{readme_source}
 
 #{incomplete_solutions_body}
       README
+    end
+
+    def readme_title
+      problem.name
     end
 
     def readme_body
@@ -83,6 +87,10 @@ module Trackler
         track_hint,
         implementation_hint,
       ].reject(&:empty?).join("\n").strip
+    end
+
+    def readme_source
+      problem.source_markdown
     end
 
     def incomplete_solutions_body
