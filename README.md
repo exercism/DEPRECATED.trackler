@@ -20,7 +20,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To access a language track, use the track id (e.g. `ruby`, `cpp`):
+
+```
+track = Trackler.tracks["fsharp"]
+track.language
+# => "F#"
+```
+
+Tracks have implementations of specific problems:
+
+```
+track.implementations.each do |implementation|
+  # implementation.files, implementation.readme, etc
+end
+```
+
+To get a problem, use the problem slug:
+
+```
+problem = Trackler.problems["leap"]
+```
+
+Problems contain the generic, language-independent metadata:
+
+```
+problem.blurb
+# => "Write a program that will take a year and report if it is a leap year."
+problem.name
+# => "Leap"
+```
+
+You can get all of the different language implementations for a problem:
+
+```
+
+Trackler.implementations[problem.slug].each do |implementation|
+  # ...
+end
+```
 
 ## Development
 
