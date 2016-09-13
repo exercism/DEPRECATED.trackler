@@ -59,10 +59,18 @@ module Trackler
       end
     end
 
-    %w(problems deprecated foregone).each do |name|
+    %w(exercises deprecated foregone).each do |name|
       define_method name do
         config[name] || []
       end
+    end
+
+    def problems
+      exercises.empty? ? exercises_in_deprecated_key : exercises.map { |ex| ex["slug"] }
+    end
+
+    def exercises_in_deprecated_key
+      config["problems"] || []
     end
 
     def test_pattern

@@ -37,6 +37,12 @@ class TrackTest < Minitest::Test
     assert_equal(/test/i, track.test_pattern)
   end
 
+  def test_deprecated_problems
+    track = Trackler::Track.new('fruit', FIXTURE_PATH)
+    problems = %w(apple banana cherry)
+    assert_equal problems, track.problems
+  end
+
   def test_img
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 

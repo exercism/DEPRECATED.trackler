@@ -6,7 +6,7 @@ require 'trackler/implementations'
 class ImplementationsTest < Minitest::Test
   def test_collection
     path = File.join(FIXTURE_PATH, 'tracks', 'fake', 'config.json')
-    slugs = JSON.parse(File.read(path))["problems"]
+    slugs = JSON.parse(File.read(path))["exercises"].map { |ex| ex["slug"] }
     implementations = Trackler::Implementations.new('fake', "[REPO_URL]", slugs, FIXTURE_PATH)
 
     # can access it like an array
