@@ -1,10 +1,12 @@
 # Contributing Guide
 
-The exercises for each language are stored in separate repositories, included
-here as git submodules under `./tracks`.
+The exercises for [each language][xtracks] are stored in separate repositories,
+included here as [git submodules][submodule] under `./tracks`.
 
-The common metadata which is shared between all the language tracks are also
-included as a git submodule in `./common`.
+The [common metadata][xcommon] which is shared between all the language tracks are
+also included as a [git submodule][submodule] in `./common`.
+
+A git submodule is essentially a project in another project.
 
 ## Terminology
 
@@ -25,3 +27,7 @@ Once the repository exists, it can be added as a submodule here (using C++ as an
 ```
 $ TRACK_ID=cpp git submodule add https://github.com/exercism/x$TRACK_ID.git tracks/$TRACK_ID
 ```
+
+[submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
+[xtracks]: https://github.com/exercism/trackler/tree/master/tracks
+[xcommon]: https://github.com/exercism/x-common
