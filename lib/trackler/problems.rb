@@ -29,7 +29,9 @@ module Trackler
     private
 
     def all
-      @all ||= deprecated_basenames + dirs
+      @all ||= (deprecated_basenames + dirs).reject { |problem|
+        deprecated?(problem.slug)
+      }
     end
 
     def dirs
@@ -42,6 +44,10 @@ module Trackler
       @deprecated ||= Dir["%s/common/*.yml" % root].sort.map { |f|
         Problem.new(f[SLUG_PATTERN_DEPRECATED, 1], root)
       }
+    end
+
+    def deprecated?(slug)
+      File.exist?(File.join(root, "common", "exercises", slug, ".deprecated"))
     end
 
     def by_slug
