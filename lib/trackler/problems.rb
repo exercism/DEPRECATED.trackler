@@ -3,7 +3,8 @@ module Trackler
   class Problems
     include Enumerable
 
-    SLUG_PATTERN = Regexp.new(".*\/([^\/]*)\.yml")
+    SLUG_PATTERN_DEPRECATED = Regexp.new(".*\/([^\/]*)\.yml")
+    SLUG_PATTERN = Regexp.new(".*\/exercises\/([^\/]*)\/")
 
     attr_reader :root
     def initialize(root)
@@ -28,8 +29,18 @@ module Trackler
     private
 
     def all
-      @all ||= Dir["%s/common/*.yml" % root].sort.map { |f|
+      @all ||= deprecated_basenames + dirs
+    end
+
+    def dirs
+      @exercise_ids ||= Dir["%s/common/exercises/*/" % root].sort.map { |f|
         Problem.new(f[SLUG_PATTERN, 1], root)
+      }
+    end
+
+    def deprecated_basenames
+      @deprecated ||= Dir["%s/common/*.yml" % root].sort.map { |f|
+        Problem.new(f[SLUG_PATTERN_DEPRECATED, 1], root)
       }
     end
 
