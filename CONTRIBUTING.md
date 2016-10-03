@@ -25,7 +25,7 @@ repository for you.
 Once the repository exists, it can be added as a submodule here (using C++ as an example):
 
 ```
-$ TRACK_ID=cpp git submodule add https://github.com/exercism/x$TRACK_ID.git tracks/$TRACK_ID
+$ TRACK_ID=cpp; git submodule add https://github.com/exercism/x$TRACK_ID.git tracks/$TRACK_ID
 ```
 
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
