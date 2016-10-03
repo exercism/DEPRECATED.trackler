@@ -8,7 +8,7 @@ class ProblemsTest < Minitest::Test
 
     # can access it like an array
     slugs = [
-      "apple", "banana", "cherry", "dog", "hello-world", "one", "three", "two", "mango"
+      "apple", "banana", "cherry", "dog", "hello-world", "mango", "one", "three", "two"
     ]
     assert_equal slugs, problems.map(&:slug)
 
