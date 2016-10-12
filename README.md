@@ -74,6 +74,16 @@ See CONTRIBUTING.md for details.
 
 This is an extraction from https://github.com/exercism/x-api.
 
+## Publishing
+
+Owners of the gem can publish it to rubygems like this:
+
+```
+gem build trackler.gemspec
+gem install --local trackler-$VERSION.gem
+gem push trackler-$VERSION.gem
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
