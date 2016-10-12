@@ -1,6 +1,14 @@
 # Change log
 
-The Trackler gem follows [semantic versioning](http://semver.org/).
+The Trackler gem almost follows [semantic versioning](http://semver.org/).
+
+We've added a forth level, which tracks content. It gets bumped each time we
+update the submodules.
+
+      1   .   0   .   0   .   0
+    MAJOR   MINOR   PATCH   CONTENT
+
+The changelog will not be updated for content updates.
 
 ----------------
 
