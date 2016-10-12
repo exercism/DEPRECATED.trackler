@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   } + Dir.glob("common/**/*", File::FNM_DOTMATCH) + Dir.glob("tracks/**/*", File::FNM_DOTMATCH)
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rubyzip", "~> 1.1.0"
+  spec.add_dependency "rubyzip", "~> 1.1"
   spec.add_dependency "org-ruby", "~> 0.9.0"
 
   spec.add_development_dependency "rake", "~> 10.0"
