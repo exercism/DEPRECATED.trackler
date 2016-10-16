@@ -9,4 +9,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
-FIXTURE_PATH = File.expand_path("./test/fixtures").freeze
+
+require 'trackler/path'
+FIXTURE_PATH = Trackler::Path.fixtures

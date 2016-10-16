@@ -2,16 +2,24 @@ paths = Dir[File.expand_path('../trackler/**/*.rb', __FILE__)]
 paths.each { |path| require path }
 
 module Trackler
-  def self.root
-    File.expand_path("../../", __FILE__)
+  def self.path
+    @path ||= Trackler::Path.root
+  end
+
+  def self.use_real_data
+    @path = Trackler::Path.root
+  end
+
+  def self.use_fixture_data
+    @path = Trackler::Path.fixtures
   end
 
   def self.problems
-    @problems ||= Problems.new(root)
+    @problems ||= Problems.new(path)
   end
 
   def self.tracks
-    @tracks ||= Tracks.new(root)
+    @tracks ||= Tracks.new(path)
   end
 
   def self.implementations
