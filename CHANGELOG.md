@@ -15,6 +15,11 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v1.0.1.0 (2016-10-16)
+
+Make the location of the track data configurable so we can use fixture
+data for the x-api and exercism.io tests.
+
 ## v1.0.0.0 (2016-10-03)
 
 This is an extraction of the tracks, problems, and implementations logic
