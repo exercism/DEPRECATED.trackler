@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+system("bin/update")
+
+file = File.absolute_path("../../lib/trackler/version.rb", __FILE__)
+
+contents = File.read(file)
+major, minor, patch, data = contents[/\ \ VERSION\ =\ "(.*)"/, 1].split(".")
+
+version = [major, minor, patch, data.to_i + 1].join(".")
+
+template = <<-TEMPLATE % version
+module Trackler
+  VERSION = "%s"
+end
+TEMPLATE
+
+File.open(file, "w") do |f|
+  f.puts template
+end
+
+cmds = [
+  "git add lib/trackler/version.rb",
+  "git commit -m 'Bump to v%s'" % version,
+  "git tag v%s" % version,
+  "git push origin master",
+  "git push --tags",
+  "gem build trackler.gemspec",
+  "gem install --local trackler-%s.gem" % version,
+  "gem push trackler-%s.gem" % version,
+].each do |cmd|
+  system cmd
+end
