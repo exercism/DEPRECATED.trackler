@@ -13,8 +13,12 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
-* Add script to update submodules and bump version
 * **Your contribution here**
+
+## v1.0.2.0 (2016-10-17)
+
+* Add script to update submodules and bump version
+* Invalidate the data caches when switching track data path
 
 ## v1.0.1.0 (2016-10-16)
 
