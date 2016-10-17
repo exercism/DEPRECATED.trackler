@@ -160,3 +160,6 @@
 [submodule "tracks/pascal"]
 	path = tracks/pascal
 	url = https://github.com/exercism/xpascal.git
+[submodule "tracks/prolog"]
+	path = tracks/prolog
+	url = https://github.com/exercism/xprolog
