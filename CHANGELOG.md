@@ -15,6 +15,10 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v1.0.3.0 (2016-10-21)
+
+* Add more granular states for track state
+
 ## v1.0.2.0 (2016-10-17)
 
 * Add script to update submodules and bump version
