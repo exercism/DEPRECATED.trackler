@@ -7,6 +7,7 @@ module Trackler
     @implementations = nil
     @problems = nil
     @tracks = nil
+    @todos = nil
   end
 
   def self.path
@@ -41,5 +42,22 @@ module Trackler
       end
     end
     @implementations
+  end
+
+  def self.todos
+    return @todos if !!@todos
+
+    slugs = problems.map(&:slug)
+
+    @todos = Hash.new { |h, k| h[k] = [] }
+    tracks.each do |track|
+      todos = slugs - track.slugs
+      @todos[track.id] = problems.select { |problem|
+        todos.include?(problem.slug)
+      }.sort_by { |problem|
+        [implementations[problem.slug].count * -1, problem.name]
+      }
+    end
+    @todos
   end
 end

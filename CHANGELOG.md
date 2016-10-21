@@ -13,6 +13,7 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
+* Provide a list of unimplemented exercises for a track
 * **Your contribution here**
 
 ## v1.0.3.0 (2016-10-21)
