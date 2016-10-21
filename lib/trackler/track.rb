@@ -133,7 +133,7 @@ module Trackler
     end
 
     def document_contents(topic)
-      filename = document_fiename(topic)
+      filename = document_filename(topic)
       case filename
       when /\.md$/
         File.read(filename)
@@ -144,7 +144,7 @@ module Trackler
       end
     end
 
-    def document_fiename(topic)
+    def document_filename(topic)
       path = File.join(dir, "docs", topic.upcase)
       Dir.glob("%s.*" % path).sort.first
     end
