@@ -115,4 +115,21 @@ class TrackTest < Minitest::Test
     files = ["some-vendored-library", "sub-global/other-some-vendor"]
     assert_archive_contains files, track.global_zip
   end
+
+  def test_states
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    assert track.active?
+    refute track.upcoming?
+    refute track.planned?
+
+    track = Trackler::Track.new('shoes', FIXTURE_PATH)
+    refute track.active?
+    assert track.upcoming?
+    refute track.planned?
+
+    track = Trackler::Track.new('vehicles', FIXTURE_PATH)
+    refute track.active?
+    refute track.upcoming?
+    assert track.planned?
+  end
 end

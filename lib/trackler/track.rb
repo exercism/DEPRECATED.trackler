@@ -33,6 +33,14 @@ module Trackler
       !!config["active"]
     end
 
+    def upcoming?
+      !active? && problems.length > 0
+    end
+
+    def planned?
+      !active? && problems.length.zero?
+    end
+
     def implementations
       @implementations ||= Implementations.new(id, repository, problems, root)
     end
