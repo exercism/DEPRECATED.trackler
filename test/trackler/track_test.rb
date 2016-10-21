@@ -22,16 +22,18 @@ class TrackTest < Minitest::Test
     assert_equal 5, track.checklist_issue
     assert_equal nil, track.gitter
 
-    problems = %w(hello-world one two three)
-    assert_equal problems, track.problems
-    assert_equal ["apple"], track.foregone
-    assert_equal ["dog"], track.deprecated
-    assert_equal problems, track.implementations.map {|implementation|
+    slugs = %w(hello-world one two three)
+    assert_equal slugs, track.problems.map(&:slug)
+    assert_equal slugs, track.implementations.map {|implementation|
       implementation.problem.slug
     }
 
+    # This is a sanity-check to demonstrate that this fake
+    # track actually has both foregone and deprecated problems.
     slugs = %w(hello-world one two three apple dog)
-    assert_equal slugs, track.slugs
+    assert_equal ["apple"], track.send(:foregone_slugs)
+    assert_equal ["dog"], track.send(:deprecated_slugs)
+    assert_equal slugs, track.send(:slugs)
 
     # default test pattern
     assert_equal(/test/i, track.test_pattern)
@@ -39,8 +41,14 @@ class TrackTest < Minitest::Test
 
   def test_deprecated_problems
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
-    problems = %w(apple banana cherry)
-    assert_equal problems, track.problems
+    slugs = %w(apple banana cherry)
+    assert_equal slugs, track.problems.map(&:slug)
+  end
+
+  def test_problems
+    track = Trackler::Track.new('fruit', FIXTURE_PATH)
+    slugs = %w(apple banana cherry)
+    assert_equal slugs, track.problems.map(&:slug)
   end
 
   def test_img
