@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-system("bin/update")
+unless system("bin/update")
+  exit 1
+end
 
 file = File.absolute_path("../../lib/trackler/version.rb", __FILE__)
 
