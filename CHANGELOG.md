@@ -13,8 +13,11 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
-* Fix domain concept confusion on Tracks. **Backwards incompatible**
 * **Your contribution here**
+
+## v2.0.0.0 (2016-10-22)
+
+* Fix domain concept confusion on Tracks. **Backwards incompatible**
 
 ## v1.0.4.0 (2016-10-21)
 
