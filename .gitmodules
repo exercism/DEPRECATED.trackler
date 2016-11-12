@@ -162,4 +162,4 @@
 	url = https://github.com/exercism/xpascal.git
 [submodule "tracks/prolog"]
 	path = tracks/prolog
-	url = https://github.com/exercism/xprolog
+	url = https://github.com/exercism/xprolog.git

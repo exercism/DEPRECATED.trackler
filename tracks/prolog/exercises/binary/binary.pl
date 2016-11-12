@@ -1,1 +1,0 @@
-binary(Str, Dec).

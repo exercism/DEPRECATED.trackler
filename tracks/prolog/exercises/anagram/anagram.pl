@@ -1,1 +1,0 @@
-anagram(Word, Options, Matching).
