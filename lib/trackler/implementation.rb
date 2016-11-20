@@ -17,16 +17,16 @@ module Trackler
       @repo = repo
       @problem = problem
       @root = Pathname.new(root)
-      @file_bundle = FileBundle.new(dir, IGNORE)
+      @file_bundle = FileBundle.new(track_directory, IGNORE)
     end
 
     def exists?
-      File.exist?(dir)
+      File.exist?(track_directory)
     end
 
     def files
       @files ||= Hash[file_bundle.paths.map {|path|
-        [path.relative_path_from(dir).to_s, File.read(path)]
+        [path.relative_path_from(track_directory).to_s, File.read(path)]
       }].merge("README.md" => readme)
     end
 
@@ -55,8 +55,8 @@ module Trackler
 
     private
 
-    def dir
-      @dir ||= track_dir.join(exercise_dir)
+    def track_directory
+      @track_directory ||= track_dir.join(exercise_dir)
     end
 
     def track_dir
@@ -105,7 +105,7 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def implementation_hint
-      read File.join(dir, 'HINTS.md')
+      read File.join(track_directory, 'HINTS.md')
     end
 
     def read(f)
