@@ -18,7 +18,7 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(filepath(md_path))
+      @description ||= File.read(common_metadata_path(md_path))
     end
 
     def source_markdown
@@ -61,33 +61,33 @@ module Trackler
       [
         "exercises/%s/canonical-data.json" % slug,
         "%s.json" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+      ].find { |path| File.exist?(common_metadata_path(path)) }
     end
 
     def yaml_path
       [
         "exercises/%s/metadata.yml" % slug,
         "%s.yml" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+      ].find { |path| File.exist?(common_metadata_path(path)) }
     end
 
     def md_path
       [
         "exercises/%s/description.md" % slug,
         "%s.md" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+      ].find { |path| File.exist?(common_metadata_path(path)) }
     end
 
     def repo_url(path)
       "https://github.com/exercism/x-common/blob/master/%s" % path
     end
 
-    def filepath(filename)
-      File.join(root, "common", filename)
+    def common_metadata_path(path)
+      File.join(root, "common", path)
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(filepath(yaml_path)))
+      @metadata ||= YAML.load(File.read(common_metadata_path(yaml_path)))
     end
   end
 end
