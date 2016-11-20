@@ -25,8 +25,9 @@ class ProblemTest < Minitest::Test
   def test_json_url
     problem = Trackler::Problem.new('mango', FIXTURE_PATH)
     assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.json_url
+  end
 
-    # missing JSON file
+  def test_json_url_missing
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     assert_equal nil, problem.json_url
   end
