@@ -43,10 +43,16 @@ module Trackler
       repo_url(yaml_path)
     end
 
-    %w(blurb source source_url).each do |name|
-      define_method name do
-        metadata[name].to_s.strip
-      end
+    def blurb
+      metadata['blurb'].to_s.strip
+    end
+
+    def source
+      metadata['source'].to_s.strip
+    end
+
+    def source_url
+      metadata['source_url'].to_s.strip
     end
 
     private
