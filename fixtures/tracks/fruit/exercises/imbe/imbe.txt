@@ -1,0 +1,1 @@
+All files in this directory, EXCEPT for this file, should be ignored.

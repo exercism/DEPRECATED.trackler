@@ -1,0 +1,1 @@
+Hints file is ignored.
