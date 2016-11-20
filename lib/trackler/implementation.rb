@@ -8,6 +8,7 @@ module Trackler
       Regexp.new("HINTS\.md$"),
       Regexp.new("example", Regexp::IGNORECASE),
       Regexp.new("\/\.$"),
+      Regexp.new("/\.meta/")
     ]
 
     attr_reader :track_id, :repo, :problem, :root, :file_bundle
