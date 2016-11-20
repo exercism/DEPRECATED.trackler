@@ -7,7 +7,6 @@ class ProblemTest < Minitest::Test
 
     assert problem.exists?, "hello world files not found in the metadata dir"
     assert_equal 'hello-world', problem.slug
-    assert_equal 'Hello World', problem.name
     assert_equal 'Oh, hello.', problem.blurb
     assert_equal "* hello\n* hello again\n", problem.description
     assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/metadata.yml', problem.yaml_url
@@ -16,6 +15,11 @@ class ProblemTest < Minitest::Test
     assert_equal "## Source\n\nThe internet. [http://example.com](http://example.com)", problem.source_markdown
     assert_equal 'The internet.', problem.source
     assert_equal 'http://example.com', problem.source_url
+  end
+
+  def test_problem_name
+    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
+    assert_equal 'Hello World', problem.name
   end
 
   def test_json_url
