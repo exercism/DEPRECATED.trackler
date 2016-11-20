@@ -37,8 +37,7 @@ class ProblemTest < Minitest::Test
     assert_equal "## Source\n\nThe mango. [http://example.com](http://example.com)", problem.source_markdown
   end
 
-  def test_source_markdown_no_source
-    # in deprecated location
+  def test_source_markdown_in_depricated_location
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     assert_equal "## Source\n\n[http://example.com](http://example.com)", problem.source_markdown
   end
