@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      !!md && !!yaml
+      !!md_path && !!yaml_path
     end
 
     def name
@@ -18,7 +18,7 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(filepath(md))
+      @description ||= File.read(filepath(md_path))
     end
 
     def source_markdown
@@ -32,15 +32,15 @@ module Trackler
     end
 
     def md_url
-      repo_url(md)
+      repo_url(md_path)
     end
 
     def json_url
-      repo_url(json) if !!json
+      repo_url(json_path) if !!json_path
     end
 
     def yaml_url
-      repo_url(yaml)
+      repo_url(yaml_path)
     end
 
     %w(blurb source source_url).each do |name|
@@ -51,21 +51,21 @@ module Trackler
 
     private
 
-    def json
+    def json_path
       [
         "exercises/%s/canonical-data.json" % slug,
         "%s.json" % slug,
       ].find { |path| File.exist?(filepath(path)) }
     end
 
-    def yaml
+    def yaml_path
       [
         "exercises/%s/metadata.yml" % slug,
         "%s.yml" % slug,
       ].find { |path| File.exist?(filepath(path)) }
     end
 
-    def md
+    def md_path
       [
         "exercises/%s/description.md" % slug,
         "%s.md" % slug,
@@ -81,7 +81,7 @@ module Trackler
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(filepath(yaml)))
+      @metadata ||= YAML.load(File.read(filepath(yaml_path)))
     end
   end
 end
