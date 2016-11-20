@@ -76,8 +76,8 @@ module Trackler
       "https://github.com/exercism/x-common/blob/master/%s" % path
     end
 
-    def filepath(f)
-      File.join(root, "common", f)
+    def filepath(filename)
+      File.join(root, "common", filename)
     end
 
     def metadata
