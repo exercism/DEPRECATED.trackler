@@ -1,9 +1,10 @@
 require 'zip'
 
 module Trackler
-  # FileBundle is a zippech archive of a directory.
+  # A FileBundle is a collection of files from within an exercise directory
+  # It contains all the files that will be provided by the `exercism fetch` command
+  # EXCEPT for those whose names match any of the ignore patterns.
   class FileBundle
-    attr_reader :dir, :ignore_patterns
     def initialize(dir, ignore_patterns = [])
       @dir = dir
       @ignore_patterns = ignore_patterns
@@ -24,6 +25,8 @@ module Trackler
     end
 
     private
+
+    attr_reader :dir, :ignore_patterns
 
     def all_files_below(dir)
       Pathname.glob("#{dir}/**/*", File::FNM_DOTMATCH)
