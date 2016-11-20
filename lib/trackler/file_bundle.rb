@@ -4,7 +4,7 @@ module Trackler
   # FileBundle is a zippech archive of a directory.
   class FileBundle
     attr_reader :dir, :ignore_patterns
-    def initialize(dir, ignore_patterns=[])
+    def initialize(dir, ignore_patterns = [])
       @dir = dir
       @ignore_patterns = ignore_patterns
     end
@@ -20,10 +20,25 @@ module Trackler
     end
 
     def paths
-      Pathname.glob("#{dir}/**/*", File::FNM_DOTMATCH).reject {|file|
-        file.directory? ||
-          ignore_patterns.any? { |pattern| file.to_s =~ pattern }
-      }.sort
+      all_files_below(dir).reject { |file| ignored? file }.sort
+    end
+
+    private
+
+    def all_files_below(dir)
+      Pathname.glob("#{dir}/**/*", File::FNM_DOTMATCH)
+    end
+
+    def ignored?(file)
+      ignored_by_name?(file) || ignored_by_type?(file)
+    end
+
+    def ignored_by_name?(file)
+      ignore_patterns.any? { |pattern| file.to_s =~ pattern }
+    end
+
+    def ignored_by_type?(file)
+      file.directory?
     end
   end
 end
