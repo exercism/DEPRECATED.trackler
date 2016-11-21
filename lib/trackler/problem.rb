@@ -68,21 +68,18 @@ module Trackler
     def json_path
       [
         "exercises/%s/canonical-data.json" % slug,
-        "%s.json" % slug,
       ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
     def yaml_path
-      [ 
+      [
         "exercises/%s/metadata.yml" % slug,
-        "%s.yml" % slug,
       ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
     def md_path
       [
         "exercises/%s/description.md" % slug,
-        "%s.md" % slug,
       ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
