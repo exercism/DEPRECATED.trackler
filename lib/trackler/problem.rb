@@ -22,13 +22,8 @@ module Trackler
     end
 
     def source_markdown
-      body = source.empty? ? "" : "%s" % source
-      url = source_url.empty? ? "" : "[%s](%s)" % [source_url, source_url]
-      if url.empty? && body.empty?
-        ""
-      else
-        "## Source\n\n" + [body, url].reject(&:empty?).join(" ")
-      end
+      text = [source, markdown_link(source_url)].reject(&:empty?).join(" ")
+      text.empty? ? text : "## Source\n\n#{text}"
     end
 
     def md_url
@@ -88,6 +83,10 @@ module Trackler
 
     def metadata
       @metadata ||= YAML.load(File.read(common_metadata_path(yaml_path)))
+    end
+
+    def markdown_link(url)
+      url.empty? ? url : format("[%s](%s)", url, url)
     end
   end
 end
