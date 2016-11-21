@@ -69,21 +69,21 @@ module Trackler
       [
         "exercises/%s/canonical-data.json" % slug,
         "%s.json" % slug,
-      ].find { |path| common_metadata_exists_for?(path) }
+      ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
     def yaml_path
-      [
+      [ 
         "exercises/%s/metadata.yml" % slug,
         "%s.yml" % slug,
-      ].find { |path| common_metadata_exists_for?(path) }
+      ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
     def md_path
       [
         "exercises/%s/description.md" % slug,
         "%s.md" % slug,
-      ].find { |path| common_metadata_exists_for?(path) }
+      ].find { |filename| common_metadata_file_exists?(filename) }
     end
 
     def repo_url(path)
@@ -98,8 +98,8 @@ module Trackler
       File.join(root, "common", path)
     end
 
-    def common_metadata_exists_for?(path)
-      File.exist?(common_metadata_path(path))
+    def common_metadata_file_exists?(filename)
+      File.exist?(common_metadata_path(filename))
     end
 
     def load_description
