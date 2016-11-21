@@ -52,10 +52,6 @@ module Trackler
 
     private
 
-    def load_description
-      File.read(common_metadata_path(md_path))
-    end
-
     def description_exists?
       !md_path.nil?
     end
@@ -72,33 +68,41 @@ module Trackler
       [
         "exercises/%s/canonical-data.json" % slug,
         "%s.json" % slug,
-      ].find { |path| File.exist?(common_metadata_path(path)) }
+      ].find { |path| common_metadata_exists_for?(path) }
     end
 
     def yaml_path
       [
         "exercises/%s/metadata.yml" % slug,
         "%s.yml" % slug,
-      ].find { |path| File.exist?(common_metadata_path(path)) }
+      ].find { |path| common_metadata_exists_for?(path) }
     end
 
     def md_path
       [
         "exercises/%s/description.md" % slug,
         "%s.md" % slug,
-      ].find { |path| File.exist?(common_metadata_path(path)) }
+      ].find { |path| common_metadata_exists_for?(path) }
     end
 
     def repo_url(path)
       "https://github.com/exercism/x-common/blob/master/%s" % path
     end
 
+    def metadata
+      @metadata ||= load_yaml
+    end
+
     def common_metadata_path(path)
       File.join(root, "common", path)
     end
 
-    def metadata
-      @metadata ||= load_yaml
+    def common_metadata_exists_for?(path)
+      File.exist?(common_metadata_path(path))
+    end
+
+    def load_description
+      File.read(common_metadata_path(md_path))
     end
 
     def load_yaml
