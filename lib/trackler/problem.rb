@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      !!md_path && !!yaml_path
+      md_path && yaml_path
     end
 
     def name
@@ -36,7 +36,7 @@ module Trackler
     end
 
     def json_url
-      repo_url(json_path) if !!json_path
+      repo_url(json_path) if json_path
     end
 
     def yaml_url
