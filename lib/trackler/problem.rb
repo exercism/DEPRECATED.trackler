@@ -10,15 +10,15 @@ module Trackler
     end
 
     def exists?
-      md_path && yaml_path
+      description_exists? && yaml_exists?
     end
 
     def name
-      @name ||= slug.split('-').map(&:capitalize).join(' ')
+      @name ||= slug_to_name
     end
 
     def description
-      @description ||= File.read(common_metadata_path(md_path))
+      @description ||= load_description
     end
 
     def source_markdown
@@ -52,6 +52,22 @@ module Trackler
 
     private
 
+    def load_description
+      File.read(common_metadata_path(md_path))
+    end
+
+    def description_exists?
+      !md_path.nil?
+    end
+
+    def yaml_exists?
+      !yaml_path.nil?
+    end
+
+    def slug_to_name
+      slug.split('-').map(&:capitalize).join(' ')
+    end
+
     def json_path
       [
         "exercises/%s/canonical-data.json" % slug,
@@ -82,7 +98,11 @@ module Trackler
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(common_metadata_path(yaml_path)))
+      @metadata ||= load_yaml
+    end
+
+    def load_yaml
+      YAML.load(File.read(common_metadata_path(yaml_path)))
     end
 
     def markdown_link(url)
