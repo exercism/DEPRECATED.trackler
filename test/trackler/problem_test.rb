@@ -80,4 +80,10 @@ class ProblemTest < Minitest::Test
   def test_no_such_problem
     refute Trackler::Problem.new('no-such-problem', FIXTURE_PATH).exists?
   end
+
+  def test_source_markdown_empty
+    problem = Trackler::Problem.new('cherry', FIXTURE_PATH)
+    expected = ''
+    assert_equal expected, problem.source_markdown
+  end
 end
