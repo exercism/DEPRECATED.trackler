@@ -7,6 +7,7 @@ module Trackler
     def initialize(slug, root)
       @slug = slug
       @root = root
+      @xcommon_repository_url = 'https://github.com/exercism/x-common/blob/master'
     end
 
     def exists?
@@ -86,7 +87,7 @@ module Trackler
     end
 
     def repo_url(path)
-      "https://github.com/exercism/x-common/blob/master/%s" % path
+      "#{@xcommon_repository_url}/#{path}"
     end
 
     def metadata
