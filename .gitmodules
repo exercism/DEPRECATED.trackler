@@ -163,3 +163,6 @@
 [submodule "tracks/prolog"]
 	path = tracks/prolog
 	url = https://github.com/exercism/xprolog.git
+[submodule "tracks/julia"]
+	path = tracks/julia
+	url = https://github.com/exercism/xjulia
