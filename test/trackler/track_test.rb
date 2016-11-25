@@ -81,6 +81,14 @@ class TrackTest < Minitest::Test
     assert_equal expected, track.docs
   end
 
+  # FIXME: this is a test of a Docs object, it doesn't really belong here.
+  def test_docs_accessible_as_object
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    expected = "Language Information\n"
+    assert_equal expected, track.docs.about
+  end
+
+  # FIXME: this is a test of a Docs object, it doesn't really belong here.
   # TODO: make exercism.io views consistent in what they expect docs to be.
   def test_docs_also_accessible_as_a_hash
     track = Trackler::Track.new('fake', FIXTURE_PATH)
