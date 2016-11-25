@@ -49,6 +49,22 @@ module Trackler
       end
     end
 
+    #TODO: Complete implementation
+    def readme_url
+      "fixme: #{caller.first}"
+    end
+
+    #TODO: Complete implementation
+    #TODO: Rename to test_data_url
+    def data
+      "fixme: #{caller.first}"
+    end
+
+    #TODO: Complete implementation
+    def implementations
+      [ { 'url' => "fixme: #{caller.first}", 'track_id' => "I don't know my track_id'" } ]
+    end
+
     private
 
     def json
