@@ -52,7 +52,7 @@ module Trackler
     end
 
     def canonical_data_url
-      repo_url(canonical_data_path) if !!canonical_data_path
+      repo_url(canonical_data_path)
     end
 
     def metadata_url
@@ -92,7 +92,7 @@ module Trackler
     end
 
     def repo_url(path)
-      "https://github.com/exercism/x-common/blob/master/#{path}"
+      "https://github.com/exercism/x-common/blob/master/#{path}" unless path.nil?
     end
 
     def metadata
