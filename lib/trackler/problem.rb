@@ -7,19 +7,18 @@ module Trackler
     def initialize(slug, root)
       @slug = slug
       @root = root
-      @xcommon_repository_url = 'https://github.com/exercism/x-common/blob/master'
     end
 
     def exists?
-      description_exists? && yaml_exists?
+      !!md_path && !!yaml_path
     end
 
     def name
-      @name ||= slug_to_name
+      slug.split('-').map(&:capitalize).join(' ')
     end
 
     def description
-      @description ||= load_description
+      @description ||= File.read(common_metadata_path(md_path))
     end
 
     def source_markdown
@@ -32,7 +31,7 @@ module Trackler
     end
 
     def json_url
-      repo_url(json_path) if json_path
+      repo_url(json_path) if !!json_path
     end
 
     def yaml_url
@@ -53,58 +52,34 @@ module Trackler
 
     private
 
-    def description_exists?
-      !md_path.nil?
-    end
-
-    def yaml_exists?
-      !yaml_path.nil?
-    end
-
-    def slug_to_name
-      slug.split('-').map(&:capitalize).join(' ')
-    end
-
     def json_path
       [
         "exercises/%s/canonical-data.json" % slug,
-      ].find { |filename| common_metadata_file_exists?(filename) }
+      ].find { |filename| File.exist?(common_metadata_path(filename)) }
     end
 
     def yaml_path
       [
         "exercises/%s/metadata.yml" % slug,
-      ].find { |filename| common_metadata_file_exists?(filename) }
+      ].find { |filename| File.exist?(common_metadata_path(filename)) }
     end
 
     def md_path
       [
         "exercises/%s/description.md" % slug,
-      ].find { |filename| common_metadata_file_exists?(filename) }
+      ].find { |filename| File.exist?(common_metadata_path(filename)) }
     end
 
     def repo_url(path)
-      "#{@xcommon_repository_url}/#{path}"
+      "https://github.com/exercism/x-common/blob/master/#{path}"
     end
 
     def metadata
-      @metadata ||= load_yaml
+      @metadata ||= YAML.load(File.read(common_metadata_path(yaml_path)))
     end
 
     def common_metadata_path(path)
       File.join(root, "common", path)
-    end
-
-    def common_metadata_file_exists?(filename)
-      File.exist?(common_metadata_path(filename))
-    end
-
-    def load_description
-      File.read(common_metadata_path(md_path))
-    end
-
-    def load_yaml
-      YAML.load(File.read(common_metadata_path(yaml_path)))
     end
 
     def markdown_link(url)

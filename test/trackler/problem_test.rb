@@ -62,7 +62,7 @@ class ProblemTest < Minitest::Test
     assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.json_url
   end
 
-  def test_json_url_missing
+  def test_track_with_no_canonical_data
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     assert_equal nil, problem.json_url
   end
@@ -72,7 +72,7 @@ class ProblemTest < Minitest::Test
     assert_equal "## Source\n\nThe mango. [http://example.com](http://example.com)", problem.source_markdown
   end
 
-  def test_source_markdown_in_depricated_location
+  def test_source_markdown_in_deprecated_location
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     assert_equal "## Source\n\n[http://example.com](http://example.com)", problem.source_markdown
   end
@@ -83,7 +83,6 @@ class ProblemTest < Minitest::Test
 
   def test_source_markdown_empty
     problem = Trackler::Problem.new('cherry', FIXTURE_PATH)
-    expected = ''
-    assert_equal expected, problem.source_markdown
+    assert_equal '', problem.source_markdown
   end
 end
