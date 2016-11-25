@@ -102,6 +102,10 @@ module Trackler
       active_slugs + foregone_slugs + deprecated_slugs
     end
 
+    def unimplemented_problems
+      Trackler.todos[id]
+    end
+
     private
 
     # The slugs for the problems that are currently in the track.
@@ -162,5 +166,6 @@ module Trackler
       path = File.join(dir, "docs", topic.upcase)
       Dir.glob("%s.*" % path).sort.first
     end
+
   end
 end

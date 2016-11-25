@@ -142,8 +142,11 @@ class TrackTest < Minitest::Test
   end
 
   def test_unimplemented_problems
-    track = Trackler::Track.new('animal', FIXTURE_PATH)
-    expected = ['unimplemented_one','unimplemented_two']
-    assert_equal expected, track.unimplemented_problems
+    # Shameless green: Stubbing Trackler here is a smell
+    expected = ['unimplemented_problem_one','unimplemented_problem_two']
+    Trackler.stub(:todos, {'animal' => expected } ) do
+      track = Trackler::Track.new('animal', FIXTURE_PATH)
+      assert_equal expected, track.unimplemented_problems
+    end
   end
 end
