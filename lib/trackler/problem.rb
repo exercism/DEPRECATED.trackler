@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      !!md_path && !!yaml_path
+      !!description_path && !!metadata_path
     end
 
     def name
@@ -18,7 +18,7 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(common_metadata_path(md_path))
+      @description ||= File.read(common_metadata_path(description_path))
     end
 
     def source_markdown
@@ -26,16 +26,37 @@ module Trackler
       text.empty? ? text : "## Source\n\n#{text}"
     end
 
+    ######
+    # Deprecated methods
+    # TODO: remove external references to these methods.
+    # found in: x-api
+    # NOT in: exercism.io, cli
+    # Anywhere else we need to look?
+    # Should this output a warning or raise an error?
     def md_url
-      repo_url(md_path)
+      description_url
     end
 
     def json_url
-      repo_url(json_path) if !!json_path
+      canonical_data_url
     end
 
     def yaml_url
-      repo_url(yaml_path)
+      metadata_url
+    end
+    # End deprecated methods
+    ######
+
+    def description_url
+      repo_url(description_path)
+    end
+
+    def canonical_data_url
+      repo_url(canonical_data_path) if !!canonical_data_path
+    end
+
+    def metadata_url
+      repo_url(metadata_path)
     end
 
     def blurb
@@ -52,19 +73,19 @@ module Trackler
 
     private
 
-    def json_path
+    def canonical_data_path
       [
         "exercises/%s/canonical-data.json" % slug,
       ].find { |filename| File.exist?(common_metadata_path(filename)) }
     end
 
-    def yaml_path
+    def metadata_path
       [
         "exercises/%s/metadata.yml" % slug,
       ].find { |filename| File.exist?(common_metadata_path(filename)) }
     end
 
-    def md_path
+    def description_path
       [
         "exercises/%s/description.md" % slug,
       ].find { |filename| File.exist?(common_metadata_path(filename)) }
@@ -75,7 +96,7 @@ module Trackler
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(common_metadata_path(yaml_path)))
+      @metadata ||= YAML.load(File.read(common_metadata_path(metadata_path)))
     end
 
     def common_metadata_path(path)
