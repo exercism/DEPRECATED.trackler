@@ -140,4 +140,10 @@ class TrackTest < Minitest::Test
     refute track.upcoming?
     assert track.planned?
   end
+
+  def test_unimplemented_problems
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    expected = ['unimplemented_one','unimplemented_two']
+    assert_equal expected, track.unimplemented_problems
+  end
 end
