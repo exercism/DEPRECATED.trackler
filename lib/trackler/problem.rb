@@ -54,15 +54,25 @@ module Trackler
       "fixme: #{caller.first}"
     end
 
-    #TODO: Complete implementation
-    #TODO: Rename to test_data_url
-    def data
+    def test_suite_url
       "fixme: #{caller.first}"
     end
 
     #TODO: Complete implementation
+    #TODO: Rename to test_data_url
+    def data
+      test_suite_url
+    end
+
     def implementations
-      [ { 'url' => "fixme: #{caller.first}", 'track_id' => "I don't know my track_id'" } ]
+      # TODO: Accessing Trackler directly here is bad.
+      implementations = Trackler.implementations[slug]
+
+      # Format for exercism.io/app/views/languages/_contribute_exercise.erb
+      # TODO: update _contribute_exercise.erb to use the implemenation object.
+      implementations.map do |implementation|
+        { 'url' => implementation.git_url, 'track_id' => implementation.track_id }
+      end
     end
 
     private
