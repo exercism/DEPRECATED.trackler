@@ -82,6 +82,10 @@ class ProblemTest < Minitest::Test
     assert_equal nil, problem.canonical_data_url
   end
 
+  def test_problem_with_no_metadata_yml
+    refute Trackler::Problem.new('no-metadata', FIXTURE_PATH).exists?
+  end
+
   def test_default_location
     problem = Trackler::Problem.new('mango', FIXTURE_PATH)
     assert_equal "## Source\n\nThe mango. [http://example.com](http://example.com)", problem.source_markdown
