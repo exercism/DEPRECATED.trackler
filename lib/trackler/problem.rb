@@ -54,14 +54,13 @@ module Trackler
       md_url
     end
 
-    def test_suite_url
-      "fixme: #{caller.first}"
+    # Used by exercism.io/app/views/languages/_contribute_exercise.erb
+    def data
+      test_data_url
     end
 
-    #TODO: Complete implementation
-    #TODO: Rename to test_data_url
-    def data
-      test_suite_url
+    def test_data_url
+      json_url
     end
 
     def implementations
