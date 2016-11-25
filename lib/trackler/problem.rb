@@ -49,9 +49,9 @@ module Trackler
       end
     end
 
-    #TODO: Complete implementation
+    # Used by exercism.io/app/views/languages/_contribute_exercise.erb
     def readme_url
-      "fixme: #{caller.first}"
+      md_url
     end
 
     def test_suite_url
