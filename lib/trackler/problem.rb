@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      !!description_path && !!metadata_path
+      !!description && !!metadata
     end
 
     def name
@@ -18,7 +18,7 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(common_metadata_path(description_path))
+      @description ||= File.read(common_metadata_path(description_path)) if !!description_path
     end
 
     def source_markdown
@@ -96,7 +96,7 @@ module Trackler
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(common_metadata_path(metadata_path)))
+      @metadata ||= YAML.load(File.read(common_metadata_path(metadata_path))) if !!metadata_path
     end
 
     def common_metadata_path(path)
