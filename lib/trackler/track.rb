@@ -1,6 +1,7 @@
 require 'json'
 require 'pathname'
 require 'org-ruby'
+require 'ostruct'
 require_relative 'file_bundle'
 
 module Trackler
@@ -80,7 +81,7 @@ module Trackler
     end
 
     def docs
-      Hash[TOPICS.zip(TOPICS.map { |topic| document_contents(topic) })]
+      OpenStruct.new( Hash[TOPICS.zip(TOPICS.map { |topic| document_contents(topic) })] )
     end
 
     def img(file_path)
