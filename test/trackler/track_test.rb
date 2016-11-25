@@ -71,14 +71,29 @@ class TrackTest < Minitest::Test
   def test_docs
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 
-    expected = {
+    expected = OpenStruct.new({
       "about" => "Language Information\n",
       "installation" => "Installing\n",
       "tests" => "Running\n",
       "learning" => "Learning Fake!\n",
       "resources" => "",
-    }
+    })
     assert_equal expected, track.docs
+  end
+
+  # FIXME: this is a test of a Docs object, it doesn't really belong here.
+  def test_docs_accessible_as_object
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    expected = "Language Information\n"
+    assert_equal expected, track.docs.about
+  end
+
+  # FIXME: this is a test of a Docs object, it doesn't really belong here.
+  # TODO: make exercism.io views consistent in what they expect docs to be.
+  def test_docs_also_accessible_as_a_hash
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    expected = "Language Information\n"
+    assert_equal expected, track.docs['about']
   end
 
   def test_doc_format
@@ -139,5 +154,14 @@ class TrackTest < Minitest::Test
     refute track.active?
     refute track.upcoming?
     assert track.planned?
+  end
+
+  def test_unimplemented_problems
+    # Shameless green: Stubbing Trackler here is a smell
+    expected = ['unimplemented_problem_one','unimplemented_problem_two']
+    Trackler.stub(:todos, {'animal' => expected } ) do
+      track = Trackler::Track.new('animal', FIXTURE_PATH)
+      assert_equal expected, track.unimplemented_problems
+    end
   end
 end

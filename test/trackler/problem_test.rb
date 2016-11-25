@@ -1,4 +1,5 @@
 require_relative '../test_helper'
+require 'trackler'
 require 'trackler/problem'
 
 class ProblemTest < Minitest::Test
@@ -40,5 +41,20 @@ class ProblemTest < Minitest::Test
 
   def test_no_such_problem
     refute Trackler::Problem.new('no-such-problem', FIXTURE_PATH).exists?
+  end
+
+  def test_implementations
+    mock_implemnetation = Minitest::Mock.new
+    mock_implemnetation.expect( :git_url, 'fake url' )
+    mock_implemnetation.expect( :track_id, 'fake track_id' )
+
+    # Temporarily return the format wanted by:
+    # exercism.io/app/views/languages/_contribute_exercise.erb
+    expected = [{'url' => 'fake url', 'track_id' => 'fake track_id'}]
+
+    Trackler.stub( :implementations, {'apple' => [mock_implemnetation] } ) do
+      problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+      assert_equal expected, problem.implementations
+    end
   end
 end

@@ -49,6 +49,31 @@ module Trackler
       end
     end
 
+    # Used by exercism.io/app/views/languages/_contribute_exercise.erb
+    def readme_url
+      md_url
+    end
+
+    # Used by exercism.io/app/views/languages/_contribute_exercise.erb
+    def data
+      test_data_url
+    end
+
+    def test_data_url
+      json_url
+    end
+
+    def implementations
+      # TODO: Accessing Trackler directly here is bad.
+      implementations = Trackler.implementations[slug]
+
+      # Format for exercism.io/app/views/languages/_contribute_exercise.erb
+      # TODO: update _contribute_exercise.erb to use the implemenation object.
+      implementations.map do |implementation|
+        { 'url' => implementation.git_url, 'track_id' => implementation.track_id }
+      end
+    end
+
     private
 
     def json

@@ -1,6 +1,7 @@
 require 'json'
 require 'pathname'
 require 'org-ruby'
+require 'ostruct'
 require_relative 'file_bundle'
 
 module Trackler
@@ -80,7 +81,7 @@ module Trackler
     end
 
     def docs
-      Hash[TOPICS.zip(TOPICS.map { |topic| document_contents(topic) })]
+      OpenStruct.new( Hash[TOPICS.zip(TOPICS.map { |topic| document_contents(topic) })] )
     end
 
     def img(file_path)
@@ -100,6 +101,10 @@ module Trackler
     # Every slug mentioned in the configuration.
     def slugs
       active_slugs + foregone_slugs + deprecated_slugs
+    end
+
+    def unimplemented_problems
+      Trackler.todos[id]
     end
 
     private
@@ -162,5 +167,6 @@ module Trackler
       path = File.join(dir, "docs", topic.upcase)
       Dir.glob("%s.*" % path).sort.first
     end
+
   end
 end
