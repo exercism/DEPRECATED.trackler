@@ -18,7 +18,9 @@ module Trackler
     end
 
     def description
-      @description ||= File.read(common_metadata_path(description_path)) if File.exists?(common_metadata_path(description_path))
+      @description ||= if File.exists?(common_metadata_path(description_path))
+                         File.read(common_metadata_path(description_path))
+                       end
     end
 
     def source_markdown
