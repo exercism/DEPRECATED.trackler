@@ -62,15 +62,15 @@ module Trackler
     end
 
     def blurb
-      metadata.nil? ? '' :  metadata['blurb'].to_s.strip
+      metadata['blurb'].to_s.strip
     end
 
     def source
-      metadata.nil? ? '' : metadata['source'].to_s.strip
+      metadata['source'].to_s.strip
     end
 
     def source_url
-      metadata.nil? ? '' : metadata['source_url'].to_s.strip
+      metadata['source_url'].to_s.strip
     end
 
     private

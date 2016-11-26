@@ -62,6 +62,11 @@ class ProblemTest < Minitest::Test
     assert_equal 'http://example.com', problem.source_url
   end
 
+  def test_no_source_url_in_metadata
+    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+    assert_equal '', problem.source_url
+  end
+
   def test_problem_name
     problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
     assert_equal 'Hello World', problem.name
