@@ -18,9 +18,11 @@ module Trackler
     end
 
     def description
-      @description ||= if File.exists?(common_metadata_path(description_path))
-                         File.read(common_metadata_path(description_path))
-                       end
+      return @description unless @description.nil?
+      filename = common_metadata_path(description_path)
+      if File.exists?(filename)
+        @description = File.read(filename)
+      end
     end
 
     def source_markdown
@@ -92,9 +94,11 @@ module Trackler
     end
 
     def metadata
-      @metadata ||= if File.exists?(common_metadata_path(metadata_path))
-                      YAML.load(File.read(common_metadata_path(metadata_path)))
-                    end
+      return @metadata unless @metadata.nil?
+      filename = common_metadata_path(metadata_path)
+      if File.exists?(filename)
+        @metadata = YAML.load(File.read(filename))
+      end
     end
 
     def common_metadata_path(path)
