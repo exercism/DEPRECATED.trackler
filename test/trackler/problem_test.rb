@@ -32,7 +32,7 @@ class ProblemTest < Minitest::Test
     assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/metadata.yml', problem.metadata_url
   end
 
-  def test_yaml_url_deprecated
+  def test_deprecated_method_yaml_url
     problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
     assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/metadata.yml', problem.yaml_url
   end
@@ -42,7 +42,7 @@ class ProblemTest < Minitest::Test
     assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/description.md', problem.description_url
   end
 
-  def test_md_url_deprecated
+  def test_deprecated_method_md_url
     problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
     assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/description.md', problem.md_url
   end
@@ -77,7 +77,7 @@ class ProblemTest < Minitest::Test
     assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.canonical_data_url
   end
 
-  def test_json_url_deprecated
+  def test_deprecated_method_json_url
     problem = Trackler::Problem.new('mango', FIXTURE_PATH)
     assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.json_url
   end
