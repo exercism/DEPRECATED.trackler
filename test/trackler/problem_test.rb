@@ -67,11 +67,6 @@ class ProblemTest < Minitest::Test
     assert_equal '', problem.source_url
   end
 
-  def test_problem_name
-    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
-    assert_equal 'Hello World', problem.name
-  end
-
   def test_canonical_data_url
     problem = Trackler::Problem.new('mango', FIXTURE_PATH)
     assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", problem.canonical_data_url
