@@ -71,14 +71,26 @@ class TrackTest < Minitest::Test
   def test_docs
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 
-    expected = {
+    expected = OpenStruct.new({
       "about" => "Language Information\n",
       "installation" => "Installing\n",
       "tests" => "Running\n",
       "learning" => "Learning Fake!\n",
       "resources" => "",
-    }
+    })
     assert_equal expected, track.docs
+  end
+
+  def test_docs_accessible_as_object
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    expected = "Language Information\n"
+    assert_equal expected, track.docs.about
+  end
+
+  def test_docs_also_accessible_as_a_hash
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    expected = "Language Information\n"
+    assert_equal expected, track.docs['about']
   end
 
   def test_doc_format

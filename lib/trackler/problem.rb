@@ -10,78 +10,103 @@ module Trackler
     end
 
     def exists?
-      !!md && !!yaml
+      !!description && !!metadata
     end
 
     def name
-      @name ||= slug.split('-').map(&:capitalize).join(' ')
+      slug.split('-').map(&:capitalize).join(' ')
     end
 
     def description
-      @description ||= File.read(filepath(md))
+      return @description unless @description.nil?
+      filename = common_metadata_path(description_path)
+      if File.exists?(filename)
+        @description = File.read(filename)
+      end
     end
 
     def source_markdown
-      body = source.empty? ? "" : "%s" % source
-      url = source_url.empty? ? "" : "[%s](%s)" % [source_url, source_url]
-      if url.empty? && body.empty?
-        ""
-      else
-        "## Source\n\n" + [body, url].reject(&:empty?).join(" ")
-      end
+      text = [source, markdown_link(source_url)].reject(&:empty?).join(" ")
+      text.empty? ? text : "## Source\n\n#{text}"
     end
 
+    ######
+    # Deprecated methods
+    # TODO: remove external references to these methods.
+    # found in: x-api
+    # NOT in: exercism.io, cli
+    # Anywhere else we need to look?
+    # Should this output a warning or raise an error?
     def md_url
-      repo_url(md)
+      description_url
     end
 
     def json_url
-      repo_url(json) if !!json
+      canonical_data_url
     end
 
     def yaml_url
-      repo_url(yaml)
+      metadata_url
+    end
+    # End deprecated methods
+    ######
+
+    def description_url
+      repo_url(description_path)
     end
 
-    %w(blurb source source_url).each do |name|
-      define_method name do
-        metadata[name].to_s.strip
-      end
+    def canonical_data_url
+      repo_url(canonical_data_path) if File.exists?(common_metadata_path(canonical_data_path))
+    end
+
+    def metadata_url
+      repo_url(metadata_path)
+    end
+
+    def blurb
+      metadata['blurb'].to_s.strip
+    end
+
+    def source
+      metadata['source'].to_s.strip
+    end
+
+    def source_url
+      metadata['source_url'].to_s.strip
     end
 
     private
 
-    def json
-      [
-        "exercises/%s/canonical-data.json" % slug,
-        "%s.json" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+    def canonical_data_path
+      "exercises/%s/canonical-data.json" % slug
     end
 
-    def yaml
-      [
-        "exercises/%s/metadata.yml" % slug,
-        "%s.yml" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+    def metadata_path
+      "exercises/%s/metadata.yml" % slug
     end
 
-    def md
-      [
-        "exercises/%s/description.md" % slug,
-        "%s.md" % slug,
-      ].find { |path| File.exist?(filepath(path)) }
+    def description_path
+      "exercises/%s/description.md" % slug
     end
 
     def repo_url(path)
-      "https://github.com/exercism/x-common/blob/master/%s" % path
-    end
-
-    def filepath(f)
-      File.join(root, "common", f)
+      "https://github.com/exercism/x-common/blob/master/#{path}" unless path.nil?
     end
 
     def metadata
-      @metadata ||= YAML.load(File.read(filepath(yaml)))
+      return @metadata unless @metadata.nil?
+      filename = common_metadata_path(metadata_path)
+      if File.exists?(filename)
+        @metadata = YAML.load(File.read(filename))
+      end
+    end
+
+    def common_metadata_path(path)
+      File.join(root, "common", path)
+    end
+
+    def markdown_link(url)
+      url.empty? ? url : format("[%s](%s)", url, url)
     end
   end
 end
