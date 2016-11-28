@@ -8,7 +8,7 @@ class ProblemsTest < Minitest::Test
 
     # can access it like an array
     slugs = [
-      "apple", "banana", "cherry", "dog", "hello-world", "mango", "no-metadata", "one", "three", "two"
+      "apple", "banana", "cherry", "dog", "hello-world", "imbe", "mango", "no-metadata", "one", "three", "two"
     ]
     assert_equal slugs, problems.map(&:slug)
 
@@ -20,7 +20,7 @@ class ProblemsTest < Minitest::Test
 
     # kind of dirty set operation
     slugs = %w(one two three apple)
-    todos = %w(dog hello-world banana cherry mango no-metadata).sort
+    todos = %w(dog hello-world imbe banana cherry mango no-metadata).sort
     assert_equal todos, problems - slugs
   end
 end

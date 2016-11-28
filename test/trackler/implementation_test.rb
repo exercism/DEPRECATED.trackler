@@ -72,6 +72,14 @@ class ImplementationTest < Minitest::Test
     assert_equal files, implementation.files
   end
 
+  def test_ignores_example_files
+    track_id = 'fruit'
+    problem = Trackler::Problem.new('imbe', PATH)
+    implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
+    expected = ['imbe.txt', 'README.md']
+    assert_equal expected, implementation.files.keys
+  end
+
   private
 
   def archive_filenames(zip)

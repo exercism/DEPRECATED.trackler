@@ -1,18 +1,19 @@
 require 'zip'
 
 module Trackler
-  # FileBundle is a zippech archive of a directory.
+  # A FileBundle is a collection of files from within an exercise directory
+  # It contains all the files that will be provided by the `exercism fetch` command
+  # EXCEPT for those whose names match any of the ignore patterns.
   class FileBundle
-    attr_reader :dir, :ignore_patterns
-    def initialize(dir, ignore_patterns=[])
-      @dir = dir
+    def initialize(base_directory, ignore_patterns = [])
+      @base_directory = base_directory
       @ignore_patterns = ignore_patterns
     end
 
     def zip
       Zip::OutputStream.write_buffer do |io|
         paths.each do |path|
-          io.put_next_entry(path.relative_path_from(dir))
+          io.put_next_entry(path.relative_path_from(base_directory))
           io.print IO.read(path)
         end
         yield io if block_given?
@@ -20,10 +21,27 @@ module Trackler
     end
 
     def paths
-      Pathname.glob("#{dir}/**/*", File::FNM_DOTMATCH).reject {|file|
-        file.directory? ||
-          ignore_patterns.any? { |pattern| file.to_s =~ pattern }
-      }.sort
+      all_files_below(base_directory).reject { |file| ignored? file }.sort
+    end
+
+    private
+
+    attr_reader :base_directory, :ignore_patterns
+
+    def all_files_below(dir)
+      Pathname.glob("#{dir}/**/*", File::FNM_DOTMATCH)
+    end
+
+    def ignored?(file)
+      ignored_by_name?(file) || ignored_by_type?(file)
+    end
+
+    def ignored_by_name?(file)
+      ignore_patterns.any? { |pattern| file.to_s =~ pattern }
+    end
+
+    def ignored_by_type?(file)
+      file.directory?
     end
   end
 end
