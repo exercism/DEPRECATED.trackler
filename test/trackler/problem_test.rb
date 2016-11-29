@@ -110,4 +110,19 @@ class ProblemTest < Minitest::Test
     problem = Trackler::Problem.new('fish', FIXTURE_PATH)
     assert problem.deprecated?
   end
+
+  def test_problem_active?
+    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+    assert problem.active?
+  end
+
+  def test_problem_which_not_active_because_it_is_deprecated
+    problem = Trackler::Problem.new('fish', FIXTURE_PATH)
+    refute problem.active?
+  end
+
+  def test_problem_which_not_active_because_it_does_not_exist
+    problem = Trackler::Problem.new('no-such-problem', FIXTURE_PATH)
+    refute problem.active?
+  end
 end

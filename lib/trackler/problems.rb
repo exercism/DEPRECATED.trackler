@@ -28,7 +28,7 @@ module Trackler
     private
 
     def valid
-      @valid ||= dirs.reject(&:deprecated?)
+      @valid ||= dirs.select(&:active?)
     end
 
     def dirs

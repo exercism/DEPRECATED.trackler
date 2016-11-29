@@ -17,6 +17,10 @@ module Trackler
       @deprecated ||= File.exists?(common_metadata_path(deprecation_indicator_path))
     end
 
+    def active?
+      exists? && !deprecated?
+    end
+
     def name
       slug.split('-').map(&:capitalize).join(' ')
     end
