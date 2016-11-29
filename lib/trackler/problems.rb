@@ -28,17 +28,13 @@ module Trackler
     private
 
     def all
-      @all ||= dirs.reject { |problem| deprecated?(problem.slug) }
+      @all ||= dirs.reject(&:deprecated?)
     end
 
     def dirs
       @exercise_ids ||= Dir["%s/common/exercises/*/" % root].sort.map { |f|
         Problem.new(f[SLUG_PATTERN, 1], root)
       }
-    end
-
-    def deprecated?(slug)
-      File.exist?(File.join(root, "common", "exercises", slug, ".deprecated"))
     end
 
     def by_slug
