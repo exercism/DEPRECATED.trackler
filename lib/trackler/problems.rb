@@ -11,7 +11,7 @@ module Trackler
     end
 
     def each
-      all.each do |problem|
+      valid.each do |problem|
         yield problem
       end
     end
@@ -27,8 +27,8 @@ module Trackler
 
     private
 
-    def all
-      @all ||= dirs.reject { |problem| deprecated?(problem.slug) }
+    def valid
+      @valid ||= dirs.reject { |problem| deprecated?(problem.slug) }
     end
 
     def dirs
@@ -47,7 +47,7 @@ module Trackler
 
     def problem_map
       hash = Hash.new { |_, k| Problem.new(k, root) }
-      all.each do |problem|
+      valid.each do |problem|
         hash[problem.slug] = problem
       end
       hash
