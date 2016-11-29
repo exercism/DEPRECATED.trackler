@@ -63,7 +63,7 @@ module Trackler
     end
 
     def icon
-      @icon ||= Image.new(File.join(dir, "img/icon.png"))
+      @icon ||= svg_icon.exists? ? svg_icon : png_icon
     end
 
     %w(language repository).each do |name|
@@ -162,6 +162,14 @@ module Trackler
     def document_filename(topic)
       path = File.join(dir, "docs", topic.upcase)
       Dir.glob("%s.*" % path).sort.first
+    end
+
+    def svg_icon
+      @svg_icon ||= Image.new(File.join(dir, "img/icon.svg"))
+    end
+
+    def png_icon
+      @png_icon ||= Image.new(File.join(dir, "img/icon.png"))
     end
   end
 end
