@@ -3,8 +3,6 @@ module Trackler
   class Problems
     include Enumerable
 
-    SLUG_PATTERN = Regexp.new(".*\/exercises\/([^\/]*)\/")
-
     attr_reader :root
     def initialize(root)
       @root = root
@@ -32,9 +30,11 @@ module Trackler
     end
 
     def all
-      @exercise_ids ||= Dir["%s/common/exercises/*/" % root].sort.map { |f|
-        Problem.new(f[SLUG_PATTERN, 1], root)
-      }
+      @all_problems ||= exercise_slugs.map { |slug| Problem.new(slug, root) }
+    end
+
+    def exercise_slugs
+      Dir["%s/common/exercises/*/" % root].map { |path| File.basename(path) }.sort
     end
 
     def by_slug
