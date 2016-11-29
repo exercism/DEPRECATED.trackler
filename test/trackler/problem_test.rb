@@ -100,4 +100,14 @@ class ProblemTest < Minitest::Test
     problem = Trackler::Problem.new('cherry', FIXTURE_PATH)
     assert_equal '', problem.source_markdown
   end
+
+  def test_problem_which_is_not_deprecated
+    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+    refute problem.deprecated?
+  end
+
+  def test_problem_which_has_been_deprecated
+    problem = Trackler::Problem.new('fish', FIXTURE_PATH)
+    assert problem.deprecated?
+  end
 end
