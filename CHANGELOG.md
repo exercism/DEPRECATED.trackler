@@ -15,6 +15,10 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v2.0.2.0 (2016-11-29)
+
+* Add support for SVG icons by default
+
 ## v2.0.1.0 (2016-11-25)
 
 * Make track documentation accessible via messages.
