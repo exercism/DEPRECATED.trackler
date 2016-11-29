@@ -28,10 +28,10 @@ module Trackler
     private
 
     def valid
-      @valid ||= dirs.select(&:active?)
+      @valid ||= all.select(&:active?)
     end
 
-    def dirs
+    def all
       @exercise_ids ||= Dir["%s/common/exercises/*/" % root].sort.map { |f|
         Problem.new(f[SLUG_PATTERN, 1], root)
       }
