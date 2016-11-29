@@ -13,6 +13,10 @@ module Trackler
       !!description && !!metadata
     end
 
+    def deprecated?
+      @deprecated ||= File.exists?(common_metadata_path(deprecation_indicator_path))
+    end
+
     def name
       slug.split('-').map(&:capitalize).join(' ')
     end
@@ -87,6 +91,10 @@ module Trackler
 
     def description_path
       "exercises/%s/description.md" % slug
+    end
+
+    def deprecation_indicator_path
+      "exercises/%s/.deprecated" % slug
     end
 
     def repo_url(path)
