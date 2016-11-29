@@ -118,7 +118,13 @@ class TrackTest < Minitest::Test
     refute Trackler::Track.new('nope', FIXTURE_PATH).exists?, "unexpected track 'nope'"
   end
 
-  def test_icon_path
+  def test_icon_path_svg
+    subject = Trackler::Track.new('fruit', FIXTURE_PATH)
+    expected = FIXTURE_PATH + '/tracks/fruit/img/icon.svg'
+    assert_equal expected, subject.icon_path
+  end
+
+  def test_icon_path_png
     subject = Trackler::Track.new('fake', FIXTURE_PATH)
     expected = FIXTURE_PATH + '/tracks/fake/img/icon.png'
     assert_equal expected, subject.icon_path
