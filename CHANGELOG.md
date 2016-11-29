@@ -15,6 +15,10 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v2.0.3.0 (2016-11-29)
+
+* Remove test fixture that breaks x-api
+
 ## v2.0.2.0 (2016-11-29)
 
 * Add support for SVG icons by default
