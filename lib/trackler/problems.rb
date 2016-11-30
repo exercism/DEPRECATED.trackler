@@ -3,15 +3,13 @@ module Trackler
   class Problems
     include Enumerable
 
-    SLUG_PATTERN = Regexp.new(".*\/exercises\/([^\/]*)\/")
-
     attr_reader :root
     def initialize(root)
       @root = root
     end
 
     def each
-      all.each do |problem|
+      active.each do |problem|
         yield problem
       end
     end
@@ -27,18 +25,16 @@ module Trackler
 
     private
 
+    def active
+      @active ||= all.select(&:active?)
+    end
+
     def all
-      @all ||= dirs.reject { |problem| deprecated?(problem.slug) }
+      @all_problems ||= exercise_slugs.map { |slug| Problem.new(slug, root) }
     end
 
-    def dirs
-      @exercise_ids ||= Dir["%s/common/exercises/*/" % root].sort.map { |f|
-        Problem.new(f[SLUG_PATTERN, 1], root)
-      }
-    end
-
-    def deprecated?(slug)
-      File.exist?(File.join(root, "common", "exercises", slug, ".deprecated"))
+    def exercise_slugs
+      Dir["%s/common/exercises/*/" % root].map { |path| File.basename(path) }.sort
     end
 
     def by_slug
@@ -47,7 +43,7 @@ module Trackler
 
     def problem_map
       hash = Hash.new { |_, k| Problem.new(k, root) }
-      all.each do |problem|
+      active.each do |problem|
         hash[problem.slug] = problem
       end
       hash

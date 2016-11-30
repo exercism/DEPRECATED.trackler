@@ -82,6 +82,10 @@ class ProblemTest < Minitest::Test
     assert_equal nil, problem.canonical_data_url
   end
 
+  def test_problem_with_no_metadata_yml
+    refute Trackler::Problem.new('no-metadata', FIXTURE_PATH).exists?
+  end
+
   def test_default_location
     problem = Trackler::Problem.new('mango', FIXTURE_PATH)
     assert_equal "## Source\n\nThe mango. [http://example.com](http://example.com)", problem.source_markdown
@@ -99,5 +103,30 @@ class ProblemTest < Minitest::Test
   def test_source_markdown_empty
     problem = Trackler::Problem.new('cherry', FIXTURE_PATH)
     assert_equal '', problem.source_markdown
+  end
+
+  def test_problem_which_is_not_deprecated
+    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+    refute problem.deprecated?
+  end
+
+  def test_problem_which_has_been_deprecated
+    problem = Trackler::Problem.new('fish', FIXTURE_PATH)
+    assert problem.deprecated?
+  end
+
+  def test_problem_active?
+    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
+    assert problem.active?
+  end
+
+  def test_problem_which_not_active_because_it_is_deprecated
+    problem = Trackler::Problem.new('fish', FIXTURE_PATH)
+    refute problem.active?
+  end
+
+  def test_problem_which_not_active_because_it_does_not_exist
+    problem = Trackler::Problem.new('no-such-problem', FIXTURE_PATH)
+    refute problem.active?
   end
 end
