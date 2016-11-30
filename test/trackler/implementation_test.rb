@@ -59,6 +59,14 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.readme
   end
 
+  def test_symlinked_file
+    problem = Trackler::Problem.new('fish', PATH)
+    implementation = Trackler::Implementation.new('animal', URL, problem, PATH)
+
+    expected = "This should get included in fish.\n"
+    assert_equal expected, implementation.files['included-via-symlink.txt']
+  end
+
   def test_missing_implementation
     problem = Trackler::Problem.new('apple', PATH)
     implementation = Trackler::Implementation.new(TRACK_ID, URL, problem, PATH)
