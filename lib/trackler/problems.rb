@@ -9,7 +9,7 @@ module Trackler
     end
 
     def each
-      valid.each do |problem|
+      active.each do |problem|
         yield problem
       end
     end
@@ -25,8 +25,8 @@ module Trackler
 
     private
 
-    def valid
-      @valid ||= all.select(&:active?)
+    def active
+      @active ||= all.select(&:active?)
     end
 
     def all
@@ -43,7 +43,7 @@ module Trackler
 
     def problem_map
       hash = Hash.new { |_, k| Problem.new(k, root) }
-      valid.each do |problem|
+      active.each do |problem|
         hash[problem.slug] = problem
       end
       hash
