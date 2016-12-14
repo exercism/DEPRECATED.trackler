@@ -80,6 +80,15 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.files.keys
   end
 
+  def test_readme_has_empty_string_for_track_hint_when_setup_file_does_not_exist
+    track_id = 'fake'
+    problem = Trackler::Problem.new('apple', PATH)
+    implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
+
+    expected = "# Apple\n\nThis is apple.\n\n* apple\n* apple again\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    assert_equal expected, implementation.readme
+  end
+
   private
 
   def archive_filenames(zip)
