@@ -89,6 +89,15 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.readme
   end
 
+  def test_readme_uses_track_hint_instead_of_setup
+    track_id = 'sports'
+    problem = Trackler::Problem.new('track-and-field', PATH)
+    implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
+
+    expected = "# Track And Field\n\nThis is a track hint.\n\n* track hint\n* track hint again\n\nDo stuff in track hints.\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    assert_equal expected, implementation.readme
+  end
+
   private
 
   def archive_filenames(zip)

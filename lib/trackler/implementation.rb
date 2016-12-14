@@ -102,7 +102,11 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def track_hint
-      read track_dir.join('SETUP.md')
+      track_hints = track_dir.join('exercises','TRACK_HINTS.md')
+      unless File.exist?(track_hints)
+        track_hints = track_dir.join('SETUP.md')
+      end
+      read track_hints
     end
 
     def implementation_hint
