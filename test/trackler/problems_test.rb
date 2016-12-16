@@ -14,13 +14,13 @@ class ProblemsTest < Minitest::Test
 
     # kind of dirty set operation
     slugs = %w(one two three apple)
-    todos = %w(dog hello-world imbe banana cherry mango track-and-field).sort
+    todos = %w(dog hello-world imbe banana cherry mango).sort
     assert_equal todos, problems - slugs
   end
 
   def test_only_valid_problems
     problems = Trackler::Problems.new(FIXTURE_PATH)
-    slugs = %w(apple banana cherry dog hello-world imbe mango one three track-and-field two)
+    slugs = %w(apple banana cherry dog hello-world imbe mango one three two)
     assert_equal slugs, problems.map(&:slug)
   end
 end
