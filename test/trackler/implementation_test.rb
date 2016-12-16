@@ -89,7 +89,7 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.readme
   end
 
-  def test_readme_uses_track_hint_instead_of_setup
+  def test_readme_uses_track_hint_in_precedence_of_setup
     track_id = 'animal'
     problem = Trackler::Problem.new('dog', PATH)
     implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
@@ -103,6 +103,14 @@ class ImplementationTest < Minitest::Test
     implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
 
     assert_match /Do stuff/, implementation.readme
+  end
+
+  def test_readme_uses_track_hint_instead_of_setup
+    track_id = 'jewels'
+    problem = Trackler::Problem.new('hello-world', PATH)
+    implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
+
+    assert_match /This is the content of the track hints file/, implementation.readme
   end
 
   private
