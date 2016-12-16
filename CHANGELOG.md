@@ -13,6 +13,7 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
+* Make documentation image paths configurable
 * **Your contribution here**
 
 ## v2.0.3.0 (2016-11-29)

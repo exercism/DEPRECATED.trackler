@@ -1,1 +1,2 @@
 Installing
+![](/docs/img/test.jpg)

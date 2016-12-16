@@ -73,12 +73,21 @@ class TrackTest < Minitest::Test
 
     expected = OpenStruct.new({
       "about" => "Language Information\n",
-      "installation" => "Installing\n",
+      "installation" => "Installing\n![](/docs/img/test.jpg)\n",
       "tests" => "Running\n",
       "learning" => "Learning Fake!\n",
       "resources" => "",
     })
     assert_equal expected, track.docs
+  end
+
+  def test_docs_with_alternate_image_path
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+
+    expected = "Installing\n![](/alt/test.jpg)\n"
+    assert_equal expected, track.docs("/alt").installation
+    # handles trailing slash
+    assert_equal expected, track.docs("/alt/").installation
   end
 
   def test_docs_accessible_as_object
