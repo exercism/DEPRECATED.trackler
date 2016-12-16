@@ -8,6 +8,7 @@ module Trackler
   # Track is a collection of exercises in a given language.
   class Track
     TOPICS = %w(about installation tests learning resources)
+    DEFAULT_IMAGE_PATH = "/docs/img"
 
     Image = Struct.new(:path) do
       def exists?
@@ -80,8 +81,8 @@ module Trackler
       end
     end
 
-    def docs
-      OpenStruct.new( Hash[TOPICS.zip(TOPICS.map { |topic| document_contents(topic) })] )
+    def docs(image_path = DEFAULT_IMAGE_PATH)
+      OpenStruct.new(docs_by_topic(image_path))
     end
 
     def img(file_path)
@@ -157,6 +158,16 @@ module Trackler
       else
         ''
       end
+    end
+
+    def docs_by_topic(image_path)
+      Hash[
+        TOPICS.zip(
+          TOPICS.map { |topic|
+            document_contents(topic).gsub(DEFAULT_IMAGE_PATH, image_path.gsub(Regexp.new("/$"), ""))
+          }
+        )
+      ]
     end
 
     def document_filename(topic)
