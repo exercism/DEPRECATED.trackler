@@ -161,10 +161,12 @@ module Trackler
     end
 
     def docs_by_topic(image_path)
+      src = Regexp.new("]\\(%s" % DEFAULT_IMAGE_PATH)
+      dst = "](%s" % image_path.gsub(Regexp.new("/$"), "")
       Hash[
         TOPICS.zip(
           TOPICS.map { |topic|
-            document_contents(topic).gsub(DEFAULT_IMAGE_PATH, image_path.gsub(Regexp.new("/$"), ""))
+            document_contents(topic).gsub(src, dst)
           }
         )
       ]

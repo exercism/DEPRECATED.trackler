@@ -74,7 +74,7 @@ class TrackTest < Minitest::Test
     expected = OpenStruct.new({
       "about" => "Language Information\n",
       "installation" => "Installing\n![](/docs/img/test.jpg)\n",
-      "tests" => "Running\n",
+      "tests" => "Running\n![](http://example.org/abc/docs/img/test.jpg)\n",
       "learning" => "Learning Fake!\n",
       "resources" => "",
     })
@@ -88,6 +88,9 @@ class TrackTest < Minitest::Test
     assert_equal expected, track.docs("/alt").installation
     # handles trailing slash
     assert_equal expected, track.docs("/alt/").installation
+    # doesn't break absolute URLs
+    expected = "Running\n![](http://example.org/abc/docs/img/test.jpg)\n"
+    assert_equal expected, track.docs("/alt").tests
   end
 
   def test_docs_accessible_as_object
