@@ -97,6 +97,14 @@ class ImplementationTest < Minitest::Test
     assert_match /This is the content of the track hints file/, implementation.readme
   end
 
+  def test_readme_uses_setup_when_track_hints_is_missing
+    track_id = 'fruit'
+    problem = Trackler::Problem.new('apple', PATH)
+    implementation = Trackler::Implementation.new(track_id, URL, problem, PATH)
+
+    assert_match /Do stuff/, implementation.readme
+  end
+
   private
 
   def archive_filenames(zip)
