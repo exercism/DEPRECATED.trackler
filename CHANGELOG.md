@@ -13,8 +13,11 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
-* Handle full URLs as documentation images
 * **Your contribution here**
+
+## v2.0.5.0 (2016-12-16)
+
+* Handle full URLs as documentation images
 
 ## v2.0.4.0 (2016-12-16)
 
