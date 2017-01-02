@@ -13,6 +13,7 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
+* Deprecate SETUP.md in favor of a new, better-named TRACK_HINTS.md file.
 * **Your contribution here**
 
 ## v2.0.5.0 (2016-12-16)
