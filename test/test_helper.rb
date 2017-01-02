@@ -1,8 +1,10 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'simplecov'
-SimpleCov.start
-SimpleCov.command_name "Run PID: #{$PROCESS_ID}"
+SimpleCov.start do
+  add_filter "/test/"
+  command_name "Run PID: #{$PROCESS_ID}"
+end
 
 gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
