@@ -20,7 +20,7 @@ class TrackTest < Minitest::Test
     assert_equal "Fake", track.language
     assert_equal "https://github.com/exercism/xfake", track.repository
     assert_equal 5, track.checklist_issue
-    assert_equal nil, track.gitter
+    assert_nil track.gitter
 
     slugs = %w(hello-world one two three)
     assert_equal slugs, track.problems.map(&:slug)
@@ -144,8 +144,7 @@ class TrackTest < Minitest::Test
 
   def test_icon_path_nonexisting
     subject = Trackler::Track.new('noicon', FIXTURE_PATH)
-    expected = nil
-    assert_equal expected, subject.icon_path
+    assert_nil subject.icon_path
   end
 
   def test_global_files

@@ -79,7 +79,7 @@ class ProblemTest < Minitest::Test
 
   def test_track_with_no_canonical_data
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
-    assert_equal nil, problem.canonical_data_url
+    assert_nil problem.canonical_data_url
   end
 
   def test_problem_with_no_metadata_yml
