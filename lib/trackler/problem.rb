@@ -7,6 +7,8 @@ module Trackler
     def initialize(slug, root)
       @slug = slug
       @root = root
+      @file_root = File.join(root, 'common', 'exercises', self.slug)
+      @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
     end
 
     def exists?
@@ -14,7 +16,7 @@ module Trackler
     end
 
     def deprecated?
-      @deprecated ||= File.exists?(common_metadata_path(deprecation_indicator_path))
+      @deprecated ||= File.exists?(file_path(deprecation_file_name))
     end
 
     def active?
@@ -27,7 +29,7 @@ module Trackler
 
     def description
       return @description unless @description.nil?
-      filename = common_metadata_path(description_path)
+      filename = file_path(description_file_name)
       if File.exists?(filename)
         @description = File.read(filename)
       end
@@ -60,15 +62,15 @@ module Trackler
     ######
 
     def description_url
-      repo_url(description_path)
+      repo_url(description_file_name)
     end
 
     def canonical_data_url
-      repo_url(canonical_data_path) if File.exists?(common_metadata_path(canonical_data_path))
+      repo_url(canonical_data_file_name) if File.exists?(file_path(canonical_data_file_name))
     end
 
     def metadata_url
-      repo_url(metadata_path)
+      repo_url(metadata_file_name)
     end
 
     def blurb
@@ -85,36 +87,36 @@ module Trackler
 
     private
 
-    def canonical_data_path
-      "exercises/%s/canonical-data.json" % slug
+    def canonical_data_file_name
+      "canonical-data.json"
     end
 
-    def metadata_path
-      "exercises/%s/metadata.yml" % slug
+    def description_file_name
+      "description.md"
     end
 
-    def description_path
-      "exercises/%s/description.md" % slug
+    def metadata_file_name
+      "metadata.yml"
     end
 
-    def deprecation_indicator_path
-      "exercises/%s/.deprecated" % slug
+    def deprecation_file_name
+      ".deprecated"
     end
 
-    def repo_url(path)
-      "https://github.com/exercism/x-common/blob/master/#{path}" unless path.nil?
+    def repo_url(filename)
+      @repo_root + filename
+    end
+
+    def file_path(filename)
+      File.join(@file_root, filename)
     end
 
     def metadata
       return @metadata unless @metadata.nil?
-      filename = common_metadata_path(metadata_path)
+      filename = file_path(metadata_file_name)
       if File.exists?(filename)
         @metadata = YAML.load(File.read(filename))
       end
-    end
-
-    def common_metadata_path(path)
-      File.join(root, "common", path)
     end
 
     def markdown_link(url)
