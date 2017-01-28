@@ -157,12 +157,12 @@
 [submodule "common"]
 	path = common
 	url = https://github.com/exercism/x-common.git
-[submodule "tracks/pascal"]
-	path = tracks/pascal
-	url = https://github.com/exercism/xpascal.git
 [submodule "tracks/prolog"]
 	path = tracks/prolog
 	url = https://github.com/exercism/xprolog.git
 [submodule "tracks/julia"]
 	path = tracks/julia
 	url = https://github.com/exercism/xjulia
+[submodule "tracks/delphi"]
+	path = tracks/delphi
+	url = https://github.com/exercism/xdelphi
