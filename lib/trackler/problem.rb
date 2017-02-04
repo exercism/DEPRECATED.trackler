@@ -1,23 +1,27 @@
 require 'yaml'
+require_relative 'metadata'
+require_relative 'null_track'
 
 module Trackler
   # Problem is a language-independent definition of an exercise.
   class Problem
-    attr_reader :slug, :root
-    def initialize(slug, root, track = nil)
+    attr_reader :slug, :root, :metadata
+    def initialize(slug, root, track = NullTrack.new)
       @slug = slug
       @root = root
       @file_root = File.join(root, 'common', 'exercises', self.slug)
       @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
 
-      if track
+      @metadata = Metadata.for(problem: self, track: track)
+
+      if track.exists?
         @track_file_root = File.join(root, 'tracks', track.id, 'exercises', self.slug)
         @track_repo_root = "#{track.repository}/blob/master/exercises/%s/" % self.slug
       end
     end
 
     def exists?
-      !!description && !!metadata
+      !!description && metadata.exists?
     end
 
     def deprecated?
@@ -75,15 +79,15 @@ module Trackler
     end
 
     def blurb
-      metadata['blurb'].to_s.strip
+      metadata.blurb
     end
 
     def source
-      metadata['source'].to_s.strip
+      metadata.source
     end
 
     def source_url
-      metadata['source_url'].to_s.strip
+      metadata.source_url
     end
 
     private
@@ -116,25 +120,6 @@ module Trackler
       File.join(root, filename)
     end
 
-    def metadata
-      @metadata ||= (track_specific_metadata || common_metadata)
-    end
-
-    def common_metadata
-      filename = file_path(metadata_file_name, @file_root)
-      if File.exists?(filename)
-        YAML.load(File.read(filename))
-      end
-    end
-
-    def track_specific_metadata
-      return if !@track_file_root
-      filename = file_path(metadata_file_name, @track_file_root)
-      if File.exists?(filename)
-        YAML.load(File.read(filename))
-      end
-    end
-
     def common_description
       filename = file_path(description_file_name, @file_root)
       if File.exists?(filename)
@@ -149,7 +134,6 @@ module Trackler
         File.read(filename)
       end
     end
-
 
     def markdown_link(url)
       url.empty? ? url : format("[%s](%s)", url, url)
