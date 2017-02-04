@@ -4,11 +4,16 @@ module Trackler
   # Problem is a language-independent definition of an exercise.
   class Problem
     attr_reader :slug, :root
-    def initialize(slug, root)
+    def initialize(slug, root, track = nil)
       @slug = slug
       @root = root
       @file_root = File.join(root, 'common', 'exercises', self.slug)
       @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
+
+      if track
+        @track_file_root = File.join(root, 'tracks', track.id, 'exercises', self.slug)
+        @track_repo_root = "#{track.repository}/blob/master/exercises/%s/" % self.slug
+      end
     end
 
     def exists?
@@ -16,7 +21,7 @@ module Trackler
     end
 
     def deprecated?
-      @deprecated ||= File.exists?(file_path(deprecation_file_name))
+      @deprecated ||= File.exists?(file_path(deprecation_file_name, @file_root))
     end
 
     def active?
@@ -28,11 +33,7 @@ module Trackler
     end
 
     def description
-      return @description unless @description.nil?
-      filename = file_path(description_file_name)
-      if File.exists?(filename)
-        @description = File.read(filename)
-      end
+      @description ||= (track_specific_description || common_description)
     end
 
     def source_markdown
@@ -66,7 +67,7 @@ module Trackler
     end
 
     def canonical_data_url
-      repo_url(canonical_data_file_name) if File.exists?(file_path(canonical_data_file_name))
+      repo_url(canonical_data_file_name) if File.exists?(file_path(canonical_data_file_name, @file_root))
     end
 
     def metadata_url
@@ -104,20 +105,51 @@ module Trackler
     end
 
     def repo_url(filename)
-      @repo_root + filename
+      if @track_repo_root
+        @track_repo_root
+      else
+        @repo_root
+      end + filename
     end
 
-    def file_path(filename)
-      File.join(@file_root, filename)
+    def file_path(filename, root = @file_root)
+      File.join(root, filename)
     end
 
     def metadata
-      return @metadata unless @metadata.nil?
-      filename = file_path(metadata_file_name)
+      @metadata ||= (track_specific_metadata || common_metadata)
+    end
+
+    def common_metadata
+      filename = file_path(metadata_file_name, @file_root)
       if File.exists?(filename)
-        @metadata = YAML.load(File.read(filename))
+        YAML.load(File.read(filename))
       end
     end
+
+    def track_specific_metadata
+      return if !@track_file_root
+      filename = file_path(metadata_file_name, @track_file_root)
+      if File.exists?(filename)
+        YAML.load(File.read(filename))
+      end
+    end
+
+    def common_description
+      filename = file_path(description_file_name, @file_root)
+      if File.exists?(filename)
+        File.read(filename)
+      end
+    end
+
+    def track_specific_description
+      return if !@track_file_root
+      filename = file_path(description_file_name, @track_file_root)
+      if File.exists?(filename)
+        File.read(filename)
+      end
+    end
+
 
     def markdown_link(url)
       url.empty? ? url : format("[%s](%s)", url, url)
