@@ -1,5 +1,6 @@
 require 'yaml'
 require_relative 'metadata'
+require_relative 'description'
 require_relative 'null_track'
 
 module Trackler
@@ -13,15 +14,15 @@ module Trackler
       @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
 
       @metadata = Metadata.for(problem: self, track: track)
+      self.description_object = Description.for(problem: self, track: track)
 
       if track.exists?
-        @track_file_root = File.join(root, 'tracks', track.id, 'exercises', self.slug)
         @track_repo_root = "#{track.repository}/blob/master/exercises/%s/" % self.slug
       end
     end
 
     def exists?
-      !!description && metadata.exists?
+      description_object.exists? && metadata.exists?
     end
 
     def deprecated?
@@ -37,7 +38,7 @@ module Trackler
     end
 
     def description
-      @description ||= (track_specific_description || common_description)
+      description_object.content
     end
 
     def source_markdown
@@ -92,6 +93,8 @@ module Trackler
 
     private
 
+    attr_accessor :description_object
+
     def canonical_data_file_name
       "canonical-data.json"
     end
@@ -118,21 +121,6 @@ module Trackler
 
     def file_path(filename, root = @file_root)
       File.join(root, filename)
-    end
-
-    def common_description
-      filename = file_path(description_file_name, @file_root)
-      if File.exists?(filename)
-        File.read(filename)
-      end
-    end
-
-    def track_specific_description
-      return if !@track_file_root
-      filename = file_path(description_file_name, @track_file_root)
-      if File.exists?(filename)
-        File.read(filename)
-      end
     end
 
     def markdown_link(url)
