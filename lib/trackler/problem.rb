@@ -38,7 +38,7 @@ module Trackler
     end
 
     def description
-      description_object.content
+      description_object.to_s
     end
 
     def source_markdown

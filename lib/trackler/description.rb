@@ -1,25 +1,22 @@
-require_relative 'null_description'
+require_relative 'description_file'
 
 module Trackler
   class Description
     def self.for(problem:, track: )
-      if File.exists?(File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, 'description.md'))
-        new(File.read(File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, 'description.md')))
-      elsif File.exists?(File.join(problem.root, 'common', 'exercises', problem.slug, 'description.md'))
-        new(File.read(File.join(problem.root, 'common', 'exercises', problem.slug, 'description.md')))
-      else
-        NullDescription.new
-      end
+      new(DescriptionFile.for(problem: problem, track: track))
     end
 
-    attr_reader :content
+    def initialize(description_file)
+      @content = description_file.to_s
+    end
+    private_class_method :new
 
-    def initialize(content)
-      @content = content
+    def to_s
+      @content
     end
 
     def exists?
-      true
+      !@content.empty?
     end
   end
 end
