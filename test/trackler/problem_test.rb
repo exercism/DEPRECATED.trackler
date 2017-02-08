@@ -172,4 +172,11 @@ class ProblemTest < Minitest::Test
 
     assert_nil problem.canonical_data_url
   end
+
+  def test_description_url_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "https://example.com/exercism/xsnowflake/blob/master/exercises/snowflake-only/description.md", problem.description_url
+  end
 end
