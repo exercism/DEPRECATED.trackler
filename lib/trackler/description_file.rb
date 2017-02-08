@@ -13,23 +13,41 @@ module Trackler
     end
 
     def initialize(problem:, track:)
+      self.problem = problem
+      self.track = track
       @content = File.read(self.class.location(problem: problem, track: track))
+    end
+
+    def url
+      raise
     end
 
     def to_s
       String(@content)
     end
+
+    private
+
+    attr_accessor :problem, :track
   end
 
   class TrackDescriptionFile < DescriptionFile
     def self.location(problem:, track:)
       File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, 'description.md')
     end
+
+    def url
+      "#{track.repository}/blob/master/exercises/%s/description.md" % problem.slug
+    end
   end
 
   class CommonDescriptionFile < DescriptionFile
     def self.location(problem:, **_track)
       File.join(problem.root, 'common', 'exercises', problem.slug, 'description.md')
+    end
+
+    def url
+      "https://github.com/exercism/x-common/blob/master/exercises/%s/description.md" % problem.slug
     end
   end
 

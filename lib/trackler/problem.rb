@@ -15,10 +15,6 @@ module Trackler
 
       @metadata = Metadata.for(problem: self, track: track)
       self.description_object = Description.for(problem: self, track: track)
-
-      if track.exists?
-        @track_repo_root = "#{track.repository}/blob/master/exercises/%s/" % self.slug
-      end
     end
 
     def exists?
@@ -68,7 +64,7 @@ module Trackler
     ######
 
     def description_url
-      repo_url(description_file_name)
+      description_object.url
     end
 
     def canonical_data_url
@@ -76,7 +72,7 @@ module Trackler
     end
 
     def metadata_url
-      repo_url(metadata_file_name)
+      metadata.url
     end
 
     def blurb
@@ -112,11 +108,7 @@ module Trackler
     end
 
     def repo_url(filename)
-      if @track_repo_root
-        @track_repo_root
-      else
-        @repo_root
-      end + filename
+      @repo_root + filename
     end
 
     def file_path(filename, root = @file_root)

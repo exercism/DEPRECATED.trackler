@@ -9,10 +9,15 @@ module Trackler
     attr_accessor :blurb, :source, :source_url
 
     def initialize(metadata_file)
-      @attrs = metadata_file.to_h
+      @file = metadata_file
+      @attrs = @file.to_h
       %w(blurb source source_url).each do |attr|
         self.send("#{attr}=".to_sym, @attrs[attr].to_s.strip)
       end
+    end
+
+    def url
+      @file.url
     end
 
     def exists?

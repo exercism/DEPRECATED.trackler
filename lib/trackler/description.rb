@@ -7,12 +7,17 @@ module Trackler
     end
 
     def initialize(description_file)
+      @file = description_file
       @content = description_file.to_s
     end
     private_class_method :new
 
     def to_s
       @content
+    end
+
+    def url
+      @file.url
     end
 
     def exists?

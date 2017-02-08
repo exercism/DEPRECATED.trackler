@@ -14,23 +14,41 @@ module Trackler
     end
 
     def initialize(problem:, track:)
+      self.problem = problem
+      self.track = track
       @content = File.read(self.class.location(problem: problem, track: track))
+    end
+
+    def url
+      raise
     end
 
     def to_h
       YAML.load(@content)
     end
+
+    private
+
+    attr_accessor :problem, :track
   end
 
   class TrackMetadataFile < MetadataFile
     def self.location(problem:, track:)
       File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, 'metadata.yml')
     end
+
+    def url
+      "#{track.repository}/blob/master/exercises/%s/metadata.yml" % problem.slug
+    end
   end
 
   class CommonMetadataFile < MetadataFile
     def self.location(problem:, **_track)
       File.join(problem.root, 'common', 'exercises', problem.slug, 'metadata.yml')
+    end
+
+    def url
+      "https://github.com/exercism/x-common/blob/master/exercises/%s/metadata.yml" % problem.slug
     end
   end
 
