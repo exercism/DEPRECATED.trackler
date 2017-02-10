@@ -3,20 +3,9 @@ module Trackler
     attr_reader :content
 
     def self.for(problem:, track:)
-      x = [TrackMetadataFile, CommonMetadataFile].detect(-> {NullMetadataFile}) do |d|
-        d.exists?(problem: problem, track: track)
-      end
-        x.new(problem: problem, track: track)
-    end
-
-    def self.exists?(problem:, track:)
-      File.exists?(location(problem: problem, track: track))
-    end
-
-    def initialize(problem:, track:)
-      self.problem = problem
-      self.track = track
-      @content = File.read(self.class.location(problem: problem, track: track))
+      [TrackMetadataFile, CommonMetadataFile].detect(-> {NullMetadataFile}) do |d|
+        d.send(:exists?, problem: problem, track: track)
+      end.send(:new, problem: problem, track: track)
     end
 
     def url
@@ -30,6 +19,18 @@ module Trackler
     private
 
     attr_accessor :problem, :track
+
+    def self.exists?(problem:, track:)
+      File.exists?(location(problem: problem, track: track))
+    end
+    private_class_method :exists?
+
+    def initialize(problem:, track:)
+      self.problem = problem
+      self.track = track
+      @content = File.read(self.class.location(problem: problem, track: track))
+    end
+    private_class_method :new
   end
 
   class TrackMetadataFile < MetadataFile
