@@ -1,14 +1,14 @@
-require_relative 'description_file'
+require_relative 'guaranteed_file'
 
 module Trackler
   class Description
     def self.for(problem:, track: )
-      new(DescriptionFile.for(problem: problem, track: track))
+      new(GuaranteedFile.for(problem: problem, track: track, filename: 'description.md'))
     end
 
     def initialize(description_file)
       @file = description_file
-      @content = description_file.to_s
+      @content = description_file.content
     end
     private_class_method :new
 
