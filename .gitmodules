@@ -166,3 +166,6 @@
 [submodule "tracks/delphi"]
 	path = tracks/delphi
 	url = https://github.com/exercism/xdelphi
+[submodule "tracks/typescript"]
+	path = tracks/typescript
+	url = https://github.com/exercism/xtypescript
