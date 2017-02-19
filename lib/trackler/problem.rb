@@ -10,7 +10,7 @@ module Trackler
     end
 
     def exists?
-      !!description && !!metadata
+      !!description && !!metadata.exists?
     end
 
     def deprecated?
@@ -72,15 +72,15 @@ module Trackler
     end
 
     def blurb
-      metadata['blurb'].to_s.strip
+      metadata.blurb
     end
 
     def source
-      metadata['source'].to_s.strip
+      metadata.source
     end
 
     def source_url
-      metadata['source_url'].to_s.strip
+      metadata.source_url
     end
 
     private
@@ -106,11 +106,7 @@ module Trackler
     end
 
     def metadata
-      return @metadata unless @metadata.nil?
-      filename = common_metadata_path(metadata_path)
-      if File.exists?(filename)
-        @metadata = YAML.load(File.read(filename))
-      end
+      @metadata ||= Trackler::Metadata.for_problem(problem: self)
     end
 
     def common_metadata_path(path)
