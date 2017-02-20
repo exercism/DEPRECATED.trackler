@@ -169,3 +169,6 @@
 [submodule "tracks/typescript"]
 	path = tracks/typescript
 	url = https://github.com/exercism/xtypescript
+[submodule "tracks/vimscript"]
+	path = tracks/vimscript
+	url = https://github.com/exercism/xvimscript
