@@ -14,7 +14,7 @@ class TracklerTest < Minitest::Test
     assert_nil Trackler.problems.detect { |p| p.slug == "snowflake-only" }
   end
 
-  def test_problems_does_not_contain_track_specific_problems
+  def test_implementations_does_contain_track_specific_problems
     Trackler.use_fixture_data
 
     refute_nil Trackler.implementations['snowflake-only']
