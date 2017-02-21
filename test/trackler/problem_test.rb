@@ -1,5 +1,6 @@
 require_relative '../test_helper'
 require 'trackler/problem'
+require 'trackler/track'
 
 class ProblemTest < Minitest::Test
   def test_existing_problem
@@ -128,5 +129,54 @@ class ProblemTest < Minitest::Test
   def test_problem_which_not_active_because_it_does_not_exist
     problem = Trackler::Problem.new('no-such-problem', FIXTURE_PATH)
     refute problem.active?
+  end
+
+  def test_description_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "Special snowflakes are _special_\n", problem.description
+  end
+
+  def test_blurb_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "This exercise only exists in snowflake", problem.blurb
+  end
+
+  def test_source_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "Special snowflake.", problem.source
+  end
+
+  def test_source_url_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "http://snowflake.com", problem.source_url
+  end
+
+  def test_metadata_url_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "https://example.com/exercism/xsnowflake/blob/master/exercises/snowflake-only/metadata.yml", problem.metadata_url
+  end
+
+  def test_canonical_data_url_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_nil problem.canonical_data_url
+  end
+
+  def test_description_url_of_problem_that_exists_in_single_track
+    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('snowflake-only', FIXTURE_PATH, track)
+
+    assert_equal "https://example.com/exercism/xsnowflake/blob/master/exercises/snowflake-only/description.md", problem.description_url
   end
 end

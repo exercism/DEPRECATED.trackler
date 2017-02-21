@@ -1,0 +1,17 @@
+{
+  "slug": "snowflake",
+  "language": "Snowflake",
+  "repository": "https://example.com/exercism/xsnowflake",
+  "active": true,
+  "test_pattern": "\\.tst$",
+  "problems": [
+    "apple",
+    "banana",
+    "cherry",
+    "snowflake-only"
+  ],
+  "deprecated": [
+  ],
+  "foregone": [
+  ]
+}

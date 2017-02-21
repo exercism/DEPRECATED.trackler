@@ -3,12 +3,12 @@ module Trackler
   class Implementations
     include Enumerable
 
-    attr_reader :track_id, :repo, :slugs, :root
-    def initialize(track_id, repo, slugs, root)
-      @track_id = track_id
+    attr_reader :repo, :slugs, :root, :track
+    def initialize(repo, slugs, root, track)
       @repo = repo
       @slugs = slugs
       @root = root
+      @track = track
     end
 
     def each
@@ -25,7 +25,7 @@ module Trackler
 
     def all
       @all ||= slugs.map { |slug|
-        Implementation.new(track_id, repo, Problem.new(slug, root), root)
+        Implementation.new(track.id, repo, Problem.new(slug, root, track), root)
       }
     end
 
@@ -35,7 +35,7 @@ module Trackler
 
     def implementation_map
       hash = Hash.new { |_, k|
-        Implementation.new(track_id, repo, Problem.new(k, root), root)
+        Implementation.new(track.id, repo, Problem.new(k, root, track), root)
       }
       all.each do |impl|
         hash[impl.problem.slug] = impl

@@ -1,20 +1,28 @@
 require 'yaml'
+require_relative 'metadata'
+require_relative 'description'
+require_relative 'null_track'
 
 module Trackler
   # Problem is a language-independent definition of an exercise.
   class Problem
-    attr_reader :slug, :root
-    def initialize(slug, root)
+    attr_reader :slug, :root, :metadata
+    def initialize(slug, root, track = NullTrack.new)
       @slug = slug
       @root = root
+      @file_root = File.join(root, 'common', 'exercises', self.slug)
+      @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
+
+      @metadata = Metadata.for(problem: self, track: track)
+      self.description_object = Description.for(problem: self, track: track)
     end
 
     def exists?
-      !!description && !!metadata
+      description_object.exists? && metadata.exists?
     end
 
     def deprecated?
-      @deprecated ||= File.exists?(common_metadata_path(deprecation_indicator_path))
+      @deprecated ||= File.exists?(file_path(deprecation_file_name, @file_root))
     end
 
     def active?
@@ -26,11 +34,7 @@ module Trackler
     end
 
     def description
-      return @description unless @description.nil?
-      filename = common_metadata_path(description_path)
-      if File.exists?(filename)
-        @description = File.read(filename)
-      end
+      description_object.to_s
     end
 
     def source_markdown
@@ -60,61 +64,55 @@ module Trackler
     ######
 
     def description_url
-      repo_url(description_path)
+      description_object.url
     end
 
     def canonical_data_url
-      repo_url(canonical_data_path) if File.exists?(common_metadata_path(canonical_data_path))
+      repo_url(canonical_data_file_name) if File.exists?(file_path(canonical_data_file_name, @file_root))
     end
 
     def metadata_url
-      repo_url(metadata_path)
+      metadata.url
     end
 
     def blurb
-      metadata['blurb'].to_s.strip
+      metadata.blurb
     end
 
     def source
-      metadata['source'].to_s.strip
+      metadata.source
     end
 
     def source_url
-      metadata['source_url'].to_s.strip
+      metadata.source_url
     end
 
     private
 
-    def canonical_data_path
-      "exercises/%s/canonical-data.json" % slug
+    attr_accessor :description_object
+
+    def canonical_data_file_name
+      "canonical-data.json"
     end
 
-    def metadata_path
-      "exercises/%s/metadata.yml" % slug
+    def description_file_name
+      "description.md"
     end
 
-    def description_path
-      "exercises/%s/description.md" % slug
+    def metadata_file_name
+      "metadata.yml"
     end
 
-    def deprecation_indicator_path
-      "exercises/%s/.deprecated" % slug
+    def deprecation_file_name
+      ".deprecated"
     end
 
-    def repo_url(path)
-      "https://github.com/exercism/x-common/blob/master/#{path}" unless path.nil?
+    def repo_url(filename)
+      @repo_root + filename
     end
 
-    def metadata
-      return @metadata unless @metadata.nil?
-      filename = common_metadata_path(metadata_path)
-      if File.exists?(filename)
-        @metadata = YAML.load(File.read(filename))
-      end
-    end
-
-    def common_metadata_path(path)
-      File.join(root, "common", path)
+    def file_path(filename, root = @file_root)
+      File.join(root, filename)
     end
 
     def markdown_link(url)
