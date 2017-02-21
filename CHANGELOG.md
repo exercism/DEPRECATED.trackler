@@ -13,8 +13,11 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
-* Handle track-specific exercises
 * **Your contribution here**
+
+## v2.0.8.0 (2017-02-21)
+
+* Handle track-specific exercises
 
 ## v2.0.7.0 (2017-02-20)
 
