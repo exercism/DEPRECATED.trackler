@@ -13,7 +13,12 @@ The changelog will not be updated for content updates.
 ----------------
 
 ## Next Release
+* Handle track-specific exercises
 * **Your contribution here**
+
+## v2.0.7.0 (2017-02-20)
+
+* Add Vim script track
 
 ## v2.0.6.0 (2017-01-03)
 
