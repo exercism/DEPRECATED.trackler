@@ -44,7 +44,7 @@ module Trackler
     end
 
     def implementations
-      @implementations ||= Implementations.new(id, repository, active_slugs, root, self)
+      @implementations ||= Implementations.new(repository, active_slugs, root, self)
     end
 
     def problems
