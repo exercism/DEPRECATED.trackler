@@ -172,3 +172,6 @@
 [submodule "tracks/vimscript"]
 	path = tracks/vimscript
 	url = https://github.com/exercism/xvimscript
+[submodule "tracks/clojurescript"]
+	path = tracks/clojurescript
+	url = https://github.com/exercism/xclojurescript
