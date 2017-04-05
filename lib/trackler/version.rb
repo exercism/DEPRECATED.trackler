@@ -1,3 +1,3 @@
 module Trackler
-  VERSION = "2.0.8.40"
+  VERSION = "2.0.8.41"
 end
