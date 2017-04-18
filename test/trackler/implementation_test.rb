@@ -55,7 +55,7 @@ class ImplementationTest < Minitest::Test
     problem = Trackler::Problem.new('banana', PATH)
     implementation = Trackler::Implementation.new('fruit', URL, problem, PATH)
 
-    expected = "# Banana\n\nThis is banana.\n\n* banana\n* banana again\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n* a hint\n* another hint\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    expected = "# Banana\n\nThis is banana.\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
 
     assert_equal expected, implementation.readme
   end

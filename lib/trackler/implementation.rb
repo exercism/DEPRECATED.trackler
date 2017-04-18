@@ -85,8 +85,8 @@ module Trackler
     def readme_body
       [
         problem.description,
-        track_hint,
         implementation_hint,
+        track_hint,
       ].reject(&:empty?).join("\n").strip
     end
 
