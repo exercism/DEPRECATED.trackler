@@ -85,12 +85,20 @@ class TrackTest < Minitest::Test
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 
     expected = "Installing\n![](/alt/test.jpg)\n"
-    assert_equal expected, track.docs("/alt").installation
+    assert_equal expected, track.docs(image_path: "/alt").installation
     # handles trailing slash
-    assert_equal expected, track.docs("/alt/").installation
+    assert_equal expected, track.docs(image_path: "/alt/").installation
     # doesn't break absolute URLs
     expected = "Running\n![](http://example.org/abc/docs/img/test.jpg)\n"
-    assert_equal expected, track.docs("/alt").tests
+    assert_equal expected, track.docs(image_path: "/alt").tests
+  end
+
+  def test_docs_with_alternate_image_path_using_positional_argument
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    assert_output nil, /DEPRECATION WARNING/ do
+      expected = "Installing\n![](/positional/test.jpg)\n"
+      assert_equal expected, track.docs('/positional').installation
+    end
   end
 
   def test_docs_accessible_as_object

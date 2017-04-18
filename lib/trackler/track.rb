@@ -81,8 +81,11 @@ module Trackler
       end
     end
 
-    def docs(image_path = DEFAULT_IMAGE_PATH)
-      OpenStruct.new(docs_by_topic(image_path))
+    def docs(positional_image_path_which_is_deprecated = nil, image_path: nil)
+      if positional_image_path_which_is_deprecated
+        warn "DEPRECATION WARNING:\ntrack.docs: Positional argument is deprected, please use keyword argument 'image_path:' instead\neg: track.docs(image_path: #{positional_image_path_which_is_deprecated.inspect})\n"
+      end
+      OpenStruct.new(docs_by_topic(image_path || positional_image_path_which_is_deprecated || DEFAULT_IMAGE_PATH))
     end
 
     def img(file_path)
