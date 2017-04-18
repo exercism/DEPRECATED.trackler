@@ -101,12 +101,6 @@ class TrackTest < Minitest::Test
     end
   end
 
-  def test_docs_with_alternate_image_path_using_keyword_argument
-    track = Trackler::Track.new('fake', FIXTURE_PATH)
-    expected = "Installing\n![](/keyword/test.jpg)\n"
-    assert_equal expected, track.docs(image_path: '/keyword').installation
-  end
-
   def test_docs_accessible_as_object
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     expected = "Language Information\n"
