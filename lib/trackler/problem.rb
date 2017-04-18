@@ -42,27 +42,6 @@ module Trackler
       text.empty? ? text : "## Source\n\n#{text}"
     end
 
-    ######
-    # Deprecated methods
-    # TODO: remove external references to these methods.
-    # found in: x-api
-    # NOT in: exercism.io, cli
-    # Anywhere else we need to look?
-    # Should this output a warning or raise an error?
-    def md_url
-      description_url
-    end
-
-    def json_url
-      canonical_data_url
-    end
-
-    def yaml_url
-      metadata_url
-    end
-    # End deprecated methods
-    ######
-
     def description_url
       description_object.url
     end
