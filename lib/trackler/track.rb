@@ -81,8 +81,8 @@ module Trackler
       end
     end
 
-    def docs(image_path = DEFAULT_IMAGE_PATH)
-      OpenStruct.new(docs_by_topic(image_path))
+    def docs(positional_image_path_which_is_deprecated = nil, image_path: nil)
+      OpenStruct.new(docs_by_topic(image_path || positional_image_path_which_is_deprecated || DEFAULT_IMAGE_PATH))
     end
 
     def img(file_path)
