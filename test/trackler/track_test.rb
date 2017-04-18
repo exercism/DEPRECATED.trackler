@@ -84,17 +84,13 @@ class TrackTest < Minitest::Test
   def test_docs_with_alternate_image_path
     track = Trackler::Track.new('fake', FIXTURE_PATH)
 
-    # This will now raise a deprecation warning (or 3)
-    _, err = capture_io do
-      expected = "Installing\n![](/alt/test.jpg)\n"
-      assert_equal expected, track.docs("/alt").installation
-      # handles trailing slash
-      assert_equal expected, track.docs("/alt/").installation
-      # doesn't break absolute URLs
-      expected = "Running\n![](http://example.org/abc/docs/img/test.jpg)\n"
-      assert_equal expected, track.docs("/alt").tests
-    end
-    assert_match(/DEPRECATION WARNING/, err)
+    expected = "Installing\n![](/alt/test.jpg)\n"
+    assert_equal expected, track.docs(image_path: "/alt").installation
+    # handles trailing slash
+    assert_equal expected, track.docs(image_path: "/alt/").installation
+    # doesn't break absolute URLs
+    expected = "Running\n![](http://example.org/abc/docs/img/test.jpg)\n"
+    assert_equal expected, track.docs(image_path: "/alt").tests
   end
 
   def test_docs_with_alternate_image_path_using_positional_argument
