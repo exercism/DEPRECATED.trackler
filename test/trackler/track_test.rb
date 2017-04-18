@@ -97,6 +97,14 @@ class TrackTest < Minitest::Test
     assert_match(/DEPRECATION WARNING/, err)
   end
 
+  def test_docs_with_alternate_image_path_using_positional_argument
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    assert_output nil, /DEPRECATION WARNING/ do
+      expected = "Installing\n![](/positional/test.jpg)\n"
+      assert_equal expected, track.docs('/positional').installation
+    end
+  end
+
   def test_docs_with_alternate_image_path_using_keyword_argument
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     expected = "Installing\n![](/keyword/test.jpg)\n"
