@@ -42,14 +42,6 @@ module Trackler
       @readme ||= assemble_readme
     end
 
-    def exercise_dir
-      if File.exist?(track.dir.join('exercises'))
-        File.join('exercises', problem.slug)
-      else
-        problem.slug
-      end
-    end
-
     def git_url
       [track.repository, "tree/master", exercise_dir].join("/")
     end
@@ -64,6 +56,14 @@ module Trackler
 
     def implementation_dir
       @implementation_dir ||= track.dir.join(exercise_dir)
+    end
+
+    def exercise_dir
+      if File.exist?(track.dir.join('exercises'))
+        File.join('exercises', problem.slug)
+      else
+        problem.slug
+      end
     end
 
     def assemble_readme

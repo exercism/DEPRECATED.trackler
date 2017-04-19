@@ -43,7 +43,6 @@ class ImplementationTest < Minitest::Test
     implementation = Trackler::Implementation.new(track, problem)
 
     assert_equal "https://example.com/exercism/xfruit/tree/master/exercises/apple", implementation.git_url
-    assert_match Regexp.new('exercises[\\/]apple'), implementation.exercise_dir
 
     expected = {
       "apple.ext" => "an apple a day keeps the doctor away\n",
