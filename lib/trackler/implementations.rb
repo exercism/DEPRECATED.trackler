@@ -25,7 +25,7 @@ module Trackler
 
     def all
       @all ||= slugs.map { |slug|
-        Implementation.new(track.id, repo, Problem.new(slug, root, track), root)
+        Implementation.new(track, Problem.new(slug, root, track))
       }
     end
 
@@ -35,7 +35,7 @@ module Trackler
 
     def implementation_map
       hash = Hash.new { |_, k|
-        Implementation.new(track.id, repo, Problem.new(k, root, track), root)
+        Implementation.new(track, Problem.new(k, root, track))
       }
       all.each do |impl|
         hash[impl.problem.slug] = impl
