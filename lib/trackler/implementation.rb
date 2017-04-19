@@ -10,6 +10,9 @@ module Trackler
       "/\.meta/"
     ]
 
+    extend Forwardable
+    def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug
+
     attr_reader :track, :problem
     def initialize(track, problem)
       @track = track
@@ -90,26 +93,25 @@ module Trackler
     end
 
     def readme_title
-      problem.name
+      name
     end
 
     def optional_blurb
-      blurb = problem.blurb
-      return '' if problem.description.start_with?(blurb)
+      return '' if description.start_with?(blurb)
       "#{blurb}\n\n"
     end
 
     def readme_body
       optional_blurb +
         [
-          problem.description,
+          description,
           implementation_hints,
           track.hints,
         ].reject(&:empty?).join("\n").strip
     end
 
     def readme_source
-      problem.source_markdown
+      source_markdown
     end
 
     def incomplete_solutions_body
