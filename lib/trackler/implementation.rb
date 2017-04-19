@@ -10,13 +10,10 @@ module Trackler
       Regexp.new("/\.meta/")
     ]
 
-    attr_reader :track_id, :repo, :problem, :root, :file_bundle
+    attr_reader :track, :problem, :file_bundle
     attr_writer :files
     def initialize(track, problem)
       @track = track
-      @track_id = track.id
-      @repo = track.repository
-      @root = Pathname.new(track.root)
       @problem = problem
       @file_bundle = FileBundle.new(track_directory, ignore)
     end
@@ -55,7 +52,7 @@ module Trackler
     end
 
     def git_url
-      [repo, "tree/master", exercise_dir].join("/")
+      [track.repository, "tree/master", exercise_dir].join("/")
     end
 
     private
@@ -65,7 +62,8 @@ module Trackler
     end
 
     def track_dir
-      @track_dir ||= root.join('tracks', track_id)
+      root = Pathname.new(track.root)
+      @track_dir ||= root.join('tracks', track.id)
     end
 
     def assemble_readme
