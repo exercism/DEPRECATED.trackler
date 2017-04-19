@@ -13,12 +13,12 @@ module Trackler
 
     attr_reader :track_id, :repo, :problem, :root, :file_bundle
     attr_writer :files
-    def initialize(track_id, repo, problem, root)
-      @track_id = track_id
-      @repo = repo
+    def initialize(track, problem)
+      @track_id = track.id
+      @repo = track.repository
+      @root = Pathname.new(track.root)
       @problem = problem
-      @root = Pathname.new(root)
-      @file_bundle = FileBundle.new(track_directory, IGNORE)
+      @file_bundle = FileBundle.new(track_directory, IGNORE, track.test_pattern)
     end
 
     def exists?
