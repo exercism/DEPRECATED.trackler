@@ -18,7 +18,7 @@ module Trackler
       @repo = track.repository
       @root = Pathname.new(track.root)
       @problem = problem
-      @file_bundle = FileBundle.new(track_directory, IGNORE)
+      @file_bundle = FileBundle.new(track_directory, IGNORE, track.test_pattern)
     end
 
     def exists?

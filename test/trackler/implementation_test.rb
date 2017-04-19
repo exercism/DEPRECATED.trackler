@@ -99,6 +99,15 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.files.keys
   end
 
+  def test_never_ignores_explicit_matches_to_configured_test_pattern_regex
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    problem = Trackler::Problem.new('dog', FIXTURE_PATH)
+    implementation = Trackler::Implementation.new(track, problem)
+
+    expected = ["a_dog.animal", "a_dog_2.animal", "a_test_example_for.animal", "README.md"]
+    assert_equal expected, implementation.files.keys
+  end
+
   def test_readme_has_empty_string_for_track_hint_when_setup_file_does_not_exist
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     problem = Trackler::Problem.new('apple', FIXTURE_PATH)
