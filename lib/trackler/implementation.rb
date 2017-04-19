@@ -5,7 +5,7 @@ module Trackler
   # Implementation is a language-specific implementation of an exercise.
   class Implementation
     IGNORE_PATTERNS = [
-      "HINTS\.md$",
+      "\/HINTS\.md$",
       "\/\.$",
       "/\.meta/"
     ]
