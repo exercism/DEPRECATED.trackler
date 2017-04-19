@@ -4,10 +4,10 @@ require_relative 'file_bundle'
 module Trackler
   # Implementation is a language-specific implementation of an exercise.
   class Implementation
-    IGNORE = [
-      Regexp.new("HINTS\.md$"),
-      Regexp.new("\/\.$"),
-      Regexp.new("/\.meta/")
+    IGNORE_PATTERNS = [
+      "HINTS\.md$",
+      "\/\.$",
+      "/\.meta/"
     ]
 
     attr_reader :track, :problem
@@ -22,7 +22,9 @@ module Trackler
     end
 
     def ignore
-      IGNORE + [Regexp.new(@track.ignore_pattern, Regexp::IGNORECASE)]
+      (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
+        Regexp.new(pattern, Regexp::IGNORECASE)
+      end
     end
 
     def exists?
