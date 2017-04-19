@@ -115,6 +115,10 @@ module Trackler
       active_slugs + foregone_slugs + deprecated_slugs
     end
 
+    def dir
+      root.join("tracks", id)
+    end
+
     private
 
     # The slugs for the problems that are currently in the track.
@@ -145,10 +149,6 @@ module Trackler
         File.extname(filename).sub(/^\./, '')
       end
       formats.max_by { |format| formats.count(format) }
-    end
-
-    def dir
-      root.join("tracks", id)
     end
 
     def config

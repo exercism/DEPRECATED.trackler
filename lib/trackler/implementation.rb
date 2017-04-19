@@ -43,7 +43,7 @@ module Trackler
     end
 
     def exercise_dir
-      if File.exist?(track_dir.join('exercises'))
+      if File.exist?(track.dir.join('exercises'))
         File.join('exercises', problem.slug)
       else
         problem.slug
@@ -63,12 +63,7 @@ module Trackler
     end
 
     def implementation_dir
-      @implementation_dir ||= track_dir.join(exercise_dir)
-    end
-
-    def track_dir
-      root = Pathname.new(track.root)
-      @track_dir ||= root.join('tracks', track.id)
+      @implementation_dir ||= track.dir.join(exercise_dir)
     end
 
     def assemble_readme
@@ -109,9 +104,9 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def track_hint
-      track_hints_filename = track_dir.join('exercises','TRACK_HINTS.md')
+      track_hints_filename = track.dir.join('exercises','TRACK_HINTS.md')
       unless File.exist?(track_hints_filename)
-        track_hints_filename = track_dir.join('SETUP.md')
+        track_hints_filename = track.dir.join('SETUP.md')
       end
       read track_hints_filename
     end
