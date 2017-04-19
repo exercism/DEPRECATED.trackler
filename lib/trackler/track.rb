@@ -82,11 +82,7 @@ module Trackler
     end
 
     def ignore_pattern
-      if config.key?('ignore_pattern')
-        config['ignore_pattern']
-      else
-        'example'
-      end
+      config.fetch('ignore_pattern', 'example')
     end
 
     def docs(positional_image_path_which_is_deprecated = nil, image_path: nil)
