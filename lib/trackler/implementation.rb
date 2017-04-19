@@ -6,7 +6,6 @@ module Trackler
   class Implementation
     IGNORE = [
       Regexp.new("HINTS\.md$"),
-      Regexp.new("example", Regexp::IGNORECASE),
       Regexp.new("\/\.$"),
       Regexp.new("/\.meta/")
     ]
@@ -14,11 +13,16 @@ module Trackler
     attr_reader :track_id, :repo, :problem, :root, :file_bundle
     attr_writer :files
     def initialize(track, problem)
+      @track = track
       @track_id = track.id
       @repo = track.repository
       @root = Pathname.new(track.root)
       @problem = problem
-      @file_bundle = FileBundle.new(track_directory, IGNORE)
+      @file_bundle = FileBundle.new(track_directory, ignore)
+    end
+
+    def ignore
+      IGNORE + [Regexp.new(@track.ignore_pattern, Regexp::IGNORECASE)]
     end
 
     def exists?

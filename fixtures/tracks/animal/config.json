@@ -4,6 +4,7 @@
   "repository": "https://github.com/exercism/xanimal",
   "active": true,
   "test_pattern": "a.*animal",
+  "ignore_pattern": "[^_]example",
   "problems": [
     "dog"
   ],

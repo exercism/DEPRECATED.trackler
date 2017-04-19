@@ -81,6 +81,14 @@ module Trackler
       end
     end
 
+    def ignore_pattern
+      if config.key?('ignore_pattern')
+        config['ignore_pattern']
+      else
+        'example'
+      end
+    end
+
     def docs(positional_image_path_which_is_deprecated = nil, image_path: nil)
       if positional_image_path_which_is_deprecated
         warn "DEPRECATION WARNING:\ntrack.docs: Positional argument is deprecated, please use keyword argument 'image_path:' instead\neg: track.docs(image_path: #{positional_image_path_which_is_deprecated.inspect})\n"
