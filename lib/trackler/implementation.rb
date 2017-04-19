@@ -88,7 +88,7 @@ module Trackler
       [
         problem.description,
         implementation_hint,
-        track_hint,
+        track.hint,
       ].reject(&:empty?).join("\n").strip
     end
 
@@ -101,14 +101,6 @@ module Trackler
 ## Submitting Incomplete Problems
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
       README
-    end
-
-    def track_hint
-      track_hints_filename = track.dir.join('exercises','TRACK_HINTS.md')
-      unless File.exist?(track_hints_filename)
-        track_hints_filename = track.dir.join('SETUP.md')
-      end
-      read track_hints_filename
     end
 
     def implementation_hint

@@ -115,6 +115,14 @@ module Trackler
       root.join("tracks", id)
     end
 
+    def hint
+      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
+      unless File.exist?(track_hints_filename)
+        track_hints_filename = dir.join('SETUP.md')
+      end
+      read track_hints_filename
+    end
+
     private
 
     # The slugs for the problems that are currently in the track.
@@ -190,6 +198,14 @@ module Trackler
 
     def png_icon
       @png_icon ||= Image.new(File.join(dir, "img/icon.png"))
+    end
+
+    def read(f)
+      if File.exist?(f)
+        File.read(f)
+      else
+        ""
+      end
     end
   end
 end
