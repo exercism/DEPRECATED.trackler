@@ -21,12 +21,6 @@ module Trackler
       @file_bundle ||= FileBundle.new(track_directory, ignore)
     end
 
-    def ignore
-      (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
-        Regexp.new(pattern, Regexp::IGNORECASE)
-      end
-    end
-
     def exists?
       File.exist?(track_directory)
     end
@@ -61,6 +55,12 @@ module Trackler
     end
 
     private
+
+    def ignore
+      (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
+        Regexp.new(pattern, Regexp::IGNORECASE)
+      end
+    end
 
     def track_directory
       @track_directory ||= track_dir.join(exercise_dir)
