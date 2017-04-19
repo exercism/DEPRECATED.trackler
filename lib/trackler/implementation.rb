@@ -10,12 +10,15 @@ module Trackler
       Regexp.new("/\.meta/")
     ]
 
-    attr_reader :track, :problem, :file_bundle
+    attr_reader :track, :problem
     attr_writer :files
     def initialize(track, problem)
       @track = track
       @problem = problem
-      @file_bundle = FileBundle.new(track_directory, ignore)
+    end
+
+    def file_bundle
+      @file_bundle ||= FileBundle.new(track_directory, ignore)
     end
 
     def ignore
