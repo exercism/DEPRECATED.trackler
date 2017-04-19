@@ -18,7 +18,7 @@ module Trackler
     end
 
     def file_bundle
-      @file_bundle ||= FileBundle.new(track_directory, ignore)
+      @file_bundle ||= FileBundle.new(track_directory, regexes_to_ignore)
     end
 
     def exists?
@@ -56,7 +56,7 @@ module Trackler
 
     private
 
-    def ignore
+    def regexes_to_ignore
       (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
         Regexp.new(pattern, Regexp::IGNORECASE)
       end
