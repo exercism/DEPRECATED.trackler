@@ -24,9 +24,7 @@ class TrackTest < Minitest::Test
 
     slugs = %w(hello-world one two three)
     assert_equal slugs, track.problems.map(&:slug)
-    assert_equal slugs, track.implementations.map {|implementation|
-      implementation.problem.slug
-    }
+    assert_equal slugs, track.implementations.map(&:slug)
 
     # This is a sanity-check to demonstrate that this fake
     # track actually has both foregone and deprecated problems.
@@ -186,7 +184,7 @@ class TrackTest < Minitest::Test
 
   def test_track_implementations_contains_track_only_problem
     track = Trackler::Track.new('snowflake', FIXTURE_PATH)
-    refute_nil track.implementations.detect {|i| i.problem.slug == "snowflake-only"}
-    assert track.implementations.detect {|i| i.problem.slug == "snowflake-only"}.exists?
+    refute_nil track.implementations.detect {|i| i.slug == "snowflake-only"}
+    assert track.implementations.detect {|i| i.slug == "snowflake-only"}.exists?
   end
 end

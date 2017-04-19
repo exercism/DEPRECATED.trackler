@@ -38,7 +38,7 @@ module Trackler
     @implementations = Hash.new { |h, k| h[k] = [] }
     tracks.each do |track|
       track.implementations.each do |implementation|
-        @implementations[implementation.problem.slug] << implementation
+        @implementations[implementation.slug] << implementation
       end
     end
     @implementations

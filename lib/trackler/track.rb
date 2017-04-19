@@ -48,7 +48,7 @@ module Trackler
     end
 
     def problems
-      @problems ||= implementations.map(&:problem)
+      @problems ||= implementations
     end
 
     def checklist_issue
