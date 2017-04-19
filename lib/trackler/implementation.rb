@@ -87,8 +87,8 @@ module Trackler
     def readme_body
       [
         problem.description,
-        implementation_hint,
-        track.hint,
+        implementation_hints,
+        track.hints,
       ].reject(&:empty?).join("\n").strip
     end
 
@@ -103,7 +103,7 @@ It's possible to submit an incomplete solution so you can see how others have co
       README
     end
 
-    def implementation_hint
+    def implementation_hints
       read File.join(implementation_dir, 'HINTS.md')
     end
 

@@ -115,7 +115,7 @@ module Trackler
       root.join("tracks", id)
     end
 
-    def hint
+    def hints
       track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
       unless File.exist?(track_hints_filename)
         track_hints_filename = dir.join('SETUP.md')
