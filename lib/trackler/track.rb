@@ -81,6 +81,10 @@ module Trackler
       end
     end
 
+    def ignore_pattern
+      config.fetch('ignore_pattern', 'example')
+    end
+
     def docs(positional_image_path_which_is_deprecated = nil, image_path: nil)
       if positional_image_path_which_is_deprecated
         warn "DEPRECATION WARNING:\ntrack.docs: Positional argument is deprecated, please use keyword argument 'image_path:' instead\neg: track.docs(image_path: #{positional_image_path_which_is_deprecated.inspect})\n"
@@ -105,6 +109,18 @@ module Trackler
     # Every slug mentioned in the configuration.
     def slugs
       active_slugs + foregone_slugs + deprecated_slugs
+    end
+
+    def dir
+      root.join("tracks", id)
+    end
+
+    def hints
+      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
+      unless File.exist?(track_hints_filename)
+        track_hints_filename = dir.join('SETUP.md')
+      end
+      read track_hints_filename
     end
 
     private
@@ -137,10 +153,6 @@ module Trackler
         File.extname(filename).sub(/^\./, '')
       end
       formats.max_by { |format| formats.count(format) }
-    end
-
-    def dir
-      root.join("tracks", id)
     end
 
     def config
@@ -186,6 +198,14 @@ module Trackler
 
     def png_icon
       @png_icon ||= Image.new(File.join(dir, "img/icon.png"))
+    end
+
+    def read(f)
+      if File.exist?(f)
+        File.read(f)
+      else
+        ""
+      end
     end
   end
 end

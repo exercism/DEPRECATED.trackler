@@ -4,30 +4,30 @@ require_relative 'file_bundle'
 module Trackler
   # Implementation is a language-specific implementation of an exercise.
   class Implementation
-    IGNORE = [
-      Regexp.new("HINTS\.md$"),
-      Regexp.new("example", Regexp::IGNORECASE),
-      Regexp.new("\/\.$"),
-      Regexp.new("/\.meta/")
+    IGNORE_PATTERNS = [
+      "\/HINTS\.md$",
+      "\/\.$",
+      "/\.meta/"
     ]
 
-    attr_reader :track_id, :repo, :problem, :root, :file_bundle
+    attr_reader :track, :problem
     attr_writer :files
-    def initialize(track_id, repo, problem, root)
-      @track_id = track_id
-      @repo = repo
+    def initialize(track, problem)
+      @track = track
       @problem = problem
-      @root = Pathname.new(root)
-      @file_bundle = FileBundle.new(track_directory, IGNORE)
+    end
+
+    def file_bundle
+      @file_bundle ||= FileBundle.new(implementation_dir, regexes_to_ignore)
     end
 
     def exists?
-      File.exist?(track_directory)
+      File.exist?(implementation_dir)
     end
 
     def files
       @files ||= Hash[file_bundle.paths.map {|path|
-        [path.relative_path_from(track_directory).to_s, File.read(path)]
+        [path.relative_path_from(implementation_dir).to_s, File.read(path)]
       }].merge("README.md" => readme)
     end
 
@@ -42,26 +42,28 @@ module Trackler
       @readme ||= assemble_readme
     end
 
-    def exercise_dir
-      if File.exist?(track_dir.join('exercises'))
-        File.join('exercises', problem.slug)
-      else
-        problem.slug
-      end
-    end
-
     def git_url
-      [repo, "tree/master", exercise_dir].join("/")
+      [track.repository, "tree/master", exercise_dir].join("/")
     end
 
     private
 
-    def track_directory
-      @track_directory ||= track_dir.join(exercise_dir)
+    def regexes_to_ignore
+      (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
+        Regexp.new(pattern, Regexp::IGNORECASE)
+      end
     end
 
-    def track_dir
-      @track_dir ||= root.join('tracks', track_id)
+    def implementation_dir
+      @implementation_dir ||= track.dir.join(exercise_dir)
+    end
+
+    def exercise_dir
+      if File.exist?(track.dir.join('exercises'))
+        File.join('exercises', problem.slug)
+      else
+        problem.slug
+      end
     end
 
     def assemble_readme
@@ -85,8 +87,8 @@ module Trackler
     def readme_body
       [
         problem.description,
-        implementation_hint,
-        track_hint,
+        implementation_hints,
+        track.hints,
       ].reject(&:empty?).join("\n").strip
     end
 
@@ -101,16 +103,8 @@ It's possible to submit an incomplete solution so you can see how others have co
       README
     end
 
-    def track_hint
-      track_hints_filename = track_dir.join('exercises','TRACK_HINTS.md')
-      unless File.exist?(track_hints_filename)
-        track_hints_filename = track_dir.join('SETUP.md')
-      end
-      read track_hints_filename
-    end
-
-    def implementation_hint
-      read File.join(track_directory, 'HINTS.md')
+    def implementation_hints
+      read File.join(implementation_dir, 'HINTS.md')
     end
 
     def read(f)
