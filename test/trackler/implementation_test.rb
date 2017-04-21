@@ -137,7 +137,7 @@ class ImplementationTest < Minitest::Test
     problem = Trackler::Problem.new('apple', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, problem)
 
-    assert_match %r(The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.), implementation.readme
+    assert_match %r{The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.}, implementation.readme
   end
 
   def test_readme_uses_track_hint_instead_of_setup
