@@ -23,10 +23,6 @@ module Trackler
       @problem
     end
 
-    def file_bundle
-      @file_bundle ||= FileBundle.new(implementation_dir, regexes_to_ignore)
-    end
-
     def exists?
       File.exist?(implementation_dir)
     end
@@ -76,6 +72,10 @@ module Trackler
       (IGNORE_PATTERNS + [track.ignore_pattern]).map do |pattern|
         Regexp.new(pattern, Regexp::IGNORECASE)
       end
+    end
+
+    def file_bundle
+      @file_bundle ||= FileBundle.new(implementation_dir, regexes_to_ignore)
     end
 
     def implementation_dir
