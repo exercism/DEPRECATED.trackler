@@ -1,5 +1,4 @@
 require_relative '../test_helper'
-require 'trackler/implementation'
 require 'trackler/implementations'
 
 class ImplementationsTest < Minitest::Test
