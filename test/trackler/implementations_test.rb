@@ -12,9 +12,7 @@ class ImplementationsTest < Minitest::Test
     names = [
       "Hello World", "One", "Two", "Three"
     ]
-    assert_equal names, implementations.map {|implementation|
-      implementation.name
-    }
+    assert_equal names, implementations.map(&:name)
 
     # can access it like a hash
     assert_equal "Hello World", implementations["hello-world"].name
