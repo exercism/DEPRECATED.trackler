@@ -13,7 +13,6 @@ module Trackler
     extend Forwardable
     def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug, :source, :metadata, :root, :active?, :deprecated?, :source_url, :description_url, :canonical_data_url, :metadata_url
 
-    attr_reader :track
     def initialize(track, problem)
       @track = track
       @problem = problem
@@ -70,6 +69,8 @@ module Trackler
     end
 
     private
+
+    attr_reader :track
 
     def regexes_to_ignore
       (IGNORE_PATTERNS + [track.ignore_pattern]).map do |pattern|
