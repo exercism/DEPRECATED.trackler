@@ -93,6 +93,13 @@ gem build trackler.gemspec
 gem install --local trackler-$VERSION.gem
 gem push trackler-$VERSION.gem
 ```
+## Users
+
+Projects that make use of this gem:
+
+* https://github.com/exercism/exercism.io
+* https://github.com/exercism/x-api
+* https://github.com/sandimetz/99bottles-polyglot
 
 ## License
 
