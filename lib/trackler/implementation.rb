@@ -13,10 +13,15 @@ module Trackler
     extend Forwardable
     def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug, :source, :metadata, :root, :active?, :deprecated?, :source_url, :description_url, :canonical_data_url, :metadata_url
 
-    attr_reader :track, :problem
+    attr_reader :track
     def initialize(track, problem)
       @track = track
       @problem = problem
+    end
+
+    def problem
+      warn "DEPRECATION WARNING: The `problem` method is deprecated, Implementation can do everything that Problem can, so call the method directly."
+      @problem
     end
 
     def file_bundle
