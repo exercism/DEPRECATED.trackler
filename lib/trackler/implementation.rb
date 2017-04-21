@@ -11,7 +11,7 @@ module Trackler
     ]
 
     extend Forwardable
-    def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug
+    def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug, :source, :metadata, :root, :active?, :deprecated?, :source_url, :description_url, :canonical_data_url, :metadata_url
 
     attr_reader :track, :problem
     def initialize(track, problem)

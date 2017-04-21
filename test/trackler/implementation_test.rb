@@ -4,6 +4,15 @@ require 'trackler/problem'
 require 'trackler/implementation'
 
 class ImplementationTest < Minitest::Test
+  def test_implementation_implements_the_same_methods_that_problem_does
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
+    implementation = Trackler::Implementation.new(track, problem)
+
+    missing_methods = problem.public_methods - implementation.public_methods
+    assert_equal [], missing_methods
+  end
+
   def test_zip
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
