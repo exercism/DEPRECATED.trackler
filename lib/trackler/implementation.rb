@@ -119,15 +119,8 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def implementation_hints
-      read File.join(implementation_dir, 'HINTS.md')
-    end
-
-    def read(f)
-      if File.exist?(f)
-        File.read(f)
-      else
-        ""
-      end
+      hints_file = File.join(implementation_dir, 'HINTS.md')
+      File.exist?(hints_file) ? File.read(hints_file) : ''
     end
   end
 end
