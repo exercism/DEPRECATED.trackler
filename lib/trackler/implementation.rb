@@ -11,7 +11,6 @@ module Trackler
     ]
 
     attr_reader :track, :problem
-    attr_writer :files
     def initialize(track, problem)
       @track = track
       @problem = problem
@@ -29,6 +28,11 @@ module Trackler
       @files ||= Hash[file_bundle.paths.map {|path|
         [path.relative_path_from(implementation_dir).to_s, File.read(path)]
       }].merge("README.md" => readme)
+    end
+
+    def files=(value)
+      warn "DEPRECATION WARNING: 'Implementation#files=' is no longer public, please use 'implementation.merge_files' instead."
+      @files = value
     end
 
     def merge_files(new_files)
