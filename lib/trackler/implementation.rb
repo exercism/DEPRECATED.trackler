@@ -46,6 +46,13 @@ module Trackler
       [track.repository, "tree/master", exercise_dir].join("/")
     end
 
+    # DEPRECATED: We changed the class to hold on to a
+    # track object, however downstream dependencies send the
+    # to the track_id message.
+    def track_id
+      track.id
+    end
+
     private
 
     def regexes_to_ignore
