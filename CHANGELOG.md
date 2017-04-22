@@ -15,6 +15,11 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v2.1.0.0 (2017-04-21)
+
+* Add customizable ignore pattern
+* Add back method that got removed in a refactoring; it was part of the public API
+
 ## v2.0.8.0 (2017-02-21)
 
 * Handle track-specific exercises
