@@ -25,6 +25,8 @@ module Trackler
       all.length
     end
 
+    alias_method :size, :length
+
     private
 
     def all
