@@ -89,6 +89,18 @@ class ImplementationTest < Minitest::Test
     assert_equal files, implementation.files
   end
 
+  def test_implementation_merge_files
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
+    implementation = Trackler::Implementation.new(track, problem)
+
+    new_files = { "filename" => "contents", 'another_filename' => 'contents' }
+    expected = implementation.files.merge(new_files)
+    implementation.merge_files(new_files)
+    assert_equal expected, implementation.files
+  end
+
+
   def test_ignores_example_files
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
     problem = Trackler::Problem.new('imbe', FIXTURE_PATH)
