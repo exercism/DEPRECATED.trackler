@@ -48,7 +48,8 @@ module Trackler
     end
 
     def problems
-      @problems ||= implementations
+      warn "DEPRECATION WARNING: A track only has implementations, call track.implementations instead"
+      implementations
     end
 
     def checklist_issue
