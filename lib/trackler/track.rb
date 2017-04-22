@@ -36,11 +36,11 @@ module Trackler
     end
 
     def upcoming?
-      !active? && problems.length > 0
+      !active? && implementations.length > 0
     end
 
     def planned?
-      !active? && problems.length.zero?
+      !active? && implementations.length.zero?
     end
 
     def implementations

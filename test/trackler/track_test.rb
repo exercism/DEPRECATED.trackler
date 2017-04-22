@@ -23,7 +23,6 @@ class TrackTest < Minitest::Test
     assert_nil track.gitter
 
     slugs = %w(hello-world one two three)
-    assert_equal slugs, track.problems.map(&:slug)
     assert_equal slugs, track.implementations.map(&:slug)
 
     # This is a sanity-check to demonstrate that this fake
@@ -37,16 +36,16 @@ class TrackTest < Minitest::Test
     assert_equal(/test/i, track.test_pattern)
   end
 
-  def test_deprecated_problems
+  def test_deprecated_implementations
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
     slugs = %w(apple banana cherry)
-    assert_equal slugs, track.problems.map(&:slug)
+    assert_equal slugs, track.implementations.map(&:slug)
   end
 
-  def test_problems
+  def test_implementations
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
     slugs = %w(apple banana cherry)
-    assert_equal slugs, track.problems.map(&:slug)
+    assert_equal slugs, track.implementations.map(&:slug)
   end
 
   def test_img
@@ -176,10 +175,10 @@ class TrackTest < Minitest::Test
     assert track.planned?
   end
 
-  def test_track_problems_contains_track_only_problem
+  def test_track_implementations_contains_track_only_problem
     track = Trackler::Track.new('snowflake', FIXTURE_PATH)
-    refute_nil track.problems.detect {|p| p.slug == "snowflake-only"}
-    assert track.problems.detect {|p| p.slug == "snowflake-only"}.exists?
+    refute_nil track.implementations.detect {|p| p.slug == "snowflake-only"}
+    assert track.implementations.detect {|p| p.slug == "snowflake-only"}.exists?
   end
 
   def test_track_implementations_contains_track_only_problem
