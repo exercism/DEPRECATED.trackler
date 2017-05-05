@@ -175,3 +175,6 @@
 [submodule "tracks/clojurescript"]
 	path = tracks/clojurescript
 	url = https://github.com/exercism/xclojurescript
+[submodule "tracks/coq"]
+	path = tracks/coq
+	url = https://github.com/exercism/xcoq
