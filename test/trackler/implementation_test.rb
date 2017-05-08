@@ -165,6 +165,14 @@ class ImplementationTest < Minitest::Test
     assert_equal ['blurb'], result.scan(/blurb/)
   end
 
+  def test_git_url
+    mock_track = OpenStruct.new(repository: '[repository url]')
+    mock_problem = OpenStruct.new(slug: 'slug')
+    implementation = Trackler::Implementation.new(mock_track, mock_problem)
+
+    assert_equal '[repository url]/tree/master/exercises/slug', implementation.git_url
+  end
+
   private
 
   def archive_filenames(zip)
