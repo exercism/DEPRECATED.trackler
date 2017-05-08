@@ -74,11 +74,7 @@ module Trackler
     end
 
     def exercise_dir
-      if File.exist?(track.dir.join('exercises'))
-        File.join('exercises', problem.slug)
-      else
-        problem.slug
-      end
+      File.join('exercises', problem.slug)
     end
 
     def assemble_readme
