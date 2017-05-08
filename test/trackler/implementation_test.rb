@@ -37,21 +37,6 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.files
   end
 
-  def test_implementation_in_subdirectory
-    track = Trackler::Track.new('fruit', FIXTURE_PATH)
-    problem = Trackler::Problem.new('apple', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, problem)
-
-    assert_equal "https://example.com/exercism/xfruit/tree/master/exercises/apple", implementation.git_url
-
-    expected = {
-      "apple.ext" => "an apple a day keeps the doctor away\n",
-      "apple.tst" => "assert 'apple'\n",
-      "README.md" => "# Apple\n\nThis is apple.\n\n* apple\n* apple again\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
-    }
-    assert_equal expected, implementation.files
-  end
-
   def test_language_and_implementation_specific_readme
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
