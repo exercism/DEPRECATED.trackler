@@ -28,11 +28,11 @@ module Trackler
 
   class TrackFile < GuaranteedFile
     def self.location(problem:, track:, filename:)
-      File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, filename)
+      File.join(problem.root, 'tracks', track.id, 'exercises', problem.slug, '.meta', filename)
     end
 
     def url
-      "#{track.repository}/blob/master/exercises/%s/#{filename}" % problem.slug
+      "#{track.repository}/blob/master/exercises/%s/.meta/#{filename}" % problem.slug
     end
   end
 
