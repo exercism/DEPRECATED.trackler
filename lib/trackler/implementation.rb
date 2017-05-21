@@ -85,8 +85,6 @@ module Trackler
       <<-README
 # #{readme_title}
 
-#{problem.blurb}
-
 #{readme_body}
 
 #{readme_source}
@@ -99,12 +97,19 @@ module Trackler
       problem.name
     end
 
+    def optional_blurb
+      blurb = problem.blurb
+      return '' if problem.description.start_with?(blurb)
+      "#{blurb}\n\n"
+    end
+
     def readme_body
-      [
-        problem.description,
-        implementation_hints,
-        track.hints,
-      ].reject(&:empty?).join("\n").strip
+      optional_blurb +
+        [
+          problem.description,
+          implementation_hints,
+          track.hints,
+        ].reject(&:empty?).join("\n").strip
     end
 
     def readme_source
