@@ -148,17 +148,6 @@ class ImplementationTest < Minitest::Test
     assert_match /This is the content of the track hints file/, implementation.readme
   end
 
-  def test_blurb_not_repeated_if_same_as_start_of_description
-    mock_track = OpenStruct.new(dir: Pathname.new('dont care'), hints: 'dont care')
-    mock_problem = OpenStruct.new(
-      blurb: 'blurb', description: 'blurb then description',
-      name: 'dont care', slug: 'dont-care', source_markdown: 'dont_care'
-    )
-    implementation = Trackler::Implementation.new(mock_track, mock_problem)
-    result = implementation.readme
-    assert_equal ['blurb'], result.scan(/blurb/)
-  end
-
   def test_git_url
     mock_track = OpenStruct.new(repository: '[repository url]')
     mock_problem = OpenStruct.new(slug: 'slug')
