@@ -21,6 +21,12 @@ module Trackler
       by_slug[slug]
     end
 
+    def length
+      all.length
+    end
+
+    alias_method :size, :length
+
     private
 
     def all
@@ -38,7 +44,7 @@ module Trackler
         Implementation.new(track, Problem.new(k, root, track))
       }
       all.each do |impl|
-        hash[impl.problem.slug] = impl
+        hash[impl.slug] = impl
       end
       hash
     end

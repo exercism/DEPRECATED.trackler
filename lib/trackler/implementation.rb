@@ -10,14 +10,17 @@ module Trackler
       "/\.meta/"
     ]
 
-    attr_reader :track, :problem
+    extend Forwardable
+    def_delegators :@problem, :name, :blurb, :description, :source_markdown, :slug, :source, :metadata, :root, :active?, :deprecated?, :source_url, :description_url, :canonical_data_url, :metadata_url
+
     def initialize(track, problem)
       @track = track
       @problem = problem
     end
 
-    def file_bundle
-      @file_bundle ||= FileBundle.new(implementation_dir, regexes_to_ignore)
+    def problem
+      warn "DEPRECATION WARNING: The `problem` method is deprecated, Implementation can do everything that Problem can, so call the method directly."
+      @problem
     end
 
     def exists?
@@ -63,10 +66,16 @@ module Trackler
 
     private
 
+    attr_reader :track
+
     def regexes_to_ignore
-      (IGNORE_PATTERNS + [@track.ignore_pattern]).map do |pattern|
+      (IGNORE_PATTERNS + [track.ignore_pattern]).map do |pattern|
         Regexp.new(pattern, Regexp::IGNORECASE)
       end
+    end
+
+    def file_bundle
+      @file_bundle ||= FileBundle.new(implementation_dir, regexes_to_ignore)
     end
 
     def implementation_dir
@@ -79,37 +88,28 @@ module Trackler
 
     def assemble_readme
       <<-README
-# #{readme_title}
+# #{name}
 
 #{readme_body}
 
-#{readme_source}
+#{source_markdown}
 
 #{incomplete_solutions_body}
       README
     end
 
-    def readme_title
-      problem.name
-    end
-
     def optional_blurb
-      blurb = problem.blurb
-      return '' if problem.description.start_with?(blurb)
+      return '' if description.start_with?(blurb)
       "#{blurb}\n\n"
     end
 
     def readme_body
       optional_blurb +
         [
-          problem.description,
+          description,
           implementation_hints,
           track.hints,
         ].reject(&:empty?).join("\n").strip
-    end
-
-    def readme_source
-      problem.source_markdown
     end
 
     def incomplete_solutions_body
@@ -120,15 +120,8 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def implementation_hints
-      read File.join(implementation_dir, 'HINTS.md')
-    end
-
-    def read(f)
-      if File.exist?(f)
-        File.read(f)
-      else
-        ""
-      end
+      hints_file = File.join(implementation_dir, 'HINTS.md')
+      File.exist?(hints_file) ? File.read(hints_file) : ''
     end
   end
 end
