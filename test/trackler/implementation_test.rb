@@ -41,7 +41,7 @@ class ImplementationTest < Minitest::Test
       "sub/src/stubfile.ext" => "stub\n",
 
       # contains implementation-specific hint, but not language-specific hint
-      "README.md" => "# One\n\nThis is one.\n\n* one\n* one again\n\n* one hint\n* one more hint\n\n## Source\n\nThe internet. [http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+      "README.md" => "# One\n\n* one\n* one again\n\n* one hint\n* one more hint\n\n## Source\n\nThe internet. [http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
     }
     assert_equal expected, implementation.files
   end
@@ -51,7 +51,7 @@ class ImplementationTest < Minitest::Test
     problem = Trackler::Problem.new('banana', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, problem)
 
-    expected = "# Banana\n\nThis is banana.\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    expected = "# Banana\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
 
     assert_equal expected, implementation.readme
   end
@@ -120,7 +120,7 @@ class ImplementationTest < Minitest::Test
     problem = Trackler::Problem.new('apple', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, problem)
 
-    expected = "# Apple\n\nThis is apple.\n\n* apple\n* apple again\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    expected = "# Apple\n\n* apple\n* apple again\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Problems\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
     assert_equal expected, implementation.readme
   end
 
