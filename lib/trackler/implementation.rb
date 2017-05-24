@@ -18,6 +18,11 @@ module Trackler
       @problem = problem
     end
 
+    def initialize_copy(original)
+      super
+      @files = original.files.dup
+    end
+
     def problem
       warn "DEPRECATION WARNING: The `problem` method is deprecated, Implementation can do everything that Problem can, so call the method directly."
       @problem
