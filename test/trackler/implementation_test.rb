@@ -73,29 +73,6 @@ class ImplementationTest < Minitest::Test
     refute implementation.exists?, "Not expecting apple to be implemented for track TRACK_ID"
   end
 
-  def test_override_implementation_files_is_deprecated
-    track = Trackler::Track.new('fake', FIXTURE_PATH)
-    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, problem)
-
-    assert_output nil, /DEPRECATION WARNING/ do
-      files = { "filename" => "contents" }
-      implementation.files = files
-      assert_equal files, implementation.files
-    end
-  end
-
-  def test_implementation_merge_files
-    track = Trackler::Track.new('fake', FIXTURE_PATH)
-    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, problem)
-
-    new_files = { "filename" => "contents", 'another_filename' => 'contents' }
-    expected = implementation.files.merge(new_files)
-    implementation.merge_files(new_files)
-    assert_equal expected, implementation.files
-  end
-
   def test_implementation_dup_files
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
