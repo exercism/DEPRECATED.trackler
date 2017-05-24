@@ -96,6 +96,18 @@ class ImplementationTest < Minitest::Test
     assert_equal expected, implementation.files
   end
 
+  def test_implementation_dup_files
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    problem = Trackler::Problem.new('hello-world', FIXTURE_PATH)
+    original = Trackler::Implementation.new(track, problem)
+
+    # Ensure @files exists before `dup`ing
+    assert_instance_of Hash, original.files
+
+    duplicate = original.dup
+
+    refute_equal original.files.object_id, duplicate.files.object_id
+  end
 
   def test_ignores_example_files
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
