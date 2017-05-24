@@ -40,15 +40,6 @@ module Trackler
       }].merge("README.md" => readme)
     end
 
-    def files=(value)
-      warn "DEPRECATION WARNING: 'Implementation#files=' is no longer public, please use 'implementation.merge_files' instead."
-      @files = value
-    end
-
-    def merge_files(new_files)
-      files.merge!(new_files)
-    end
-
     def zip
       @zip ||= file_bundle.zip do |io|
         io.put_next_entry('README.md')
