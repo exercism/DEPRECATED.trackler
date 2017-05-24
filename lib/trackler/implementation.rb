@@ -103,13 +103,7 @@ module Trackler
       README
     end
 
-    def optional_blurb
-      return '' if description.start_with?(blurb)
-      "#{blurb}\n\n"
-    end
-
     def readme_body
-      optional_blurb +
         [
           description,
           implementation_hints,
