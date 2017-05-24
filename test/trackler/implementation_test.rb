@@ -168,6 +168,15 @@ class ImplementationTest < Minitest::Test
     assert_equal '[repository url]/tree/master/exercises/slug', implementation.git_url
   end
 
+  def test_language
+    expected_language = 'Expected Language'
+    mock_track = OpenStruct.new(repository: '[repository url]', language: expected_language)
+    mock_problem = OpenStruct.new(slug: 'slug')
+    implementation = Trackler::Implementation.new(mock_track, mock_problem)
+
+    assert_equal expected_language, implementation.language
+  end
+
   private
 
   def archive_filenames(zip)
