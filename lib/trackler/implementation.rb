@@ -1,4 +1,5 @@
 require 'pathname'
+require 'forwardable'
 require_relative 'file_bundle'
 
 module Trackler
