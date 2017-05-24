@@ -88,7 +88,7 @@ module Trackler
     end
 
     def exercise_dir
-      File.join('exercises', problem.slug)
+      File.join('exercises', slug)
     end
 
     def assemble_readme
