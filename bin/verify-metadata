@@ -6,7 +6,7 @@ require_relative '../lib/trackler'
 
 missing_problems = []
 Trackler.tracks.reject do |track|
-  missing_problems += track.problems.reject(&:exists?)
+  missing_problems += track.implementations.reject(&:exists?)
 end
 
 missing_problems = missing_problems.uniq
