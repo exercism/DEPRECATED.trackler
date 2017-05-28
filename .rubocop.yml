@@ -1,0 +1,22 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Include:
+  - 'Rakefile'
+  Exclude:
+  - 'tracks/**/*'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
