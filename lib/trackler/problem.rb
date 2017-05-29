@@ -13,8 +13,8 @@ module Trackler
       @file_root = File.join(root, 'common', 'exercises', self.slug)
       @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
 
-      @metadata = Metadata.for(problem: self, track: track)
-      self.description_object = Description.for(problem: self, track: track)
+      @metadata = Metadata.for(specification: self, track: track)
+      self.description_object = Description.for(specification: self, track: track)
     end
 
     def exists?
