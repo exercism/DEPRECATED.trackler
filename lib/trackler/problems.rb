@@ -9,8 +9,8 @@ module Trackler
     end
 
     def each
-      active.each do |problem|
-        yield problem
+      active.each do |specification|
+        yield specification
       end
     end
 
@@ -30,7 +30,7 @@ module Trackler
     end
 
     def all
-      @all_problems ||= exercise_slugs.map { |slug| Problem.new(slug, root) }
+      @all_specifications ||= exercise_slugs.map { |slug| Specification.new(slug, root) }
     end
 
     def exercise_slugs
@@ -38,13 +38,13 @@ module Trackler
     end
 
     def by_slug
-      @by_slug ||= problem_map
+      @by_slug ||= specification_map
     end
 
-    def problem_map
-      hash = Hash.new { |_, k| Problem.new(k, root) }
-      active.each do |problem|
-        hash[problem.slug] = problem
+    def specification_map
+      hash = Hash.new { |_, k| Specification.new(k, root) }
+      active.each do |specification|
+        hash[specification.slug] = specification
       end
       hash
     end
