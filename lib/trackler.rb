@@ -6,6 +6,7 @@ module Trackler
     @path = nil
     @implementations = nil
     @problems = nil
+    @specifications = nil
     @tracks = nil
     @todos = nil
   end
@@ -22,6 +23,10 @@ module Trackler
   def self.use_fixture_data
     reset
     @path = Trackler::Path.fixtures
+  end
+
+  def self.specifications
+    @specifications ||= Specifications.new(path)
   end
 
   def self.problems
