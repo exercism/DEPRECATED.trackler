@@ -178,3 +178,6 @@
 [submodule "tracks/coq"]
 	path = tracks/coq
 	url = https://github.com/exercism/xcoq
+[submodule "tracks/fortran"]
+	path = tracks/fortran
+	url = https://github.com/exercism/xfortran
