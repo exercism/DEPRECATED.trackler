@@ -106,7 +106,7 @@ module Trackler
 
     def incomplete_solutions_body
       <<-README
-## Submitting Incomplete Problems
+## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
       README
     end
