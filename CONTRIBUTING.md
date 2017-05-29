@@ -10,17 +10,12 @@ A git submodule is essentially a project in another project.
 
 ## Terminology
 
-* _Language_ - the name of a programming language, e.g. _C++_.
-* _Track_ - a collection of exercises in a programming language.
-* _Track ID_ - a url-friendly version of the language name, e.g. `cpp`.
-* _Problem_ - a high-level, language-independent description of a problem to solve.
-* _Implementation_ - a language-specific implementation of a problem. This contains at
-  minimum a README and a test suite.
+Check out the [glossary][] for an overview of the important terms for Exercism, many
+of which are used as class names in this codebase.
 
 ## Adding a New Language Track
 
-To start a new language track, ask [Katrina](https://github.com/kytrinyx) to bootstrap a
-repository for you.
+To start a new language track, open an issue in the [request-new-language-track][] repository.
 
 Once the repository exists, it can be added as a submodule here (using C++ as an example):
 
@@ -31,3 +26,5 @@ $ TRACK_ID=cpp; git submodule add https://github.com/exercism/x$TRACK_ID.git tra
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [xtracks]: https://github.com/exercism/trackler/tree/master/tracks
 [xcommon]: https://github.com/exercism/x-common
+[glossary]: https://github.com/exercism/docs/blob/master/glossary.md
+[request-new-language-track]: https://github.com/exercism/request-new-language-track
