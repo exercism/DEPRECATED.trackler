@@ -36,26 +36,26 @@ track.implementations.each do |implementation|
 end
 ```
 
-To get a problem, use the problem slug:
+To get the specification of a problem, use the exercise slug:
 
 ```
-problem = Trackler.problems["leap"]
+specification = Trackler.specifications["leap"]
 ```
 
-Problems contain the generic, language-independent metadata:
+Specifications contain the generic, language-independent metadata:
 
 ```
-problem.blurb
+specification.blurb
 # => "Write a program that will take a year and report if it is a leap year."
-problem.name
+specification.name
 # => "Leap"
 ```
 
-You can get all of the different language implementations for a problem:
+You can get all of the different language implementations for a specification:
 
 ```
 
-Trackler.implementations[problem.slug].each do |implementation|
+Trackler.implementations[specification.slug].each do |implementation|
   # ...
 end
 ```
