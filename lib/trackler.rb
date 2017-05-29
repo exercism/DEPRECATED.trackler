@@ -52,15 +52,15 @@ module Trackler
   def self.todos
     return @todos if !!@todos
 
-    slugs = problems.map(&:slug)
+    slugs = specifications.map(&:slug)
 
     @todos = Hash.new { |h, k| h[k] = [] }
     tracks.each do |track|
       todos = slugs - track.slugs
-      @todos[track.id] = problems.select { |problem|
-        todos.include?(problem.slug)
-      }.sort_by { |problem|
-        [implementations[problem.slug].count * -1, problem.name]
+      @todos[track.id] = specifications.select { |specification|
+        todos.include?(specification.slug)
+      }.sort_by { |specification|
+        [implementations[specification.slug].count * -1, specification.name]
       }
     end
     @todos
