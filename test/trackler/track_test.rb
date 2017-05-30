@@ -177,12 +177,6 @@ class TrackTest < Minitest::Test
 
   def test_track_implementations_contains_track_only_problem
     track = Trackler::Track.new('snowflake', FIXTURE_PATH)
-    refute_nil track.implementations.detect {|p| p.slug == "snowflake-only"}
-    assert track.implementations.detect {|p| p.slug == "snowflake-only"}.exists?
-  end
-
-  def test_track_implementations_contains_track_only_problem
-    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
     refute_nil track.implementations.detect {|i| i.slug == "snowflake-only"}
     assert track.implementations.detect {|i| i.slug == "snowflake-only"}.exists?
   end
