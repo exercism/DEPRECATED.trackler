@@ -211,4 +211,13 @@ class TrackTest < Minitest::Test
     expected = ""
     assert_equal expected, track.hints
   end
+
+  def test_problems_deprecated
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    problems = nil
+    assert_output nil, /DEPRECATION WARNING/ do
+      problems = track.problems
+    end
+    assert_equal track.implementations, problems
+  end
 end
