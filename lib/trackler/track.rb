@@ -68,10 +68,12 @@ module Trackler
       @icon ||= svg_icon.exists? ? svg_icon : png_icon
     end
 
-    %w(language repository).each do |name|
-      define_method name do
-        config[name].to_s.strip
-      end
+    def language
+      config['language'].to_s.strip
+    end
+
+    def repository
+      config['repository'].to_s.strip
     end
 
     def test_pattern
