@@ -180,4 +180,17 @@ class TrackTest < Minitest::Test
     refute_nil track.implementations.detect {|i| i.slug == "snowflake-only"}
     assert track.implementations.detect {|i| i.slug == "snowflake-only"}.exists?
   end
+
+  def test_track_ignore_pattern_custom
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    assert_equal '[^_]example', track.ignore_pattern
+  end
+
+  def test_track_ignore_pattern_default
+    mock_config = {}
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    JSON.stub :parse, mock_config do
+      assert_equal 'example', track.ignore_pattern
+    end
+  end
 end
