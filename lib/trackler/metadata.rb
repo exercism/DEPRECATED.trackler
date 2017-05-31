@@ -2,8 +2,8 @@ require_relative 'guaranteed_file'
 
 module Trackler
   class Metadata
-    def self.for(problem:, track: )
-      new(GuaranteedFile.for(problem: problem, track: track, filename: 'metadata.yml'))
+    def self.for(specification: , track: )
+      new(GuaranteedFile.for(specification: specification, track: track, filename: 'metadata.yml'))
     end
 
     attr_accessor :blurb, :source, :source_url

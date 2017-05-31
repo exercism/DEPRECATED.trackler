@@ -2,8 +2,8 @@ require_relative 'guaranteed_file'
 
 module Trackler
   class Description
-    def self.for(problem:, track: )
-      new(GuaranteedFile.for(problem: problem, track: track, filename: 'description.md'))
+    def self.for(specification:, track: )
+      new(GuaranteedFile.for(specification: specification, track: track, filename: 'description.md'))
     end
 
     def initialize(description_file)

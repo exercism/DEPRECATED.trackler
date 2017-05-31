@@ -6,6 +6,7 @@ module Trackler
     @path = nil
     @implementations = nil
     @problems = nil
+    @specifications = nil
     @tracks = nil
     @todos = nil
   end
@@ -22,6 +23,10 @@ module Trackler
   def self.use_fixture_data
     reset
     @path = Trackler::Path.fixtures
+  end
+
+  def self.specifications
+    @specifications ||= Specifications.new(path)
   end
 
   def self.problems
@@ -47,15 +52,15 @@ module Trackler
   def self.todos
     return @todos if !!@todos
 
-    slugs = problems.map(&:slug)
+    slugs = specifications.map(&:slug)
 
     @todos = Hash.new { |h, k| h[k] = [] }
     tracks.each do |track|
       todos = slugs - track.slugs
-      @todos[track.id] = problems.select { |problem|
-        todos.include?(problem.slug)
-      }.sort_by { |problem|
-        [implementations[problem.slug].count * -1, problem.name]
+      @todos[track.id] = specifications.select { |specification|
+        todos.include?(specification.slug)
+      }.sort_by { |specification|
+        [implementations[specification.slug].count * -1, specification.name]
       }
     end
     @todos

@@ -8,6 +8,12 @@ class TracklerTest < Minitest::Test
     assert_equal slugs, Trackler.todos["fake"].map(&:slug)
   end
 
+  def test_specifications_does_not_contain_track_specific_problems
+    Trackler.use_fixture_data
+
+    assert_nil Trackler.specifications.detect { |p| p.slug == "snowflake-only" }
+  end
+
   def test_problems_does_not_contain_track_specific_problems
     Trackler.use_fixture_data
 
