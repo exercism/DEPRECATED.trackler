@@ -8,6 +8,16 @@ also included as a [git submodule][submodule] in `./common`.
 
 A git submodule is essentially a project in another project.
 
+## Development Environment
+
+Clone the git repository, then run the bootstrap script:
+
+```
+$ git clone https://github.com/exercism/trackler.git
+$ cd trackler
+$ bin/bootstrap
+```
+
 ## Terminology
 
 Check out the [glossary][] for an overview of the important terms for Exercism, many
