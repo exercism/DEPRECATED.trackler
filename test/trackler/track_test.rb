@@ -177,13 +177,47 @@ class TrackTest < Minitest::Test
 
   def test_track_implementations_contains_track_only_problem
     track = Trackler::Track.new('snowflake', FIXTURE_PATH)
-    refute_nil track.implementations.detect {|p| p.slug == "snowflake-only"}
-    assert track.implementations.detect {|p| p.slug == "snowflake-only"}.exists?
-  end
-
-  def test_track_implementations_contains_track_only_problem
-    track = Trackler::Track.new('snowflake', FIXTURE_PATH)
     refute_nil track.implementations.detect {|i| i.slug == "snowflake-only"}
     assert track.implementations.detect {|i| i.slug == "snowflake-only"}.exists?
+  end
+
+  def test_track_ignore_pattern_custom
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    assert_equal '[^_]example', track.ignore_pattern
+  end
+
+  def test_track_ignore_pattern_default
+    mock_config = {}
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    JSON.stub :parse, mock_config do
+      assert_equal 'example', track.ignore_pattern
+    end
+  end
+
+  def test_track_hints
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    expected = "This is the content of the track hints file\n"
+    assert_equal expected, track.hints
+  end
+
+  def test_track_hints_deprecated_location
+    track = Trackler::Track.new('fruit', FIXTURE_PATH)
+    expected = "The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n"
+    assert_equal expected, track.hints
+  end
+
+  def test_track_hints_not_present
+    track = Trackler::Track.new('shoes', FIXTURE_PATH)
+    expected = ""
+    assert_equal expected, track.hints
+  end
+
+  def test_problems_deprecated
+    track = Trackler::Track.new('animal', FIXTURE_PATH)
+    problems = nil
+    assert_output nil, /DEPRECATION WARNING/ do
+      problems = track.problems
+    end
+    assert_equal track.implementations, problems
   end
 end
