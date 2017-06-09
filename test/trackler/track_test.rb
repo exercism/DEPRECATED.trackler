@@ -195,12 +195,18 @@ class TrackTest < Minitest::Test
   end
 
   def test_track_hints
+    track = Trackler::Track.new('coins', FIXTURE_PATH)
+    expected = "This is the content of the docs/EXERCISE_README_INSERT.md file\n"
+    assert_equal expected, track.hints
+  end
+
+  def test_track_hints_deprecated_location_slash_exercises_slash_track_hints
     track = Trackler::Track.new('animal', FIXTURE_PATH)
     expected = "This is the content of the track hints file\n"
     assert_equal expected, track.hints
   end
 
-  def test_track_hints_deprecated_location
+  def test_track_hints_deprecated_location_slash_setup
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
     expected = "The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n"
     assert_equal expected, track.hints
@@ -209,12 +215,6 @@ class TrackTest < Minitest::Test
   def test_track_hints_not_present
     track = Trackler::Track.new('shoes', FIXTURE_PATH)
     expected = ""
-    assert_equal expected, track.hints
-  end
-
-  def test_exercise_readme_insert
-    track = Trackler::Track.new('coins', FIXTURE_PATH)
-    expected = "This is the content of the docs/EXERCISE_README_INSERT.md file\n"
     assert_equal expected, track.hints
   end
 
