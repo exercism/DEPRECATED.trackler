@@ -123,7 +123,13 @@ module Trackler
       unless File.exist?(track_hints_filename)
         track_hints_filename = dir.join('SETUP.md')
       end
-      read track_hints_filename
+
+      f = track_hints_filename
+      if File.exist?(f)
+        File.read(f)
+      else
+        ""
+      end
     end
 
     private
@@ -201,14 +207,6 @@ module Trackler
 
     def png_icon
       @png_icon ||= Image.new(File.join(dir, "img/icon.png"))
-    end
-
-    def read(f)
-      if File.exist?(f)
-        File.read(f)
-      else
-        ""
-      end
     end
   end
 end
