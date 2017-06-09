@@ -208,7 +208,7 @@ class TrackTest < Minitest::Test
 
   def test_track_hints_deprecated_location_slash_setup
     track = Trackler::Track.new('fruit', FIXTURE_PATH)
-    expected = "The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n"
+    expected = "The SETUP.md file is deprecated, and docs/EXERCISE_README_INSERT.md should be used.\n"
     assert_equal expected, track.hints
   end
 
