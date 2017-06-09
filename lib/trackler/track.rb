@@ -119,9 +119,8 @@ module Trackler
     end
 
     def hints
-      f = track_hints_filename
-      if File.exist?(f)
-        File.read(f)
+      if File.exist?(track_hints_filename)
+        File.read(track_hints_filename)
       else
         ""
       end
