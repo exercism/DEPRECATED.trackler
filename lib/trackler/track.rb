@@ -119,14 +119,22 @@ module Trackler
     end
 
     def hints
-      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
-      unless File.exist?(track_hints_filename)
-        track_hints_filename = dir.join('SETUP.md')
+      if File.exist?(track_hints_filename)
+        File.read(track_hints_filename)
+      else
+        ""
       end
-      read track_hints_filename
     end
 
     private
+
+    def track_hints_filename
+      current = [File.join('docs', 'EXERCISE_README_INSERT.md')]
+      deprecated = [File.join('exercises', 'TRACK_HINTS.md'), 'SETUP.md']
+
+      filepaths = (current + deprecated).map { |name| dir.join(name) }
+      filepaths.find(-> { '' }) { |filepath| File.exist? filepath }
+    end
 
     # The slugs for the problems that are currently in the track.
     # We deprecated the old array of problem slugs in favor of an array
@@ -201,14 +209,6 @@ module Trackler
 
     def png_icon
       @png_icon ||= Image.new(File.join(dir, "img/icon.png"))
-    end
-
-    def read(f)
-      if File.exist?(f)
-        File.read(f)
-      else
-        ""
-      end
     end
   end
 end

@@ -1,18 +1,28 @@
 require_relative '../test_helper'
 require 'trackler'
 
-class TracksTest < Minitest::Test
-  def test_collection
-    tracks = Trackler::Tracks.new(FIXTURE_PATH)
+module Trackler
+  class TracksTest < Minitest::Test
+    def test_can_access_it_like_an_array
+      tracks = Tracks.new(FIXTURE_PATH)
+      assert_kind_of Enumerable, tracks
+    end
 
-    # can access it like an array
-    ids = %w(animal fake jewels fruit shoes snowflake vehicles)
-    assert_equal ids, tracks.map(&:id)
+    def test_fixture_tracks_exist
+      tracks = Tracks.new(FIXTURE_PATH)
+      # This need not be ALL the fixture tracks.
+      ids = %w(animal fake jewels fruit shoes snowflake vehicles)
+      assert_empty ids - tracks.map(&:id)
+    end
 
-    # can access it like a hash
-    assert_equal "Fruit", tracks["fruit"].language
+    def test_can_access_it_like_a_hash
+      tracks = Tracks.new(FIXTURE_PATH)
+      assert tracks['fruit'].exists?
+    end
 
-    # handles null tracks
-    refute tracks["no-such-track"].exists?
+    def test_handles_null_tracks
+      tracks = Tracks.new(FIXTURE_PATH)
+      refute tracks["no-such-track"].exists?
+    end
   end
 end

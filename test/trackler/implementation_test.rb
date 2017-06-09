@@ -51,7 +51,7 @@ class ImplementationTest < Minitest::Test
     specification = Trackler::Specification.new('banana', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, specification)
 
-    expected = "# Banana\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Solutions\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    expected = "# Banana\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and docs/EXERCISE_README_INSERT.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Solutions\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
 
     assert_equal expected, implementation.readme
   end
@@ -126,7 +126,7 @@ class ImplementationTest < Minitest::Test
     specification = Trackler::Specification.new('apple', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, specification)
 
-    assert_match %r{The SETUP.md file is deprecated, and exercises/TRACK_HINTS.md should be used.}, implementation.readme
+    assert_match %r{The SETUP.md file is deprecated, and docs/EXERCISE_README_INSERT.md should be used.}, implementation.readme
   end
 
   def test_readme_uses_track_hint_instead_of_setup
