@@ -119,11 +119,6 @@ module Trackler
     end
 
     def hints
-      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
-      unless File.exist?(track_hints_filename)
-        track_hints_filename = dir.join('SETUP.md')
-      end
-
       f = track_hints_filename
       if File.exist?(f)
         File.read(f)
@@ -133,6 +128,14 @@ module Trackler
     end
 
     private
+
+    def track_hints_filename
+      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
+      unless File.exist?(track_hints_filename)
+        track_hints_filename = dir.join('SETUP.md')
+      end
+      track_hints_filename
+    end
 
     # The slugs for the problems that are currently in the track.
     # We deprecated the old array of problem slugs in favor of an array
