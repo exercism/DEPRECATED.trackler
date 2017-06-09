@@ -129,11 +129,11 @@ module Trackler
     private
 
     def track_hints_filename
-      track_hints_filename = dir.join('exercises', 'TRACK_HINTS.md')
-      unless File.exist?(track_hints_filename)
-        track_hints_filename = dir.join('SETUP.md')
-      end
-      track_hints_filename
+      current = [File.join('exercises', 'TRACK_HINTS.md')]
+      deprecated = ['SETUP.md']
+
+      filepaths = (current + deprecated).map { |name| dir.join(name) }
+      filepaths.find(-> { '' }) { |filepath| File.exist? filepath }
     end
 
     # The slugs for the problems that are currently in the track.
