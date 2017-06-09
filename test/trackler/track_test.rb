@@ -212,6 +212,12 @@ class TrackTest < Minitest::Test
     assert_equal expected, track.hints
   end
 
+  def test_exercise_readme_insert
+    track = Trackler::Track.new('coins', FIXTURE_PATH)
+    expected = "This is the content of the docs/EXERCISE_README_INSERT.md file\n"
+    assert_equal expected, track.hints
+  end
+
   def test_problems_deprecated
     track = Trackler::Track.new('animal', FIXTURE_PATH)
     problems = nil
