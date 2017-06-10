@@ -3,8 +3,12 @@
   "language": "Fancy Stones",
   "repository": "https://github.com/exercism/xjewels",
   "active": true,
-  "problems": [
-    "hello-world"
+  "exercises": [
+    {
+      "slug": "hello-world",
+      "difficulty": 1,
+      "topics": []
+    }
   ],
   "deprecated": [],
   "foregone": []
