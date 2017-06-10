@@ -5,8 +5,12 @@
   "active": true,
   "test_pattern": "a.*animal",
   "ignore_pattern": "[^_]example",
-  "problems": [
-    "dog"
+  "exercises": [
+    {
+      "slug": "dog",
+      "difficulty": 1,
+      "topics": []
+    }
   ],
   "deprecated": [],
   "foregone": [
