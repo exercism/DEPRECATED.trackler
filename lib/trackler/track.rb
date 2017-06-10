@@ -136,19 +136,8 @@ module Trackler
       filepaths.find(-> { '' }) { |filepath| File.exist? filepath }
     end
 
-    # The slugs for the problems that are currently in the track.
-    # We deprecated the old array of problem slugs in favor of an array
-    # containing richer metadata about a given exercise.
     def active_slugs
-      __active_slugs__.empty? ? __active_slugs_deprecated_key__ : __active_slugs__
-    end
-
-    def __active_slugs__
       (config["exercises"] || []).map { |ex| ex["slug"] }
-    end
-
-    def __active_slugs_deprecated_key__
-      config["problems"] || []
     end
 
     def foregone_slugs
