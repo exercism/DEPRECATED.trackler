@@ -4,11 +4,27 @@
   "repository": "https://example.com/exercism/xsnowflake",
   "active": true,
   "test_pattern": "\\.tst$",
-  "problems": [
-    "apple",
-    "banana",
-    "cherry",
-    "snowflake-only"
+  "exercises": [
+    {
+      "slug": "apple",
+      "difficulty": 1,
+      "topics": []
+    },
+    {
+      "slug": "banana",
+      "difficulty": 1,
+      "topics": []
+    },
+    {
+      "slug": "cherry",
+      "difficulty": 1,
+      "topics": []
+    },
+    {
+      "slug": "snowflake-only",
+      "difficulty": 1,
+      "topics": []
+    }
   ],
   "deprecated": [
   ],
