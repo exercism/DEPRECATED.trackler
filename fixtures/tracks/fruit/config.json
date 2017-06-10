@@ -6,10 +6,22 @@
   "active": true,
   "test_pattern": "\\.tst$",
   "gitter": "xfruit",
-  "problems": [
-    "apple",
-    "banana",
-    "cherry"
+  "exercises": [
+    {
+      "slug": "apple",
+      "difficulty": 1,
+      "topics": []
+    },
+    {
+      "slug": "banana",
+      "difficulty": 1,
+      "topics": []
+    },
+    {
+      "slug": "cherry",
+      "difficulty": 1,
+      "topics": []
+    }
   ],
   "deprecated": [
     "four"

@@ -5,11 +5,6 @@
   "image": "fake.png",
   "checklist_issue": 5,
   "active": true,
-  "problems": [
-    "good",
-    "bad",
-    "ugly"
-  ],
   "exercises": [
       {
         "slug": "hello-world" ,

@@ -3,8 +3,12 @@
   "language": "Shoes & Boots",
   "repository": "https://github.com/exercism/xshoes",
   "active": false,
-  "problems": [
-    "hello-world"
+  "exercises": [
+    {
+      "slug": "hello-world",
+      "difficulty": 1,
+      "topics": []
+    }
   ],
   "deprecated": [],
   "foregone": []
