@@ -5,7 +5,6 @@ module Trackler
   def self.reset
     @path = nil
     @implementations = nil
-    @problems = nil
     @specifications = nil
     @tracks = nil
     @todos = nil
@@ -27,10 +26,6 @@ module Trackler
 
   def self.specifications
     @specifications ||= Specifications.new(path)
-  end
-
-  def self.problems
-    @problems ||= Problems.new(path)
   end
 
   def self.tracks
