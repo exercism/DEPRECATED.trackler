@@ -129,11 +129,7 @@ module Trackler
     private
 
     def track_hints_filename
-      current = [File.join('docs', 'EXERCISE_README_INSERT.md')]
-      deprecated = [File.join('exercises', 'TRACK_HINTS.md'), 'SETUP.md']
-
-      filepaths = (current + deprecated).map { |name| dir.join(name) }
-      filepaths.find(-> { '' }) { |filepath| File.exist? filepath }
+      File.join(dir, 'docs', 'EXERCISE_README_INSERT.md')
     end
 
     def active_slugs

@@ -51,7 +51,7 @@ class ImplementationTest < Minitest::Test
     specification = Trackler::Specification.new('banana', FIXTURE_PATH)
     implementation = Trackler::Implementation.new(track, specification)
 
-    expected = "# Banana\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\nThe SETUP.md file is deprecated, and docs/EXERCISE_README_INSERT.md should be used.\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Solutions\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
+    expected = "# Banana\n\n* banana\n* banana again\n\n* banana specific hints.\n* a hint\n* another hint\n\n## Source\n\n[http://example.com](http://example.com)\n\n## Submitting Incomplete Solutions\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
 
     assert_equal expected, implementation.readme
   end
@@ -111,30 +111,6 @@ class ImplementationTest < Minitest::Test
 
     expected = "# Apple\n\n* apple\n* apple again\n\n## Source\n\nThe internet.\n\n## Submitting Incomplete Solutions\nIt's possible to submit an incomplete solution so you can see how others have completed the exercise.\n\n"
     assert_equal expected, implementation.readme
-  end
-
-  def test_readme_uses_track_hint_in_precedence_of_setup
-    track = Trackler::Track.new('animal', FIXTURE_PATH)
-    specification = Trackler::Specification.new('dog', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, specification)
-
-    assert_match /This is the content of the track hints file/, implementation.readme
-  end
-
-  def test_readme_uses_setup_when_track_hints_is_missing
-    track = Trackler::Track.new('fruit', FIXTURE_PATH)
-    specification = Trackler::Specification.new('apple', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, specification)
-
-    assert_match %r{The SETUP.md file is deprecated, and docs/EXERCISE_README_INSERT.md should be used.}, implementation.readme
-  end
-
-  def test_readme_uses_track_hint_instead_of_setup
-    track = Trackler::Track.new('jewels', FIXTURE_PATH)
-    specification = Trackler::Specification.new('hello-world', FIXTURE_PATH)
-    implementation = Trackler::Implementation.new(track, specification)
-
-    assert_match /This is the content of the track hints file/, implementation.readme
   end
 
   def test_git_url
