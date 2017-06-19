@@ -90,14 +90,6 @@ class TrackTest < Minitest::Test
     assert_equal expected, track.docs(image_path: "/alt").tests
   end
 
-  def test_docs_with_alternate_image_path_using_positional_argument
-    track = Trackler::Track.new('fake', FIXTURE_PATH)
-    assert_output nil, /DEPRECATION WARNING/ do
-      expected = "Installing\n![](/positional/test.jpg)\n"
-      assert_equal expected, track.docs('/positional').installation
-    end
-  end
-
   def test_docs_accessible_as_object
     track = Trackler::Track.new('fake', FIXTURE_PATH)
     expected = "Language Information\n"
