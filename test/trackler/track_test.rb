@@ -73,9 +73,14 @@ class TrackTest < Minitest::Test
       "installation" => "Installing\n![](/docs/img/test.jpg)\n",
       "tests" => "Running\n![](http://example.org/abc/docs/img/test.jpg)\n",
       "learning" => "Learning Fake!\n",
-      "resources" => "",
+      "resources" => "Fake resources for Fake!\n",
     })
     assert_equal expected, track.docs
+  end
+
+  def test_docs_with_unknown_extension
+    track = Trackler::Track.new('fruit', FIXTURE_PATH)
+    assert_equal "", track.docs.resources
   end
 
   def test_docs_with_alternate_image_path
