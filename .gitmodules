@@ -181,3 +181,6 @@
 [submodule "tracks/fortran"]
 	path = tracks/fortran
 	url = https://github.com/exercism/xfortran
+[submodule "tracks/dartlang"]
+	path = tracks/dartlang
+	url = https://github.com/exercism/dartlang
