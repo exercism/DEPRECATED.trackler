@@ -34,7 +34,7 @@ module Trackler
     end
 
     def exercise_slugs
-      Dir["%s/common/exercises/*/" % root].map { |path| File.basename(path) }.sort
+      Dir["%s/problem-specifications/exercises/*/" % root].map { |path| File.basename(path) }.sort
     end
 
     def by_slug

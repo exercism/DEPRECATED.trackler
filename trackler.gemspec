@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f|
     f.match(%r{^(test)/})
-  } + Dir.glob("common/**/*", File::FNM_DOTMATCH) + Dir.glob("tracks/**/*", File::FNM_DOTMATCH) + Dir.glob("fixtures/**/*", File::FNM_DOTMATCH)
+  } + Dir.glob("problem-specifications/**/*", File::FNM_DOTMATCH) + Dir.glob("tracks/**/*", File::FNM_DOTMATCH) + Dir.glob("fixtures/**/*", File::FNM_DOTMATCH)
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rubyzip", "~> 1.1"

@@ -38,11 +38,11 @@ module Trackler
 
   class CommonFile < GuaranteedFile
     def self.location(specification:, filename:, **_track)
-      File.join(specification.root, 'common', 'exercises', specification.slug, filename)
+      File.join(specification.root, 'problem-specifications', 'exercises', specification.slug, filename)
     end
 
     def url
-      "https://github.com/exercism/x-common/blob/master/exercises/%s/#{filename}" % specification.slug
+      "https://github.com/exercism/problem-specifications/blob/master/exercises/%s/#{filename}" % specification.slug
     end
   end
 

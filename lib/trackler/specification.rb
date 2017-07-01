@@ -10,8 +10,8 @@ module Trackler
     def initialize(slug, root, track = NullTrack.new)
       @slug = slug
       @root = root
-      @file_root = File.join(root, 'common', 'exercises', self.slug)
-      @repo_root = "https://github.com/exercism/x-common/blob/master/exercises/%s/" % self.slug
+      @file_root = File.join(root, 'problem-specifications', 'exercises', self.slug)
+      @repo_root = "https://github.com/exercism/problem-specifications/blob/master/exercises/%s/" % self.slug
 
       @metadata = Metadata.for(specification: self, track: track)
       self.description_object = Description.for(specification: self, track: track)

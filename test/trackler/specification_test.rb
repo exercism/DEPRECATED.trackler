@@ -30,12 +30,12 @@ class SpecificationTest < Minitest::Test
 
   def test_metadata_url
     specification = Trackler::Specification.new('hello-world', FIXTURE_PATH)
-    assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/metadata.yml', specification.metadata_url
+    assert_equal 'https://github.com/exercism/problem-specifications/blob/master/exercises/hello-world/metadata.yml', specification.metadata_url
   end
 
   def test_description_url
     specification = Trackler::Specification.new('hello-world', FIXTURE_PATH)
-    assert_equal 'https://github.com/exercism/x-common/blob/master/exercises/hello-world/description.md', specification.description_url
+    assert_equal 'https://github.com/exercism/problem-specifications/blob/master/exercises/hello-world/description.md', specification.description_url
   end
 
   def test_source_markdown
@@ -60,7 +60,7 @@ class SpecificationTest < Minitest::Test
 
   def test_canonical_data_url
     specification = Trackler::Specification.new('mango', FIXTURE_PATH)
-    assert_equal "https://github.com/exercism/x-common/blob/master/exercises/mango/canonical-data.json", specification.canonical_data_url
+    assert_equal "https://github.com/exercism/problem-specifications/blob/master/exercises/mango/canonical-data.json", specification.canonical_data_url
   end
 
   def test_track_with_no_canonical_data
