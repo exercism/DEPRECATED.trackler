@@ -13,7 +13,7 @@ module Trackler
     attr_accessor :track, :filename, :specification
 
     def self.exists?(specification:, track:, filename:)
-      File.exists?(location(specification: specification, track: track, filename: filename))
+      File.exist?(location(specification: specification, track: track, filename: filename))
     end
     private_class_method :exists?
 

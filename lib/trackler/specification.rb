@@ -22,7 +22,7 @@ module Trackler
     end
 
     def deprecated?
-      @deprecated ||= File.exists?(file_path(deprecation_file_name, @file_root))
+      @deprecated ||= File.exist?(file_path(deprecation_file_name, @file_root))
     end
 
     def active?
@@ -47,7 +47,7 @@ module Trackler
     end
 
     def canonical_data_url
-      repo_url(canonical_data_file_name) if File.exists?(file_path(canonical_data_file_name, @file_root))
+      repo_url(canonical_data_file_name) if File.exist?(file_path(canonical_data_file_name, @file_root))
     end
 
     def metadata_url
