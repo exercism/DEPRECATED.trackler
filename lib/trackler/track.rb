@@ -8,7 +8,6 @@ module Trackler
   # Track is a collection of exercises in a given language.
   class Track
     TOPICS = %w(about installation tests learning resources)
-    DEFAULT_IMAGE_PATH = "/docs/img"
 
     Image = Struct.new(:path) do
       def exists?
@@ -88,7 +87,7 @@ module Trackler
       config.fetch('ignore_pattern', 'example')
     end
 
-    def docs(image_path: DEFAULT_IMAGE_PATH)
+    def docs(image_path: DocFile::DEFAULT_IMAGE_PATH)
       OpenStruct.new(docs_by_topic(image_path))
     end
 
@@ -116,18 +115,10 @@ module Trackler
     end
 
     def hints
-      if File.exist?(track_hints_filename)
-        File.read(track_hints_filename)
-      else
-        ""
-      end
+      docfile = DocFile.find(basename: 'EXERCISE_README_INSERT', track_dir: dir).render
     end
 
     private
-
-    def track_hints_filename
-      File.join(dir, 'docs', 'EXERCISE_README_INSERT.md')
-    end
 
     def active_slugs
       (config["exercises"] || []).map { |ex| ex["slug"] }
@@ -156,33 +147,14 @@ module Trackler
       File.join(dir, "config.json")
     end
 
-    def document_contents(topic)
-      filename = document_filename(topic)
-      case filename
-      when /\.md$/
-        File.read(filename)
-      when /\.org$/
-        Orgmode::Parser.new(File.read(filename)).to_markdown
-      else
-        ''
-      end
-    end
-
     def docs_by_topic(image_path)
-      src = Regexp.new("]\\(%s" % DEFAULT_IMAGE_PATH)
-      dst = "](%s" % image_path.gsub(Regexp.new("/$"), "")
       Hash[
         TOPICS.zip(
           TOPICS.map { |topic|
-            document_contents(topic).gsub(src, dst)
+            DocFile.find(basename: topic.upcase, track_dir: dir).render(image_path: image_path)
           }
         )
       ]
-    end
-
-    def document_filename(topic)
-      path = File.join(dir, "docs", topic.upcase)
-      Dir.glob("%s.*" % path).sort.first
     end
 
     def svg_icon
