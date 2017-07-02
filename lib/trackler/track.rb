@@ -115,7 +115,7 @@ module Trackler
     end
 
     def hints
-      docfile = DocFile.find(basename: 'EXERCISE_README_INSERT', track_dir: dir).render
+      DocFile.find(basename: 'EXERCISE_README_INSERT', track_dir: dir).render
     end
 
     private
