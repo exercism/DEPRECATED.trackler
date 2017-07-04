@@ -1,3 +1,4 @@
+require 'English'
 ENV['RACK_ENV'] = 'test'
 
 require 'simplecov'
