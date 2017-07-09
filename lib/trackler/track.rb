@@ -3,6 +3,7 @@ require 'pathname'
 require 'org-ruby'
 require 'ostruct'
 require_relative 'file_bundle'
+require_relative 'doc_file'
 
 module Trackler
   # Track is a collection of exercises in a given language.
