@@ -130,6 +130,46 @@ class ImplementationTest < Minitest::Test
     assert_equal expected_language, implementation.language
   end
 
+  #### DEPRECATION TESTS: HINTS ####
+  # These can be removed when all tracks have renamed their
+  # HINTS.md files to .meta/hints.md
+  def test_deprecation_of_readme_hints_prefers_file_in_meta
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('hints-both', path)
+    specification = Trackler::Specification.new('foo', path)
+    implementation = Trackler::Implementation.new(track, specification)
+    assert_match /the hints/, implementation.readme
+  end
+
+  def test_deprecation_of_readme_hints_falls_back_to_old_file
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('hints-old', path)
+    specification = Trackler::Specification.new('foo', path)
+    implementation = Trackler::Implementation.new(track, specification)
+    assert_match /deprecated hints/, implementation.readme
+  end
+  #### END DEPRECATION TESTS: HINTS ####
+
+  #### DEPRECATION TESTS: INSERTS ####
+  # These can be removed when all tracks have renamed their
+  # docs/EXERCISE_README_INSERT.md files to config/exercise-readme-insert.md
+  def test_deprecation_of_readme_insert_prefers_file_in_config
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('inserts-both', path)
+    specification = Trackler::Specification.new('foo', path)
+    implementation = Trackler::Implementation.new(track, specification)
+    assert_match /the insert/, implementation.readme
+  end
+
+  def test_deprecation_of_readme_insert_falls_back_to_old_file
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('inserts-old', path)
+    specification = Trackler::Specification.new('foo', path)
+    implementation = Trackler::Implementation.new(track, specification)
+    assert_match /deprecated insert/, implementation.readme
+  end
+  #### END DEPRECATION TESTS: INSERTS ####
+
   private
 
   def archive_filenames(zip)

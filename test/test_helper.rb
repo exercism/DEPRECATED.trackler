@@ -4,6 +4,7 @@ ENV['RACK_ENV'] = 'test'
 require 'simplecov'
 SimpleCov.start do
   add_filter "/test/"
+  add_filter "/fixtures/"
   command_name "Run PID: #{$PROCESS_ID}"
 end
 
