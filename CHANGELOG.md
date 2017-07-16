@@ -15,6 +15,14 @@ The changelog will not be updated for content updates.
 ## Next Release
 * **Your contribution here**
 
+## v2.2.0.0 (2017-07-16)
+* Use static exercise README if it is present
+* Move exercise readme insert and exercise hints, handling deprecated locations
+* Add generic support for orgmode doc files
+* Rename problems to specifications
+* Make implementation adhere to problem interface
+* Suppress blurb if it starts the description
+
 ## v2.1.0.0 (2017-04-21)
 
 * Add customizable ignore pattern
