@@ -48,7 +48,7 @@ module Trackler
     end
 
     def readme
-      @readme ||= assemble_readme
+      @readme ||= static_readme || assemble_readme
     end
 
     def git_url
@@ -82,6 +82,11 @@ module Trackler
 
     def exercise_dir
       File.join('exercises', slug)
+    end
+
+    def static_readme
+      path = File.join(implementation_dir, 'README.md')
+      return File.read(path) if File.exist?(path)
     end
 
     def assemble_readme

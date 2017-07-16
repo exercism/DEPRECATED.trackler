@@ -130,6 +130,13 @@ class ImplementationTest < Minitest::Test
     assert_equal expected_language, implementation.language
   end
 
+  def test_prefer_static_readme_if_present
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    specification = Trackler::Specification.new('two', FIXTURE_PATH)
+    implementation = Trackler::Implementation.new(track, specification)
+    assert_equal "custom readme for 'two'\n", implementation.readme
+  end
+
   #### DEPRECATION TESTS: HINTS ####
   # These can be removed when all tracks have renamed their
   # HINTS.md files to .meta/hints.md
