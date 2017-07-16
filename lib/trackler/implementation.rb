@@ -112,8 +112,11 @@ It's possible to submit an incomplete solution so you can see how others have co
     end
 
     def implementation_hints
-      hints_file = File.join(implementation_dir, 'HINTS.md')
-      File.exist?(hints_file) ? File.read(hints_file) : ''
+      [File.join('.meta', 'hints.md'), 'HINTS.md'].each do |filename|
+        path = File.join(implementation_dir, filename)
+        return File.read(path) if File.exist?(path)
+      end
+      ""
     end
   end
 end

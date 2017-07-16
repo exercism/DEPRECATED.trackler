@@ -116,6 +116,8 @@ module Trackler
     end
 
     def hints
+      path = File.join(dir, 'config', 'exercise-readme-insert.md')
+      return File.read(path) if File.exist?(path)
       DocFile.find(basename: 'EXERCISE_README_INSERT', track_dir: dir).render
     end
 
