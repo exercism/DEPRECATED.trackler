@@ -124,7 +124,7 @@ module Trackler
     private
 
     def active_slugs
-      (config["exercises"] || []).map { |ex| ex["slug"] }
+      (config["exercises"] || []).reject { |ex| ex["deprecated"] }.map { |ex| ex["slug"] }
     end
 
     def foregone_slugs
@@ -132,7 +132,7 @@ module Trackler
     end
 
     def deprecated_slugs
-      config["deprecated"] || []
+      (config["exercises"] || []).select {|ex| ex["deprecated"]}.map { |ex| ex["slug"]}
     end
 
     def most_popular_format(path)

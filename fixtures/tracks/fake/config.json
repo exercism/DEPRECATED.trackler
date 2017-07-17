@@ -39,10 +39,11 @@
             "optional values",
             "text formatting"
         ]
+      },
+      {
+        "slug": "dog",
+        "deprecated": true
       }
-  ],
-  "deprecated": [
-    "dog"
   ],
   "foregone": [
     "apple"

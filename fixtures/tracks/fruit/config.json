@@ -21,10 +21,11 @@
       "slug": "cherry",
       "difficulty": 1,
       "topics": []
+    },
+    {
+      "slug": "four",
+      "deprecated": true
     }
-  ],
-  "deprecated": [
-    "four"
   ],
   "foregone": [
     "five"
