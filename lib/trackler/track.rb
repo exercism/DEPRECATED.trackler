@@ -73,7 +73,7 @@ module Trackler
     end
 
     def repository
-      config['repository'].to_s.strip
+      @repository ||= (config['repository'] || "https://github.com/exercism/%s" % id).to_s.strip
     end
 
     def test_pattern

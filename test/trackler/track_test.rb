@@ -211,4 +211,20 @@ class TrackTest < Minitest::Test
     end
     assert_equal track.implementations, problems
   end
+
+  #### DEPRECATION TESTS: config repository####
+  # These can be removed when all tracks have removed the repository field
+  # from the config.json file
+  def test_deprecation_config_repository_present
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('repo-yepp', path)
+    assert_equal "https://example.com/repo", track.repository
+  end
+
+  def test_deprecation_config_repository_absent
+    path = File.join(Trackler::Path.fixtures, "deprecation-fixtures")
+    track = Trackler::Track.new('repo-nope', path)
+    assert_equal "https://github.com/exercism/repo-nope", track.repository
+  end
+  #### END DEPRECATION TESTS: config repository ####
 end
