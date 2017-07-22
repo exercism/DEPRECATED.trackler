@@ -1,15 +1,22 @@
 {
-  "slug": "jewels",
   "language": "Fancy Stones",
-  "repository": "https://github.com/exercism/xjewels",
   "active": true,
   "exercises": [
     {
+      "uuid": "237dfdef-84c9-4cf3-afd7-08604915f79d",
       "slug": "hello-world",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     }
   ],
-  "deprecated": [],
-  "foregone": []
+  "deprecated": [
+
+  ],
+  "foregone": [
+
+  ]
 }

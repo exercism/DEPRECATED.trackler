@@ -1,49 +1,67 @@
 {
-  "slug": "fake",
   "language": "Fake",
   "repository": "https://github.com/exercism/xfake",
   "image": "fake.png",
   "checklist_issue": 5,
   "active": true,
   "exercises": [
-      {
-        "slug": "hello-world" ,
-        "difficulty": 1,
-        "topics": [
-            "control-flow (if-statements)",
-            "optional values",
-            "text formatting"
-        ]
-      },
-      {
-        "difficulty": 3,
-        "slug": "one",
-        "topics": [
-            "strings",
-            "filtering"
-        ]
-      },
-      {
-        "difficulty": 1,
-        "slug": "two",
-        "topics": [
-            "parsing",
-            "transforming"
-        ]
-      },
-      {
-        "slug": "three" ,
-        "difficulty": 1,
-        "topics": [
-            "control-flow (if-statements)",
-            "optional values",
-            "text formatting"
-        ]
-      },
-      {
-        "slug": "dog",
-        "deprecated": true
-      }
+    {
+      "uuid": "6bef4a04-2200-4478-a22e-1f3117a2f8f1",
+      "slug": "hello-world",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 1,
+      "topics": [
+        "control-flow (if-statements)",
+        "optional values",
+        "text formatting"
+      ]
+    },
+    {
+      "uuid": "db76797c-517e-4b1a-bd95-6e49beb0760e",
+      "slug": "one",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": [
+        "strings",
+        "filtering"
+      ]
+    },
+    {
+      "uuid": "8baf68b9-9f4b-4fca-9a88-9eb17e9ed4fd",
+      "slug": "two",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 1,
+      "topics": [
+        "parsing",
+        "transforming"
+      ]
+    },
+    {
+      "uuid": "579eb391-7ce9-4223-a955-378314ed46c7",
+      "slug": "three",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 1,
+      "topics": [
+        "control-flow (if-statements)",
+        "optional values",
+        "text formatting"
+      ]
+    },
+    {
+      "uuid": "2065d986-d304-4215-8425-fc291e815569",
+      "slug": "dog",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 1,
+      "topics": [
+
+      ],
+      "deprecated": true
+    }
   ],
   "foregone": [
     "apple"

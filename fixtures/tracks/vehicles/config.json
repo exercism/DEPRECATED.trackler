@@ -1,9 +1,13 @@
 {
-  "slug": "vehicles",
   "language": "Transportation Services",
-  "repository": "https://github.com/exercism/xvehicles",
   "active": false,
-  "exercises": [],
-  "deprecated": [],
-  "foregone": []
+  "exercises": [
+
+  ],
+  "deprecated": [
+
+  ],
+  "foregone": [
+
+  ]
 }

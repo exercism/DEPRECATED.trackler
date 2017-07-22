@@ -1,33 +1,54 @@
 {
-  "slug": "snowflake",
   "language": "Snowflake",
   "repository": "https://example.com/exercism/xsnowflake",
   "active": true,
   "test_pattern": "\\.tst$",
   "exercises": [
     {
+      "uuid": "bd94e4d8-6dea-4eb5-8f04-5fdd3ca9c7b4",
       "slug": "apple",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "524e4668-2edd-481f-98a5-ba789982e061",
       "slug": "banana",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "44165a8f-49cf-4826-ac2f-bd2ff06b5154",
       "slug": "cherry",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "37fccc16-5df7-4571-8965-85bdcf82f37e",
       "slug": "snowflake-only",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     }
   ],
   "deprecated": [
+
   ],
   "foregone": [
+
   ]
 }

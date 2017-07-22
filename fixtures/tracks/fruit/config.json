@@ -1,29 +1,49 @@
 {
-  "slug": "fruit",
   "language": "Fruit",
-  "repository": "https://example.com/exercism/xfruit",
   "image": "fruit.svg",
   "active": true,
   "test_pattern": "\\.tst$",
   "gitter": "xfruit",
   "exercises": [
     {
+      "uuid": "35731947-f4f8-44af-9b20-543ffd4173a2",
       "slug": "apple",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "3fc612aa-e401-4ac2-aaf2-1171c245d609",
       "slug": "banana",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "aa0c556c-b7b6-4fb5-92cd-60a543afef25",
       "slug": "cherry",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     },
     {
+      "uuid": "32fbd4f9-cf80-4e0d-8a89-a8ad41eeabcd",
       "slug": "four",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 1,
+      "topics": [
+
+      ],
       "deprecated": true
     }
   ],

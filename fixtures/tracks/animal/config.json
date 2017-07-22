@@ -1,18 +1,23 @@
 {
-  "slug": "animal",
   "language": "Animal",
-  "repository": "https://github.com/exercism/xanimal",
   "active": true,
   "test_pattern": "a.*animal",
   "ignore_pattern": "[^_]example",
   "exercises": [
     {
+      "uuid": "e541e3de-099d-4af8-b11a-614196338356",
       "slug": "dog",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     }
   ],
-  "deprecated": [],
+  "deprecated": [
+
+  ],
   "foregone": [
     "hello-world"
   ]

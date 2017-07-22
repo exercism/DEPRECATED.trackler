@@ -1,15 +1,22 @@
 {
-  "slug": "shoes",
   "language": "Shoes & Boots",
-  "repository": "https://github.com/exercism/xshoes",
   "active": false,
   "exercises": [
     {
+      "uuid": "5ea2e5bf-1143-4e09-b1d8-cd1eab063641",
       "slug": "hello-world",
+      "core": false,
+      "unlocked_by": null,
       "difficulty": 1,
-      "topics": []
+      "topics": [
+
+      ]
     }
   ],
-  "deprecated": [],
-  "foregone": []
+  "deprecated": [
+
+  ],
+  "foregone": [
+
+  ]
 }
