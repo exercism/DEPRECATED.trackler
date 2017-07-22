@@ -184,11 +184,8 @@ class TrackTest < Minitest::Test
   end
 
   def test_track_ignore_pattern_default
-    mock_config = {}
-    track = Trackler::Track.new('animal', FIXTURE_PATH)
-    JSON.stub :parse, mock_config do
-      assert_equal 'example', track.ignore_pattern
-    end
+    track = Trackler::Track.new('fake', FIXTURE_PATH)
+    assert_equal 'example', track.ignore_pattern
   end
 
   def test_track_hints
