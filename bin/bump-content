@@ -24,7 +24,7 @@ end
 cmds = [
   "git add lib/trackler/version.rb",
   "git add tracks",
-  "git add common",
+  "git add problem-specifications",
   "git commit -m 'Bump to v%s'" % version,
   "git tag v%s" % version,
   "git push origin master",
