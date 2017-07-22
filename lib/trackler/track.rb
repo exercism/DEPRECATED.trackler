@@ -32,7 +32,7 @@ module Trackler
     end
 
     def active?
-      !!config["active"]
+      !!config.active
     end
 
     def upcoming?
@@ -53,11 +53,11 @@ module Trackler
     end
 
     def checklist_issue
-      config.fetch("checklist_issue", 1)
+      config.checklist_issue || 1
     end
 
     def gitter
-      config["gitter"]
+      config.gitter
     end
 
     def icon_path
@@ -69,23 +69,23 @@ module Trackler
     end
 
     def language
-      config['language'].to_s.strip
+      config.language.to_s.strip
     end
 
     def repository
-      @repository ||= (config['repository'] || "https://github.com/exercism/%s" % id).to_s.strip
+      @repository ||= (config.repository || "https://github.com/exercism/%s" % id).to_s.strip
     end
 
     def test_pattern
-      if config.key?('test_pattern')
-        Regexp.new(config['test_pattern'])
+      if !!config.test_pattern
+        Regexp.new(config.test_pattern)
       else
         /test/i
       end
     end
 
     def ignore_pattern
-      config.fetch('ignore_pattern', 'example')
+      config.ignore_pattern || 'example'
     end
 
     def docs(image_path: DocFile::DEFAULT_IMAGE_PATH)
@@ -124,15 +124,15 @@ module Trackler
     private
 
     def active_slugs
-      (config["exercises"] || []).reject { |ex| ex["deprecated"] }.map { |ex| ex["slug"] }
+      exercises.reject(&:deprecated).map(&:slug)
     end
 
     def foregone_slugs
-      config["foregone"] || []
+      config.foregone || []
     end
 
     def deprecated_slugs
-      (config["exercises"] || []).select {|ex| ex["deprecated"]}.map { |ex| ex["slug"]}
+      exercises.select(&:deprecated).map(&:slug)
     end
 
     def most_popular_format(path)
@@ -142,8 +142,12 @@ module Trackler
       formats.max_by { |format| formats.count(format) }
     end
 
+    def exercises
+      config.exercises || []
+    end
+
     def config
-      @config ||= JSON.parse(File.read(config_filename))
+      @config ||= JSON.parse(File.read(config_filename), object_class: OpenStruct)
     end
 
     def config_filename
