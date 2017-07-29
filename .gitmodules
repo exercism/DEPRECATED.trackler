@@ -173,8 +173,6 @@
 [submodule "tracks/tcl"]
 	path = tracks/tcl
 	url = https://github.com/exercism/tcl
-[submodule "tracks/teco"]
-	path = tracks/teco
 	url = https://github.com/exercism/teco
 [submodule "tracks/typescript"]
 	path = tracks/typescript
