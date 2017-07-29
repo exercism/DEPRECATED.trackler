@@ -13,8 +13,6 @@
 [submodule "tracks/clojure"]
 	path = tracks/clojure
 	url = https://github.com/exercism/clojure
-[submodule "tracks/clojurescript"]
-	path = tracks/clojurescript
 	url = https://github.com/exercism/clojurescript
 [submodule "tracks/coffeescript"]
 	path = tracks/coffeescript
