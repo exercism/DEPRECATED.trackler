@@ -163,8 +163,6 @@
 [submodule "tracks/scheme"]
 	path = tracks/scheme
 	url = https://github.com/exercism/scheme
-[submodule "tracks/smalltalk"]
-	path = tracks/smalltalk
 	url = https://github.com/exercism/smalltalk
 [submodule "tracks/sml"]
 	path = tracks/sml
