@@ -170,8 +170,6 @@
 [submodule "tracks/swift"]
 	path = tracks/swift
 	url = https://github.com/exercism/swift
-[submodule "tracks/tcl"]
-	path = tracks/tcl
 	url = https://github.com/exercism/tcl
 	url = https://github.com/exercism/teco
 [submodule "tracks/typescript"]
