@@ -160,15 +160,12 @@
 [submodule "tracks/scheme"]
 	path = tracks/scheme
 	url = https://github.com/exercism/scheme
-	url = https://github.com/exercism/smalltalk
 [submodule "tracks/sml"]
 	path = tracks/sml
 	url = https://github.com/exercism/sml
 [submodule "tracks/swift"]
 	path = tracks/swift
 	url = https://github.com/exercism/swift
-	url = https://github.com/exercism/tcl
-	url = https://github.com/exercism/teco
 [submodule "tracks/typescript"]
 	path = tracks/typescript
 	url = https://github.com/exercism/typescript
