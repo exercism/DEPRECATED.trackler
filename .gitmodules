@@ -7,9 +7,6 @@
 [submodule "tracks/ceylon"]
 	path = tracks/ceylon
 	url = https://github.com/exercism/ceylon
-[submodule "tracks/chapel"]
-	path = tracks/chapel
-	url = https://github.com/exercism/chapel
 [submodule "tracks/clojure"]
 	path = tracks/clojure
 	url = https://github.com/exercism/clojure
