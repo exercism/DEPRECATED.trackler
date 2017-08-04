@@ -100,9 +100,6 @@
 [submodule "tracks/mips"]
 	path = tracks/mips
 	url = https://github.com/exercism/mips
-[submodule "tracks/nasm"]
-	path = tracks/nasm
-	url = https://github.com/exercism/nasm
 [submodule "tracks/nim"]
 	path = tracks/nim
 	url = https://github.com/exercism/nim
