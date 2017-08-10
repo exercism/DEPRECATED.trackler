@@ -172,3 +172,6 @@
 [submodule "problem-specifications"]
 	path = problem-specifications
 	url = https://github.com/exercism/problem-specifications
+[submodule "tracks/gnu-apl"]
+	path = tracks/gnu-apl
+	url = https://github.com/exercism/gnu-apl
