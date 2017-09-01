@@ -172,3 +172,6 @@
 [submodule "tracks/gnu-apl"]
 	path = tracks/gnu-apl
 	url = https://github.com/exercism/gnu-apl
+[submodule "tracks/common-lisp"]
+	path = tracks/common-lisp
+	url = https://github.com/exercism/common-lisp
