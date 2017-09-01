@@ -73,7 +73,7 @@ To release a new version, update the version number in `version.rb`, and then ru
 Language tracks are included as submodules. To add a new one, run the following command, defining the track id as an environment variable. Shown here with `prolog` as an example.
 
 ```
-$ TRACK_ID=prolog; git submodule add https://github.com/exercism/x$TRACK_ID tracks/$TRACK_ID
+$ TRACK_ID=prolog; git submodule add https://github.com/exercism/$TRACK_ID tracks/$TRACK_ID
 ```
 
 ## Contributing
