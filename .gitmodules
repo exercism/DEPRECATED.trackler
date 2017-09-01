@@ -91,9 +91,6 @@
 [submodule "tracks/lfe"]
 	path = tracks/lfe
 	url = https://github.com/exercism/lfe
-[submodule "tracks/lisp"]
-	path = tracks/lisp
-	url = https://github.com/exercism/lisp
 [submodule "tracks/lua"]
 	path = tracks/lua
 	url = https://github.com/exercism/lua
