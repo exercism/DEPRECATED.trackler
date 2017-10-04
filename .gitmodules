@@ -175,3 +175,6 @@
 [submodule "tracks/common-lisp"]
 	path = tracks/common-lisp
 	url = https://github.com/exercism/common-lisp
+[submodule "tracks/cfml"]
+	path = tracks/cfml
+	url = https://github.com/exercism/cfml
