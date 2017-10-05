@@ -13,9 +13,6 @@
 [submodule "tracks/coffeescript"]
 	path = tracks/coffeescript
 	url = https://github.com/exercism/coffeescript
-[submodule "tracks/coldfusion"]
-	path = tracks/coldfusion
-	url = https://github.com/exercism/coldfusion
 [submodule "tracks/coq"]
 	path = tracks/coq
 	url = https://github.com/exercism/coq
