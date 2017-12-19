@@ -1,10 +1,12 @@
 require_relative '../test_helper'
+require 'trackler/track'
+require 'trackler/implementation'
+require 'trackler/specification'
 require 'trackler/implementations'
 
 class ImplementationsTest < Minitest::Test
   def test_collection
     track = Trackler::Track.new('fake', FIXTURE_PATH)
-    path = File.join(FIXTURE_PATH, 'tracks', 'fake', 'config.json')
     implementations = Trackler::Implementations.new("[REPO_URL]", track.send(:active_slugs), FIXTURE_PATH, track)
 
     # can access it like an array
