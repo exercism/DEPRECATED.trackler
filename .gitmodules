@@ -175,3 +175,6 @@
 [submodule "tracks/cfml"]
 	path = tracks/cfml
 	url = https://github.com/exercism/cfml
+[submodule "tracks/reasonml"]
+	path = tracks/reasonml
+	url = https://github.com/exercism/reasonml
