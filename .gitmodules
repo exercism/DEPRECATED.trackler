@@ -178,3 +178,6 @@
 [submodule "tracks/reasonml"]
 	path = tracks/reasonml
 	url = https://github.com/exercism/reasonml
+[submodule "tracks/pharo"]
+	path = tracks/pharo
+	url = https://github.com/exercism/pharo
