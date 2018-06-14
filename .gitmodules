@@ -181,3 +181,6 @@
 [submodule "tracks/pharo"]
 	path = tracks/pharo
 	url = https://github.com/exercism/pharo
+[submodule "tracks/ballerina"]
+	path = tracks/ballerina
+	url = https://github.com/exercism/ballerina
